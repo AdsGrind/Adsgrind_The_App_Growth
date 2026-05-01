@@ -72,7 +72,7 @@ export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
 
 export const StatsSection = () => {
   const stats = [
-    { label: 'Users Reached', value: '5+ Millions' },
+    { label: 'Users Reached', value: '50+ Millions' },
     { label: 'Verified Conversions', value: '38,000+' },
     { label: 'Conversion Rate', value: '4.8%' },
     { label: 'GEO Coverage', value: 'Global' },
