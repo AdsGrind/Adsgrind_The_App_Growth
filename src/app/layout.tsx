@@ -26,8 +26,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "ADSGRIND | Premium Digital Marketing Agency",
-  description: "Boost your business with high-performance digital marketing solutions. SEO, PPC, Social Media, and more.",
+  title: "Adsgrind The App Growth",
+  description: "Welcome to Adsgrind, where innovation meets impact in the world of advertising. With a passion for creativity and a drive for results, we specialize in crafting bespoke strategies that captivate audiences and deliver tangible growth for your brand. From cutting-edge digital campaigns to traditional media solutions, our seasoned team is committed to grinding out success for every client. Let's grind together and make your brand shine in the competitive market.",
 };
 
 export default function RootLayout({
