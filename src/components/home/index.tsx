@@ -46,7 +46,7 @@ export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
           className="max-w-4xl mx-auto"
         >
           <span className="inline-block py-1.5 px-4 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-xs font-bold tracking-widest uppercase mb-6 text-brand-primary animate-pulse">
-            Clicks. Conversions. Growth.
+            Click. Conversion. Growth.
           </span>
           <h1 className="font-display font-bold text-2xl sm:text-4xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.3] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
             <span className="!text-slate-50">Global User</span> <br />
