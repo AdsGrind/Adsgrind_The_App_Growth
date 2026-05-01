@@ -52,7 +52,7 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             />
           </div>
           <span className="font-display font-bold text-xl tracking-tight hidden sm:block text-white uppercase italic">
-            ADS<span className="text-gradient">GRIND</span>
+            ADS<span >GRIND</span>
           </span>
         </Link>
 
