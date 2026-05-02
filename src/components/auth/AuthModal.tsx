@@ -63,7 +63,7 @@ export const AuthModal = ({ isOpen, onClose, initialMode = 'login' }: { isOpen: 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-md glass-card p-8 rounded-3xl border-white/10"
+            className="relative w-full max-w-md max-h-[95vh] overflow-y-auto glass-card p-6 sm:p-10 rounded-3xl border-white/10 custom-scrollbar"
           >
             <button 
               onClick={onClose}

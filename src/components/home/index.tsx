@@ -40,26 +40,26 @@ export const HeroSection = () => {
         <ThreeHero />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      <div className="container mx-auto px-4 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-xs font-bold tracking-widest uppercase mb-6 text-brand-primary animate-pulse">
+          <span className="inline-block py-1 px-3 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-[10px] font-bold tracking-widest uppercase mb-6 text-brand-primary animate-pulse">
             Click. Conversion. Growth.
           </span>
-          <h1 className="font-display font-bold text-2xl sm:text-4xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.3] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
+          <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.2] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
             <span className="!text-slate-50">Global User</span> <br />
             <span className="text-gradient">Acquisition</span> <span className="!text-slate-50">Marketing</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          <p className="text-slate-400 text-base md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Helping mobile apps grow through scalable, high-performance user acquisition campaigns that drive real results.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12" onClick={openGetStarted}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 max-w-sm mx-auto sm:max-w-none">
+            <Button variant="liquid" size="lg" className="w-full sm:w-auto h-14 md:h-16 gap-2 px-8 md:px-12 text-lg font-bold uppercase italic" onClick={openGetStarted}>
               Get Started <ArrowRight size={20} />
             </Button>
             <a 
@@ -68,7 +68,7 @@ export const HeroSection = () => {
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
             >
-              <Button variant="outline" size="lg" className="w-full px-8 md:px-12 border-brand-orange/20 text-brand-orange hover:bg-brand-orange/5 hover:scale-105 hover:-translate-y-1 transition-all">
+              <Button variant="outline" size="lg" className="w-full h-14 md:h-16 px-8 md:px-12 border-white/10 text-white hover:bg-white/5 transition-all text-lg font-bold uppercase italic">
                 Become a Publisher
               </Button>
             </a>
@@ -88,9 +88,9 @@ export const StatsSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-950 transition-colors duration-500 relative">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="py-12 md:py-24 bg-slate-950 transition-colors duration-500 relative">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, idx) => (
             <motion.div
               key={stat.label}
@@ -100,7 +100,7 @@ export const StatsSection = () => {
               transition={{ delay: idx * 0.1 }}
               className="text-center group"
             >
-              <div className="text-2xl md:text-5xl font-display font-bold text-gradient mb-1 md:mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-xl sm:text-2xl md:text-5xl font-display font-bold text-gradient mb-2 group-hover:scale-105 transition-transform duration-300">
                 {typeof stat.value === 'number' ? (
                   <>
                     <Counter value={stat.value} decimals={stat.decimals} />
@@ -110,7 +110,7 @@ export const StatsSection = () => {
                   stat.value
                 )}
               </div>
-              <div className="text-slate-500 dark:text-slate-400 text-[8px] md:text-sm font-bold uppercase tracking-widest leading-tight">{stat.label}</div>
+              <div className="text-slate-500 text-[9px] md:text-sm font-bold uppercase tracking-widest leading-tight">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -135,45 +135,45 @@ export const ServicesPreview = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#080808]/50 transition-colors duration-500 overflow-hidden">
-      <div className="container mx-auto px-6 text-center lg:text-left">
-        <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
-          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 text-white uppercase italic">Leading Solutions</h2>
-          <p className="text-slate-400 text-base md:text-lg">We provide end-to-end performance marketing technology for the entire mobile ecosystem.</p>
+    <section className="py-16 md:py-32 bg-[#080808]/50 transition-colors duration-500 overflow-hidden">
+      <div className="container mx-auto px-4 text-center lg:text-left">
+        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto">
+          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 text-white uppercase italic leading-tight">Leading Solutions</h2>
+          <p className="text-slate-400 text-sm md:text-lg">We provide end-to-end performance marketing technology for the entire mobile ecosystem.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16">
           {/* Advertisers */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-bold text-brand-primary flex items-center gap-3 uppercase tracking-wider">
-              <span className="w-8 h-[2px] bg-brand-primary"></span> For Advertisers
+          <div className="space-y-6 md:space-y-8">
+            <h3 className="text-xl md:text-2xl font-bold text-brand-primary flex items-center justify-center lg:justify-start gap-3 uppercase tracking-wider">
+              <span className="w-6 md:w-8 h-[2px] bg-brand-primary"></span> For Advertisers
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {advertiserServices.map((service, idx) => (
-                <GlassCard key={service.title} className="p-6 md:p-8 border-brand-primary/10 hover:border-brand-primary/40 group transition-all duration-500 text-left">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center mb-4 md:mb-6 text-brand-primary group-hover:scale-110 transition-transform">
+                <GlassCard key={service.title} className="p-6 md:p-8 border-white/5 hover:border-brand-primary/40 group transition-all duration-500 text-center lg:text-left">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-primary/10 flex items-center justify-center mb-4 md:mb-6 text-brand-primary group-hover:scale-110 mx-auto lg:mx-0 transition-transform">
                     {service.icon}
                   </div>
-                  <h4 className="text-base md:text-lg font-bold mb-2 text-white">{service.title}</h4>
-                  <p className="text-slate-400 text-xs md:text-sm">{service.desc}</p>
+                  <h4 className="text-base md:text-lg font-bold mb-2 text-white uppercase italic">{service.title}</h4>
+                  <p className="text-slate-500 text-xs md:text-sm leading-relaxed">{service.desc}</p>
                 </GlassCard>
               ))}
             </div>
           </div>
 
           {/* Publishers */}
-          <div className="space-y-8">
-            <h3 className="text-2xl font-bold text-brand-orange flex items-center gap-3 uppercase tracking-wider">
-              <span className="w-8 h-[2px] bg-brand-orange"></span> For Publishers
+          <div className="space-y-6 md:space-y-8">
+            <h3 className="text-xl md:text-2xl font-bold text-brand-orange flex items-center justify-center lg:justify-start gap-3 uppercase tracking-wider">
+              <span className="w-6 md:w-8 h-[2px] bg-brand-orange"></span> For Publishers
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {publisherServices.map((service, idx) => (
-                <GlassCard key={service.title} className="p-8 border-brand-orange/10 hover:border-brand-orange/40 group transition-all duration-500">
-                  <div className="w-12 h-12 rounded-xl bg-brand-orange/5 dark:bg-brand-orange/10 flex items-center justify-center mb-6 text-brand-orange group-hover:scale-110 transition-transform">
+                <GlassCard key={service.title} className="p-6 md:p-8 border-white/5 hover:border-brand-orange/40 group transition-all duration-500 text-center lg:text-left">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-orange/10 flex items-center justify-center mb-4 md:mb-6 text-brand-orange group-hover:scale-110 mx-auto lg:mx-0 transition-transform">
                     {service.icon}
                   </div>
-                  <h4 className="text-base md:text-lg font-bold mb-2 text-white">{service.title}</h4>
-                  <p className="text-slate-400 text-sm">{service.desc}</p>
+                  <h4 className="text-base md:text-lg font-bold mb-2 text-white uppercase italic">{service.title}</h4>
+                  <p className="text-slate-500 text-xs md:text-sm leading-relaxed">{service.desc}</p>
                 </GlassCard>
               ))}
             </div>
@@ -235,22 +235,27 @@ export const TestimonialsSection = () => {
 export const CTASection = () => {
   const { openGetStarted } = useModals();
   return (
-    <section className="py-32 bg-slate-950 transition-colors duration-500 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent-start/10 dark:bg-brand-accent-start/20 blur-[150px] rounded-full -z-10"></div>
+    <section className="py-20 md:py-32 bg-slate-950 transition-colors duration-500 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-accent-start/10 dark:bg-brand-accent-start/20 blur-[100px] md:blur-[150px] rounded-full -z-10"></div>
 
-      <div className="container mx-auto px-6">
-        <GlassCard className="max-w-5xl mx-auto p-12 md:p-20 text-center relative overflow-hidden border-brand-accent-start/10 dark:border-brand-accent-start/20">
-          <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 leading-[1.2] text-white overflow-visible">Ready to Scale Your <br /><span className="text-gradient inline-block pb-1">Brand to New Heights?</span></h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
+      <div className="container mx-auto px-4">
+        <GlassCard className="max-w-5xl mx-auto p-8 md:p-20 text-center relative overflow-hidden border-white/5 bg-white/[0.02]">
+          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 md:mb-8 leading-[1.2] text-white uppercase italic">
+            Ready to Scale Your <br />
+            <span className="text-gradient inline-block pb-1">Brand to New Heights?</span>
+          </h2>
+          <p className="text-slate-400 text-sm md:text-lg mb-10 md:mb-12 max-w-2xl mx-auto leading-relaxed">
             Stop guessing and start growing. Our data-driven strategies are waiting for you. Get a free audit and consultation today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-12" onClick={openGetStarted}>Contact Sales</Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button variant="liquid" size="lg" className="w-full sm:w-auto h-14 md:h-16 px-12 text-lg font-bold uppercase italic" onClick={openGetStarted}>
+                Contact Sales
+            </Button>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-[10px] md:text-sm text-slate-500 font-bold uppercase tracking-widest">
             <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-success" /> No Credit Card Required</span>
-            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-success" /> 24-Hour Response Guarantee</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-success" /> 24-Hour Response</span>
           </div>
         </GlassCard>
       </div>
@@ -277,31 +282,31 @@ export const ConnectSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 text-center">
+    <section className="py-20 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="font-display font-bold text-4xl md:text-6xl mb-12 tracking-tight text-white uppercase italic">
-            REACH OUT TO US
+          <h2 className="font-display font-bold text-3xl md:text-6xl mb-10 tracking-tight text-white uppercase italic leading-tight">
+            REACH OUT <br /> TO US
           </h2>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 max-w-sm mx-auto sm:max-w-none">
             <motion.a
               href="https://wa.me/919625982835"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-8 py-4 bg-[#25D366] text-black rounded-full font-bold transition-all shadow-lg hover:shadow-[#25D366]/20 text-center"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-black rounded-full font-bold transition-all shadow-lg hover:shadow-[#25D366]/20"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 15.5 17.38 18.23 13.88 18.23C13.83 18.23 13.78 18.23 13.73 18.23C13.68 18.23 13.64 18.21 13.59 18.19L11.53 17.53L10.94 17.9L8.46 19.49L9.12 17.06L9.36 16.17L8.74 15.42C7.81 14.3 7.32 12.92 7.32 11.92C7.32 8.41 10.21 5.51 13.72 5.51" />
               </svg>
-              <span>WhatsApp: 96259 82835</span>
+              <span className="text-sm">WhatsApp</span>
             </motion.a>
 
             <motion.a
@@ -310,27 +315,27 @@ export const ConnectSection = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-8 py-4 bg-[#0088cc] text-white rounded-full font-bold transition-all shadow-lg hover:shadow-[#0088cc]/20"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-[#0088cc] text-white rounded-full font-bold transition-all shadow-lg hover:shadow-[#0088cc]/20"
             >
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12.05C2.75,11.75 2.75,11.14 3.83,10.72L19.82,4.54C20.56,4.27 21.2,4.71 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z" />
               </svg>
-              Message on Telegram
+              <span className="text-sm">Telegram</span>
             </motion.a>
           </div>
 
-          <div className="flex flex-col items-center gap-6">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#a5a6f6]">Follow Us</span>
+          <div className="flex flex-col items-center gap-4">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">Follow Our Journey</span>
             <div className="flex gap-4">
               {socialLinks.map((link) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  whileHover={{ y: -4, backgroundColor: 'rgba(255,255,255,0.1)', color: '#a5a6f6', borderColor: '#a5a6f6' }}
-                  className="w-12 h-12 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-slate-400 transition-all cursor-pointer"
+                  whileHover={{ y: -4, backgroundColor: 'rgba(255,255,255,0.1)', color: '#9D50BB', borderColor: '#9D50BB' }}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-slate-400 transition-all cursor-pointer"
                   aria-label={`Follow us on ${link.name}`}
                 >
-                  <div className="w-5 h-5">
+                  <div className="w-4 h-4">
                     {link.icon}
                   </div>
                 </motion.a>
@@ -344,120 +349,83 @@ export const ConnectSection = () => {
 };
 export const AboutUsSection = () => {
   const values = [
-    { title: "Scalable Campaigns", icon: <TrendingUp className="text-brand-red" />, desc: "Growth strategies built to scale vertically without efficiency loss." },
-    { title: "Measurable ROI", icon: <Target className="text-brand-orange" />, desc: "Data-driven decisions backed by sub-second attribution tracking." },
-    { title: "Global Vision", icon: <Eye className="text-brand-purple" />, desc: "Connecting advertisers with prime publishers on a global scale." },
+    { title: "Scalable Campaigns", icon: <TrendingUp className="text-brand-red" />, desc: "Growth strategies built to scale vertically." },
+    { title: "Measurable ROI", icon: <Target className="text-brand-orange" />, desc: "Data-driven decisions backed by tracking." },
+    { title: "Global Vision", icon: <Eye className="text-brand-purple" />, desc: "Connecting advertisers with prime publishers." },
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#050505] relative overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-16 md:py-32 bg-[#050505] relative overflow-hidden">
+      <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-20">
-          <div className="lg:w-1/2">
+          <div className="lg:w-1/2 text-center lg:text-left">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              className="text-xs font-bold uppercase tracking-[0.3em] text-brand-red mb-4 block"
+              className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-red mb-4 block"
             >
               Who We Are
             </motion.span>
-            <h2 className="font-display font-bold text-2xl md:text-6xl mb-6 md:mb-8 uppercase italic text-white leading-tight">
+            <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 md:mb-8 uppercase italic text-white leading-tight">
               A Performance <br />
               <span className="text-gradient">Marketing</span> Powerhouse
             </h2>
-            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-500 text-sm md:text-lg mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Adsgrind is a global user acquisition company helping mobile apps achieve scalable growth. We bridge the gap between premium advertisers and high-performing publishers through proprietary technology and strategic campaign management.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {values.map((v, i) => (
-                <div key={i} className="space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
+                <div key={i} className="space-y-3 p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                  <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mx-auto lg:mx-0">
                     {v.icon}
                   </div>
-                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">{v.title}</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed">{v.desc}</p>
+                  <h4 className="text-xs font-bold text-white uppercase tracking-wider">{v.title}</h4>
+                  <p className="text-[10px] text-slate-500 leading-relaxed">{v.desc}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="lg:w-1/2 relative">
+          <div className="lg:w-1/2 w-full relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              className="md:aspect-square h-auto rounded-[2rem] overflow-hidden glass-card p-6 md:p-8 relative border-white/5 bg-white/[0.02] flex flex-col"
+              className="w-full aspect-[4/3] sm:aspect-square h-auto rounded-[2rem] overflow-hidden glass-card p-6 md:p-8 relative border-white/5 bg-white/[0.02] flex flex-col"
             >
-              <div className="flex justify-between items-center mb-8">
+              <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-brand-red animate-pulse"></div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Performance Data</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Analysis</span>
                 </div>
                 <div className="text-[10px] font-bold text-brand-red uppercase tracking-widest">+124% Growth</div>
               </div>
 
-              <div className="flex-1 relative">
-                {/* Grid Lines */}
-                <div className="absolute inset-0 flex flex-col justify-between opacity-10">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="w-full h-[1px] bg-white"></div>
-                  ))}
-                </div>
-
+              <div className="flex-1 relative min-h-[150px]">
                 {/* Performance Graph SVG */}
-                <svg viewBox="0 0 400 200" className="w-full h-full overflow-visible">
+                <svg viewBox="0 0 400 200" className="w-full h-full overflow-visible preserve-3d">
                   <defs>
                     <linearGradient id="graphGradient" x1="0" y1="0" x2="1" y2="0">
                       <stop offset="0%" stopColor="#EE1D23" />
                       <stop offset="50%" stopColor="#FF5800" />
                       <stop offset="100%" stopColor="#9D50BB" />
                     </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
                   </defs>
 
                   <motion.path
                     d="M 0 180 Q 50 170 80 140 T 150 120 T 220 60 T 300 80 T 400 20"
                     fill="none"
                     stroke="url(#graphGradient)"
-                    strokeWidth="4"
+                    strokeWidth="6"
                     strokeLinecap="round"
-                    filter="url(#glow)"
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
                     transition={{ duration: 2, ease: "easeOut" }}
                   />
-
-                  {/* Animated Data Point */}
-                  <motion.circle
-                    cx="400"
-                    cy="20"
-                    r="6"
-                    fill="#9D50BB"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 2 }}
-                  />
-                  <motion.circle
-                    cx="400"
-                    cy="20"
-                    r="12"
-                    stroke="#9D50BB"
-                    strokeWidth="2"
-                    fill="none"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: [1, 2], opacity: [0.5, 0] }}
-                    transition={{ delay: 2, repeat: Infinity, duration: 2 }}
-                  />
                 </svg>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-white/5">
-                <div className="text-3xl md:text-4xl font-display font-black text-white italic tracking-tighter">RESULTS DRIVEN</div>
-                <p className="text-[10px] text-slate-500 uppercase tracking-[0.3em] mt-2">Data-Backed Excellence</p>
+              <div className="mt-6 pt-6 border-t border-white/5">
+                <div className="text-2xl md:text-4xl font-display font-black text-white italic tracking-tighter">RESULTS DRIVEN</div>
+                <p className="text-[10px] text-slate-500 uppercase tracking-[0.3em] mt-1">Data-Backed Excellence</p>
               </div>
             </motion.div>
           </div>

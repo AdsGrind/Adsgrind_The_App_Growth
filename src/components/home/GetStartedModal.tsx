@@ -108,7 +108,7 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-[500px] overflow-hidden rounded-2xl sm:rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl"
+            className="relative w-full max-w-[500px] max-h-[95vh] overflow-y-auto rounded-2xl sm:rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl custom-scrollbar"
           >
             {/* Subtle glow effect behind */}
             <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-orange/10 blur-[80px] rounded-full pointer-events-none" />
