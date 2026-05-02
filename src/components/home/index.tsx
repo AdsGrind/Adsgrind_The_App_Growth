@@ -60,9 +60,16 @@ export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
             <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12" onClick={onSignup}>
               Get Started <ArrowRight size={20} />
             </Button>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-8 md:px-12 border-brand-orange/20 text-brand-orange hover:bg-brand-orange/5">
-              Become a Publisher
-            </Button>
+            <a 
+              href="https://adsgrind.offer18.com/m/signup_self_aff?r=&am=" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button variant="outline" size="lg" className="w-full px-8 md:px-12 border-brand-orange/20 text-brand-orange hover:bg-brand-orange/5 hover:scale-105 hover:-translate-y-1 transition-all">
+                Become a Publisher
+              </Button>
+            </a>
           </div>
         </motion.div>
       </div>

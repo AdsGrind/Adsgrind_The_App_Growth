@@ -71,7 +71,13 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={onLogin}>Log In</Button>
+          <a 
+            href="https://adsgrind10843948.offer18.com/m/signup" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+              <Button variant="ghost" size="sm" className="hover:scale-105 hover:-translate-y-0.5 transition-all">Log In</Button>
+          </a>
           <Button variant="liquid" size="sm" onClick={onSignup}>Get Started</Button>
         </div>
 
@@ -109,7 +115,14 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             ))}
             <div className="flex flex-col gap-3 pt-6 border-t border-white/5">
               <Button variant="liquid" size="lg" className="w-full" onClick={() => { setIsOpen(false); onSignup?.(); }}>Get Started</Button>
-              <Button variant="outline" size="lg" className="w-full border-white/10" onClick={() => { setIsOpen(false); onLogin?.(); }}>Log In</Button>
+              <a 
+                href="https://adsgrind10843948.offer18.com/m/signup" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                <Button variant="outline" size="lg" className="w-full border-white/10 hover:scale-105 hover:-translate-y-1 transition-all" onClick={() => setIsOpen(false)}>Log In</Button>
+              </a>
             </div>
           </motion.div>
         )}
