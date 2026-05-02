@@ -6,6 +6,7 @@ import { ArrowRight, BarChart3, Globe2, MessageSquare, Zap, Star, CheckCircle2 }
 import { Button, GlassCard, cn, Counter } from '@/components/ui';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useModals } from '@/context/ModalContext';
 
 const ThreeHero = dynamic(() => import('./ThreeHero').then((mod) => mod.ThreeHero), {
   ssr: false,
@@ -31,7 +32,8 @@ const partners = [
   { name: 'Partner 6', logo: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7,2H17L13.5,9H17L10,22V14H7V2Z" /></svg> },
 ];
 
-export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
+export const HeroSection = () => {
+  const { openGetStarted } = useModals();
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#050505]">
       <div className="hidden md:block absolute inset-0 -z-10">
@@ -57,7 +59,7 @@ export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12" onClick={onSignup}>
+            <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12" onClick={openGetStarted}>
               Get Started <ArrowRight size={20} />
             </Button>
             <a 
@@ -231,6 +233,7 @@ export const TestimonialsSection = () => {
 }
 
 export const CTASection = () => {
+  const { openGetStarted } = useModals();
   return (
     <section className="py-32 bg-slate-950 transition-colors duration-500 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent-start/10 dark:bg-brand-accent-start/20 blur-[150px] rounded-full -z-10"></div>
@@ -242,7 +245,7 @@ export const CTASection = () => {
             Stop guessing and start growing. Our data-driven strategies are waiting for you. Get a free audit and consultation today.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-12">Contact Sales</Button>
+            <Button variant="outline" size="lg" className="w-full sm:w-auto px-12" onClick={openGetStarted}>Contact Sales</Button>
           </div>
 
           <div className="mt-12 flex items-center justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">

@@ -28,13 +28,16 @@ export const BrandsMarquee = () => {
               key={`${brand.name}-${idx}`} 
               className="px-8 md:px-16 flex-shrink-0 flex flex-col items-center group cursor-pointer"
             >
-              <div className="relative h-10 w-24 md:h-24 md:w-56 mb-3 md:mb-6 transition-all duration-300 transform group-hover:scale-110">
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  fill
-                  className="object-contain transition-all duration-500 mix-blend-multiply dark:mix-blend-normal"
-                />
+              <div className="brand-card transition-all duration-300 transform group-hover:scale-110">
+                <div className="relative h-10 w-24 md:h-24 md:w-56 mb-2">
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    fill
+                    className="object-contain transition-all duration-500 mix-blend-multiply dark:mix-blend-normal"
+                  />
+                </div>
+                <p className="brand-name">{brand.name}</p>
               </div>
             </div>
           ))}

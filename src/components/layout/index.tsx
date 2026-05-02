@@ -52,7 +52,7 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             />
           </div>
           <span className="font-display font-bold text-xl tracking-tight hidden sm:block text-white uppercase italic">
-            ADS<span >GRIND</span>
+            ADSGRIND
           </span>
         </Link>
 
@@ -145,7 +145,7 @@ export const Footer = () => {
                 className="object-cover"
               />
             </div>
-            <span className="font-display font-bold text-lg text-white uppercase italic">ADS<span className="text-gradient">GRIND</span></span>
+            <span className="font-display font-bold text-lg text-white uppercase italic">ADSGRIND</span>
           </Link>
           <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
             Elevating brands through high-performance digital marketing, strategic SEO, and technical excellence.

@@ -1,6 +1,8 @@
 "use server";
 
 import nodemailer from 'nodemailer';
+import { saveLead } from '@/lib/db';
+import crypto from 'crypto';
 
 export async function sendContactEmail(formData: {
   name: string;
@@ -25,11 +27,13 @@ export async function sendContactEmail(formData: {
   const transporter = nodemailer.createTransport({
     host: smtpHost,
     port: parseInt(smtpPort || '587'),
-    secure: smtpPort === '465',
+    secure: smtpPort === '465', // false for 587, true for 465
     auth: {
       user: smtpUser,
       pass: smtpPass,
     },
+    debug: true,
+    logger: true,
   });
 
   const { name, email, company, budget, message } = formData;
@@ -38,99 +42,221 @@ export async function sendContactEmail(formData: {
     hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true 
   });
 
+  console.log(`Attempting to send email from ${smtpUser} to business@adsgrind.com and user ${email}`);
+
   try {
     const logoUrl = "https://adsgrind.com/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg";
     
-    // 1. Admin Email Template (Dark & Professional)
-    const adminHtml = `
-      <div style="font-family: 'Inter', Arial, sans-serif; background-color: #050505; color: #fff; padding: 60px 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 32px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8);">
-          <div style="background: linear-gradient(135deg, #EE1D23 0%, #F15A24 100%); padding: 40px; text-align: center;">
-            <img src="${logoUrl}" alt="Adsgrind" style="width: 80px; height: 80px; border-radius: 20px; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.2);" />
-            <h1 style="margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; font-style: italic; letter-spacing: 2px; color: #fff;">New Lead Captured</h1>
-          </div>
-          <div style="padding: 40px;">
-            <p style="color: rgba(255,255,255,0.5); text-transform: uppercase; font-size: 10px; font-weight: 900; letter-spacing: 2px; margin-bottom: 30px;">Campaign Intelligence Report</p>
-            
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 30px; margin-bottom: 30px;">
-              <table width="100%" cellspacing="0" cellpadding="0">
-                <tr><td style="padding: 10px 0; color: rgba(255,255,255,0.4); font-size: 12px; text-transform: uppercase;">Founder/Lead</td><td style="padding: 10px 0; color: #fff; font-weight: bold; text-align: right;">${name}</td></tr>
-                <tr><td style="padding: 10px 0; color: rgba(255,255,255,0.4); font-size: 12px; text-transform: uppercase;">Company</td><td style="padding: 10px 0; color: #fff; font-weight: bold; text-align: right;">${company}</td></tr>
-                <tr><td style="padding: 10px 0; color: rgba(255,255,255,0.4); font-size: 12px; text-transform: uppercase;">Email</td><td style="padding: 10px 0; color: #EE1D23; font-weight: bold; text-align: right;">${email}</td></tr>
-                <tr><td style="padding: 10px 0; color: rgba(255,255,255,0.4); font-size: 12px; text-transform: uppercase;">Budget</td><td style="padding: 10px 0; color: #4ADE80; font-weight: bold; text-align: right;">${budget}</td></tr>
-              </table>
-            </div>
+    // Helper to escape HTML to prevent injection in emails
+    const escape = (str: string) => str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 30px;">
-              <p style="color: rgba(255,255,255,0.4); font-size: 10px; text-transform: uppercase; margin-bottom: 15px;">Growth Objectives:</p>
-              <div style="color: #fff; line-height: 1.8; font-size: 15px;">${message}</div>
-            </div>
-          </div>
-          <div style="padding: 30px; text-align: center; color: rgba(255,255,255,0.2); font-size: 10px; border-top: 1px solid rgba(255,255,255,0.05);">
-            SENT VIA ADSGRIND INTELLIGENCE ENGINE v2.0
-          </div>
-        </div>
-      </div>
+    const safeName = escape(name);
+    const safeEmail = escape(email);
+    const safeCompany = escape(company);
+    const safeBudget = escape(budget);
+    const safeMessage = escape(message).replace(/\n/g, '<br>');
+
+    // 1. Admin Email Template (Premium Dark + Red)
+    const adminHtml = `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Lead Intelligence</title>
+        <style>
+          @media only screen and (max-width: 600px) {
+            .container { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; }
+            .brand-text { font-size: 22px !important; }
+            .content-padding { padding: 30px 20px !important; }
+          }
+        </style>
+      </head>
+      <body style="margin: 0; padding: 0; background-color: #0B0B0B; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B0B0B; padding: 40px 0;">
+          <tr>
+            <td align="center">
+              <table class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;">
+                <!-- Header / Brand -->
+                <tr>
+                  <td align="center" style="padding-bottom: 30px;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td align="center">
+                          <img src="${logoUrl}" alt="ADSGRIND" width="40" height="40" style="display: block; border-radius: 10px;">
+                          <p style="font-size: 14px; color: #A0A0A0; margin-top: 8px; font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+                            ADSGRIND
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Main Card -->
+                <tr>
+                  <td class="content-padding" style="background-color: #141414; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td style="padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                          <p style="margin: 0; color: #FF5800; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Lead Notification</p>
+                          <h1 style="margin: 8px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 700; line-height: 1.3;">NEW GROWTH INQUIRY</h1>
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td style="padding-top: 30px;">
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td style="padding-bottom: 20px;">
+                                <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Contact Details</p>
+                                <p style="margin: 6px 0 0 0; font-size: 16px; color: #ffffff; font-weight: 600;">${safeName}</p>
+                                <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(255,255,255,0.5);">${safeCompany}</p>
+                                <p style="margin: 4px 0 0 0; font-size: 14px; color: #FF5800;"><a href="mailto:${safeEmail}" style="color: #FF5800; text-decoration: none;">${safeEmail}</a></p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                                <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Objectives</p>
+                                <div style="margin: 12px 0 0 0; padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; word-break: break-word; overflow-wrap: anywhere;">
+                                  ${safeMessage}
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                  <td align="center" style="padding-top: 30px;">
+                    <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 1px;">Adsgrind Intelligence • ${date}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
     `;
 
+    console.log('Sending admin notification email...');
     await transporter.sendMail({
-      from: `"Adsgrind Form" <${smtpUser}>`,
+      from: `"Adsgrind Lead" <${smtpUser}>`,
       to: 'business@adsgrind.com',
-      subject: `🔥 New Lead: ${company} - ${name}`,
+      subject: `🔥 New Lead: ${safeCompany} - ${safeName}`,
       html: adminHtml,
     });
+    console.log('Admin notification sent successfully.');
 
-    // 2. User Auto-Response Template (Premium Dark Branding)
+    // 2. User Auto-Reply Template (Premium Dark + Red)
     const userHtml = `
-      <div style="font-family: 'Inter', Arial, sans-serif; background-color: #050505; color: #fff; padding: 60px 20px;">
-        <div style="max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 40px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.8);">
-          <div style="background: linear-gradient(135deg, #EE1D23 0%, #F15A24 100%); padding: 80px 40px; text-align: center; position: relative;">
-            <img src="${logoUrl}" alt="Adsgrind" style="width: 100px; height: 100px; border-radius: 24px; margin-bottom: 24px; border: 3px solid rgba(255,255,255,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.4);" />
-            <h1 style="margin: 0; font-size: 42px; font-weight: 900; color: #fff; font-style: italic; text-transform: uppercase; letter-spacing: -1px;">ADSGRIND</h1>
-            <p style="margin: 10px 0 0 0; font-size: 14px; font-weight: 900; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 4px;">The App Growth</p>
-          </div>
-          
-          <div style="padding: 60px 50px;">
-            <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 24px; color: #fff; font-style: italic;">HI ${name.toUpperCase()}!</h2>
-            <p style="font-size: 18px; line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 40px;">
-              Your request for a high-performance growth strategy has been received. Our engineering team is already analyzing your app's potential.
-            </p>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>We received your inquiry</title>
+        <style>
+          @media only screen and (max-width: 600px) {
+            .container { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; }
+            .brand-text { font-size: 22px !important; }
+            .content-padding { padding: 40px 20px !important; }
+            .heading { font-size: 24px !important; }
+          }
+        </style>
+      </head>
+      <body style="margin: 0; padding: 0; background-color: #0B0B0B; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B0B0B; padding: 40px 0;">
+          <tr>
+            <td align="center">
+              <table class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;">
+                <!-- Header / Brand -->
+                <tr>
+                  <td align="center" style="padding-bottom: 30px;">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td align="center">
+                          <img src="${logoUrl}" alt="ADSGRIND" width="40" height="40" style="display: block; border-radius: 10px;">
+                          <p style="font-size: 14px; color: #A0A0A0; margin-top: 8px; font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+                            ADSGRIND
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
 
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 32px; padding: 40px; margin-bottom: 40px; position: relative;">
-              <div style="color: #F15A24; font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px;">Growth Submission Summary</div>
-              <div style="margin-bottom: 15px; font-size: 16px;">
-                <span style="color: rgba(255,255,255,0.4);">Strategy ID:</span>
-                <span style="color: #fff; font-weight: bold; margin-left: 10px;">AG-${Math.floor(Math.random() * 900000) + 100000}</span>
-              </div>
-              <div style="font-size: 16px;">
-                <span style="color: rgba(255,255,255,0.4);">Timestamp:</span>
-                <span style="color: #fff; font-weight: bold; margin-left: 10px;">${date}</span>
-              </div>
-            </div>
+                <!-- Main Card -->
+                <tr>
+                  <td class="content-padding" style="background-color: #141414; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 60px 50px; text-align: center;">
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td>
+                          <h2 class="heading" style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 800; line-height: 1.2; text-transform: uppercase; font-style: italic;">HI ${safeName.toUpperCase()}!</h2>
+                          <p style="margin: 24px 0 0 0; font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.6;">
+                            Thanks for reaching out to <strong>Adsgrind</strong>. We've received your growth inquiry for <strong>${safeCompany}</strong> and our strategy team is already reviewing your request.
+                          </p>
+                          <p style="margin: 16px 0 0 0; font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.6;">
+                            A Growth Strategist will contact you within 24 hours with a custom approach designed to scale your app beyond limits.
+                          </p>
+                          
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 40px;">
+                            <tr>
+                              <td align="center">
+                                <a href="https://adsgrind.com" style="display: inline-block; background-color: #FF5800; color: #ffffff; padding: 16px 36px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(255, 88, 0, 0.2);">Explore Intelligence HQ</a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
 
-            <p style="font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 30px; text-align: center;">
-              Expect a response from a Growth Architect within 24 hours.
-            </p>
-
-            <div style="text-align: center;">
-              <a href="https://adsgrind.com" style="display: inline-block; background: #fff; color: #000; padding: 18px 40px; border-radius: 20px; text-decoration: none; font-weight: 900; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Visit Intelligence HQ</a>
-            </div>
-          </div>
-
-          <div style="padding: 40px; text-align: center; background: #080808; border-top: 1px solid rgba(255,255,255,0.05);">
-            <p style="color: rgba(255,255,255,0.3); font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">
-              © 2026 ADSGRIND THE APP GROWTH • SCALE WITHOUT LIMITS
-            </p>
-          </div>
-        </div>
-      </div>
+                <!-- Footer -->
+                <tr>
+                  <td align="center" style="padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px;">
+                    <p style="margin: 0; font-size: 14px; color: #ffffff; font-weight: 700; letter-spacing: 0.5px;">The Adsgrind Team</p>
+                    <p style="margin: 6px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px;">Scale Without Limits • adsgrind.com</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
     `;
 
+    console.log(`Sending user auto-reply to ${safeEmail}...`);
     await transporter.sendMail({
       from: `"Adsgrind Team" <${smtpUser}>`,
       to: email,
       subject: 'We received your inquiry - Adsgrind',
       html: userHtml,
+    });
+    console.log('User auto-reply sent successfully.');
+
+    // 3. Save to DB for CRM
+    await saveLead({
+      id: typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      name,
+      email,
+      company,
+      budget,
+      message,
+      status: 'New',
+      createdAt: new Date().toISOString(),
     });
 
     return { success: true };

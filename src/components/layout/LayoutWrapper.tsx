@@ -1,34 +1,28 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Navbar, Footer } from '@/components/layout';
 import { WhatsAppButton, AIChatbot } from '@/components/widgets';
 import { AuthModal } from '@/components/auth/AuthModal';
+import { GetStartedModal } from '@/components/home/GetStartedModal';
+import { ModalProvider, useModals } from '@/context/ModalContext';
 
-export function LayoutWrapper({ children }: { children: React.ReactNode }) {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+function LayoutContent({ children }: { children: React.ReactNode }) {
+  const { 
+    isAuthOpen, closeAuth, authMode, openAuth,
+    isGetStartedOpen, closeGetStarted, openGetStarted 
+  } = useModals();
 
   useEffect(() => {
-    // Force scroll to top on mount (e.g., refresh)
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
     window.scrollTo(0, 0);
   }, []);
 
-  const openAuth = (mode: 'login' | 'signup') => {
-    setAuthMode(mode);
-    setIsAuthOpen(true);
-  };
-
-  // We need to pass the openAuth function to the Navbar.
-  // One way is using a Context, another is through a cloned element if it was a direct child, 
-  // but here it's easier to just move the Navbar inside this wrapper.
-
   return (
     <>
-      <Navbar onLogin={() => openAuth('login')} onSignup={() => openAuth('signup')} />
+      <Navbar onLogin={() => openAuth('login')} onSignup={openGetStarted} />
       <main className="flex-1">
         {children}
       </main>
@@ -37,9 +31,23 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
       <AIChatbot />
       <AuthModal 
         isOpen={isAuthOpen} 
-        onClose={() => setIsAuthOpen(false)} 
+        onClose={closeAuth} 
         initialMode={authMode} 
       />
+      <GetStartedModal 
+        isOpen={isGetStartedOpen} 
+        onClose={closeGetStarted} 
+      />
     </>
+  );
+}
+
+export function LayoutWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <ModalProvider>
+      <LayoutContent>
+        {children}
+      </LayoutContent>
+    </ModalProvider>
   );
 }

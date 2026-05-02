@@ -1,0 +1,42 @@
+[
+  {
+    "id": "76d5e2d2-a5ab-4c0d-b49b-066638f657ac",
+    "name": "Rohit Yadav",
+    "email": "rohityadav561456@gmail.com",
+    "company": "Adsgrind",
+    "budget": "Not Specified (Get Started Modal)",
+    "message": "Hi I need traffic",
+    "status": "New",
+    "createdAt": "2026-05-02T19:40:04.355Z"
+  },
+  {
+    "id": "9f50df85-b278-489e-be44-a063649d289c",
+    "name": "Rohit Yadav",
+    "email": "rohit@adsgrind.com",
+    "company": "Adsgrind",
+    "budget": "Not Specified (Get Started Modal)",
+    "message": "Hi I am Rohit",
+    "status": "New",
+    "createdAt": "2026-05-02T19:46:46.162Z"
+  },
+  {
+    "id": "3eec9169-c6af-4ceb-b163-74ec9d01c7b7",
+    "name": "Rohit Yadav",
+    "email": "rohityadav561456@gmail.com",
+    "company": "Adsgrind",
+    "budget": "Not Specified (Get Started Modal)",
+    "message": "Tell us more about",
+    "status": "New",
+    "createdAt": "2026-05-02T19:51:14.927Z"
+  },
+  {
+    "id": "c66eb783-7ce4-41a0-84e2-f32bd6b417f3",
+    "name": "Rohit Yadav",
+    "email": "rohityadav561456@gmail.com",
+    "company": "Adsgrind",
+    "budget": "Not Specified (Get Started Modal)",
+    "message": "jai mata di ",
+    "status": "New",
+    "createdAt": "2026-05-02T19:53:45.181Z"
+  }
+]
