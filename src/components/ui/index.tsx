@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -56,4 +57,29 @@ export const GlassCard = ({ className, hover = true, ...props }: GlassCardProps)
       {...props} 
     />
   );
+};
+
+export const Counter = ({ value, duration = 2, decimals = 0 }: { value: number; duration?: number; decimals?: number }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView && ref.current) {
+      const controls = animate(0, value, {
+        duration,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          if (ref.current) {
+            ref.current.textContent = latest.toLocaleString(undefined, {
+              minimumFractionDigits: decimals,
+              maximumFractionDigits: decimals
+            });
+          }
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, value, duration, decimals]);
+
+  return <span ref={ref}>0</span>;
 };

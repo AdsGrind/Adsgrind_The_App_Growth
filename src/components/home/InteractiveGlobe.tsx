@@ -9,11 +9,11 @@ import { useTheme } from '../layout/ThemeProvider';
 // Coordinates for the markers
 const MARKERS = [
   { id: 'in', name: 'India', lat: 20.5937, lng: 78.9629, reach: '95%', color: '#EE1D23' },
-  { id: 'us', name: 'United States', lat: 37.0902, lng: -95.7129, reach: '85%', color: '#EE1D23' },
-  { id: 'eu', name: 'Europe', lat: 54.5260, lng: 15.2551, reach: '75%', color: '#EE1D23' },
-  { id: 'sea', name: 'Southeast Asia', lat: 13.41, lng: 103.52, reach: '88%', color: '#EE1D23' },
-  { id: 'me', name: 'Middle East', lat: 29.2985, lng: 42.5510, reach: '82%', color: '#EE1D23' },
-  { id: 'la', name: 'Latin America', lat: -14.2350, lng: -51.9253, reach: '70%', color: '#EE1D23' },
+  { id: 'us', name: 'United States', lat: 37.0902, lng: -95.7129, reach: '90%', color: '#EE1D23' },
+  { id: 'eu', name: 'Europe', lat: 54.5260, lng: 15.2551, reach: '80%', color: '#EE1D23' },
+  { id: 'sea', name: 'Southeast Asia', lat: 13.41, lng: 103.52, reach: '70%', color: '#EE1D23' },
+  { id: 'me', name: 'Middle East', lat: 29.2985, lng: 42.5510, reach: '75%', color: '#EE1D23' },
+  { id: 'la', name: 'Latin America', lat: -14.2350, lng: -51.9253, reach: '85%', color: '#EE1D23' },
 ];
 
 // Arcs to draw between regions
@@ -250,7 +250,7 @@ const GlobeCore = () => {
 
 export const InteractiveGlobe = () => {
   return (
-    <div className="w-full h-full min-h-[400px] md:min-h-[500px]">
+    <div className="w-full h-full min-h-[300px] md:min-h-[500px]">
       <Canvas dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 0, 8.5]} />
         <ambientLight intensity={0.4} />

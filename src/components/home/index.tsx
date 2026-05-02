@@ -1,9 +1,9 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import { ArrowRight, BarChart3, Globe2, MessageSquare, Zap, Star, CheckCircle2 } from 'lucide-react';
-import { Button, GlassCard, cn } from '@/components/ui';
+import { Button, GlassCard, cn, Counter } from '@/components/ui';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -79,10 +79,10 @@ export const HeroSection = ({ onSignup }: { onSignup?: () => void }) => {
 
 export const StatsSection = () => {
   const stats = [
-    { label: 'Users Reached', value: '50+ Millions' },
-    { label: 'Verified Conversions', value: '38,000+' },
-    { label: 'Conversion Rate', value: '4.8%' },
-    { label: 'GEO Coverage', value: 'Global' },
+    { label: 'Users Reached', value: 50, suffix: '+ Millions' },
+    { label: 'Verified Conversions', value: 38000, suffix: '+' },
+    { label: 'Conversion Rate', value: 4.8, suffix: '%', decimals: 1 },
+    { label: 'GEO Coverage', value: 'Global', isStatic: true },
   ];
 
   return (
@@ -98,7 +98,16 @@ export const StatsSection = () => {
               transition={{ delay: idx * 0.1 }}
               className="text-center group"
             >
-              <div className="text-2xl md:text-5xl font-display font-bold text-gradient mb-1 md:mb-2 group-hover:scale-110 transition-transform duration-300">{stat.value}</div>
+              <div className="text-2xl md:text-5xl font-display font-bold text-gradient mb-1 md:mb-2 group-hover:scale-110 transition-transform duration-300">
+                {typeof stat.value === 'number' ? (
+                  <>
+                    <Counter value={stat.value} decimals={stat.decimals} />
+                    {stat.suffix}
+                  </>
+                ) : (
+                  stat.value
+                )}
+              </div>
               <div className="text-slate-500 dark:text-slate-400 text-[8px] md:text-sm font-bold uppercase tracking-widest leading-tight">{stat.label}</div>
             </motion.div>
           ))}
