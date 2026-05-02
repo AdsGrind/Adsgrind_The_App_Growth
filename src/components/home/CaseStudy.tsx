@@ -7,7 +7,7 @@ import { Target, BarChart, ShieldCheck, Clock } from 'lucide-react';
 
 const CaseStudy = () => {
     return (
-    <section className="py-32 bg-[#080d1a] transition-colors duration-500 overflow-hidden">
+    <section className="section-padding bg-[#080d1a] transition-colors duration-500 overflow-hidden">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col lg:flex-row items-center gap-16">
                     <div className="lg:w-1/2">
@@ -18,11 +18,11 @@ const CaseStudy = () => {
                         >
                             Success Story
                         </motion.span>
-                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 uppercase italic leading-tight text-white">
+                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-4 md:mb-8 uppercase italic leading-tight text-white">
                             Fintech <span className="text-gradient">CPA</span> Hero
                         </h2>
                         
-                        <div className="grid grid-cols-2 gap-8 mb-12">
+                        <div className="grid grid-cols-2 gap-8 mb-6 md:mb-12">
                             <div>
                                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">GEO</div>
                                 <div className="text-xl font-bold text-white">United States</div>
@@ -33,7 +33,7 @@ const CaseStudy = () => {
                             </div>
                         </div>
 
-                        <p className="text-slate-600 dark:text-slate-400 text-lg mb-10 leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-400 text-lg mb-6 md:mb-10 leading-relaxed">
                             A leading US Fintech app needed to scale its high-quality user base with strict CPA constraints. We implemented a multi-channel acquisition strategy focusing on high-intent Native and Video traffic.
                         </p>
 
@@ -63,10 +63,10 @@ const CaseStudy = () => {
                             whileInView={{ opacity: 1, scale: 1, x: 0 }}
                             className="relative z-10"
                         >
-                            <GlassCard className="p-12 border-brand-red/20 shadow-2xl relative overflow-hidden bg-slate-900/80">
+                            <GlassCard className="p-6 md:p-12 border-brand-red/20 shadow-2xl relative overflow-hidden bg-slate-900/80">
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-brand-red/10 blur-[80px] rounded-full -z-10"></div>
                                 
-                                <h3 className="text-2xl font-bold mb-10 border-b border-slate-200 dark:border-white/10 pb-6 uppercase tracking-widest flex items-center justify-between">
+                                <h3 className="text-2xl font-bold mb-6 md:mb-10 border-b border-slate-200 dark:border-white/10 pb-6 uppercase tracking-widest flex items-center justify-between">
                                     Final Campaign Results
                                     <BarChart className="text-brand-red" />
                                 </h3>

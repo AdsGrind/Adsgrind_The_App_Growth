@@ -110,6 +110,18 @@ body {
     font-weight: 500;
     letter-spacing: 0.3px;
   }
+
+  .section-padding {
+    padding-top: 3rem; /* 48px */
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 8rem; /* 128px */
+      padding-bottom: 8rem;
+    }
+  }
 }
 
 /* Smooth Scroll */

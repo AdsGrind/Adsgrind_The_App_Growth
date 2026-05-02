@@ -49,9 +49,9 @@ export default function BlogPage() {
   const { openGetStarted, openStrategy, openMarket, openFraudInsight } = useModals();
 
   return (
-    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+    <div className="pt-24 md:pt-32 pb-12 md:pb-20 bg-[#050505] min-h-screen">
       <div className="container mx-auto px-6">
-        <div className="max-w-[850px] mx-auto mb-12 text-center px-4">
+        <div className="max-w-[850px] mx-auto mb-8 md:mb-12 text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured Post 1 - UA Strategy */}
-        <div className="mb-32">
+        <div className="mb-12 md:mb-32">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -78,18 +78,18 @@ export default function BlogPage() {
             >
                 <GlassCard className="p-0 overflow-hidden border-brand-purple/20 bg-white/[0.03] hover:border-brand-purple/40 transition-all duration-500">
                     <div className="flex flex-col lg:flex-row items-center">
-                        <div className="flex-1 p-8 sm:p-16 lg:pr-8">
-                            <div className="flex items-center gap-3 mb-8">
+                        <div className="flex-1 p-6 sm:p-16 lg:pr-8">
+                            <div className="flex items-center gap-3 mb-6 md:mb-8">
                                 <span className="px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-[10px] font-bold text-brand-purple tracking-widest uppercase">
                                     Featured Guide
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 15, 2026</span>
                             </div>
-                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4 md:mb-6 uppercase italic leading-tight">
                                 The 2026 Guide to <br />
                                 <span className="text-gradient">Scalable User Acquisition</span>
                             </h2>
-                            <p className="text-slate-400 text-lg mb-10 leading-relaxed max-w-xl">
+                            <p className="text-slate-400 text-lg mb-6 md:mb-10 leading-relaxed max-w-xl">
                                 Break down the core strategies that drive massive user growth in the current mobile ecosystem while maintaining efficient CPAs.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -120,7 +120,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured Post 2 - Mastering CPA */}
-        <div className="mb-32">
+        <div className="mb-12 md:mb-32">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -129,18 +129,18 @@ export default function BlogPage() {
             >
                 <GlassCard className="p-0 overflow-hidden border-brand-orange/20 bg-white/[0.03] hover:border-brand-orange/40 transition-all duration-500">
                     <div className="flex flex-col lg:flex-row items-center">
-                        <div className="flex-1 p-8 sm:p-16 lg:pr-8">
-                            <div className="flex items-center gap-3 mb-8">
+                        <div className="flex-1 p-6 sm:p-16 lg:pr-8">
+                            <div className="flex items-center gap-3 mb-6 md:mb-8">
                                 <span className="px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-[10px] font-bold text-brand-orange tracking-widest uppercase">
                                     Performance Deep-Dive
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 12, 2026</span>
                             </div>
-                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4 md:mb-6 uppercase italic leading-tight">
                                 Mastering CPA: <br />
                                 <span className="text-gradient-orange">Pay Only for Performance</span>
                             </h2>
-                            <p className="text-slate-400 text-lg mb-10 leading-relaxed max-w-xl">
+                            <p className="text-slate-400 text-lg mb-6 md:mb-10 leading-relaxed max-w-xl">
                                 Learn how to optimize your offer funnel to ensure every conversion delivered is high-quality and verified.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -166,7 +166,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured Post 3 - Global Trends */}
-        <div className="mb-32">
+        <div className="mb-12 md:mb-32">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -175,18 +175,18 @@ export default function BlogPage() {
             >
                 <GlassCard className="p-0 overflow-hidden border-brand-red/20 bg-white/[0.03] hover:border-brand-red/40 transition-all duration-500">
                     <div className="flex flex-col lg:flex-row items-center">
-                        <div className="flex-1 p-8 sm:p-16 lg:pr-8">
-                            <div className="flex items-center gap-3 mb-8">
+                        <div className="flex-1 p-6 sm:p-16 lg:pr-8">
+                            <div className="flex items-center gap-3 mb-6 md:mb-8">
                                 <span className="px-3 py-1 rounded-full bg-brand-red/10 border border-brand-red/20 text-[10px] font-bold text-brand-red tracking-widest uppercase">
                                     Market Intelligence
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 10, 2026</span>
                             </div>
-                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4 md:mb-6 uppercase italic leading-tight">
                                 Global Traffic Trends: <br />
                                 <span className="text-gradient">Beyond Tier 1 Markets</span>
                             </h2>
-                            <p className="text-slate-400 text-lg mb-10 leading-relaxed max-w-xl">
+                            <p className="text-slate-400 text-lg mb-6 md:mb-10 leading-relaxed max-w-xl">
                                 Exploring the hyper-growth opportunities in India, SEA, and the Middle East.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -217,7 +217,7 @@ export default function BlogPage() {
         </div>
 
         {/* Featured Post 4 - Fraud Prevention */}
-        <div className="mb-32">
+        <div className="mb-12 md:mb-32">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -226,18 +226,18 @@ export default function BlogPage() {
             >
                 <GlassCard className="p-0 overflow-hidden border-brand-red/20 bg-white/[0.03] hover:border-brand-red/40 transition-all duration-500">
                     <div className="flex flex-col lg:flex-row items-center">
-                        <div className="flex-1 p-8 sm:p-16 lg:pr-8">
-                            <div className="flex items-center gap-3 mb-8">
+                        <div className="flex-1 p-6 sm:p-16 lg:pr-8">
+                            <div className="flex items-center gap-3 mb-6 md:mb-8">
                                 <span className="px-3 py-1 rounded-full bg-brand-red/10 border border-brand-red/20 text-[10px] font-bold text-brand-red tracking-widest uppercase">
                                     Ad-Tech Intelligence
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 08, 2026</span>
                             </div>
-                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4 md:mb-6 uppercase italic leading-tight">
                                 Fraud Prevention in <br />
                                 <span className="text-gradient">Performance Marketing</span>
                             </h2>
-                            <p className="text-slate-400 text-lg mb-10 leading-relaxed max-w-xl">
+                            <p className="text-slate-400 text-lg mb-6 md:mb-10 leading-relaxed max-w-xl">
                                 How Adsgrind uses proprietary detection technology to ensure 100% human traffic.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
@@ -271,7 +271,7 @@ export default function BlogPage() {
         </div>
 
         {/* Other Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 md:mb-20">
           {POSTS.filter(p => p.id > 4).map((post, idx) => (
             <motion.div
               key={post.id}

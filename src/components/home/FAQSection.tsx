@@ -36,9 +36,9 @@ const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section className="py-32 bg-[#050505] relative overflow-hidden">
+        <section className="section-padding bg-[#050505] relative overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col lg:flex-row gap-20">
+                <div className="flex flex-col lg:flex-row gap-10 md:gap-20">
                     <div className="lg:w-1/3">
                         <motion.span 
                             initial={{ opacity: 0 }}
@@ -47,11 +47,11 @@ const FAQSection = () => {
                         >
                             Got Questions?
                         </motion.span>
-                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 uppercase italic text-white leading-tight">
+                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-4 md:mb-8 uppercase italic text-white leading-tight">
                             Frequently Asked <br />
                             <span className="text-gradient">Questions</span>
                         </h2>
-                        <p className="text-slate-400 text-lg mb-8">
+                        <p className="text-slate-400 text-lg mb-4 md:mb-8">
                             Everything you need to know about scaling your app growth with Adsgrind. Still have questions? Reach out to our team.
                         </p>
                     </div>
@@ -68,7 +68,7 @@ const FAQSection = () => {
                                     className={`p-0 overflow-hidden border-white/5 transition-all duration-300 ${openIndex === idx ? 'border-brand-purple/30 bg-brand-purple/5' : 'hover:border-white/10'}`}
                                 >
                                     <button 
-                                        className="w-full p-6 text-left flex items-center justify-between"
+                                        className="w-full p-4 md:p-6 text-left flex items-center justify-between"
                                         onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                                     >
                                         <span className={`text-lg font-bold transition-colors ${openIndex === idx ? 'text-brand-purple' : 'text-slate-200'}`}>

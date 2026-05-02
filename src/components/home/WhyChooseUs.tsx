@@ -27,9 +27,9 @@ const WhyChooseUs = () => {
     ];
 
     return (
-        <section className="py-32 bg-transparent relative">
+        <section className="section-padding bg-transparent relative">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col lg:flex-row items-center gap-20">
+                <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-20">
                     <div className="lg:w-1/3">
                         <motion.span 
                             initial={{ opacity: 0 }}
@@ -38,13 +38,13 @@ const WhyChooseUs = () => {
                         >
                             The Adsgrind Advantage
                         </motion.span>
-                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 uppercase italic text-white leading-tight">
+                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-4 md:mb-8 uppercase italic text-white leading-tight">
                             Why <span className="text-gradient">Choose</span> Us
                         </h2>
-                        <p className="text-slate-400 text-lg mb-8">
+                        <p className="text-slate-400 text-lg mb-4 md:mb-8">
                             We don't just deliver clicks; we deliver growth. Our technical-first approach to performance marketing ensures that every campaign is built on a foundation of quality and scale.
                         </p>
-                        <div className="h-1 w-20 bg-brand-orange rounded-full mb-8"></div>
+                        <div className="h-1 w-20 bg-brand-orange rounded-full mb-6 md:mb-8"></div>
                         <p className="text-slate-500 italic text-sm">
                             "Transparency and results are the pillars of our partnership model."
                         </p>

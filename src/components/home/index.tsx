@@ -35,7 +35,7 @@ const partners = [
 export const HeroSection = () => {
   const { openGetStarted } = useModals();
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-[#050505]">
+    <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-16 md:pt-20 overflow-hidden bg-[#050505]">
       <div className="hidden md:block absolute inset-0 -z-10">
         <ThreeHero />
       </div>
@@ -47,14 +47,14 @@ export const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-xs font-bold tracking-widest uppercase mb-6 text-brand-primary animate-pulse">
+          <span className="inline-block py-1.5 px-4 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-xs font-bold tracking-widest uppercase mb-4 md:mb-6 text-brand-primary animate-pulse">
             Click. Conversion. Growth.
           </span>
-          <h1 className="font-display font-bold text-2xl sm:text-4xl md:text-7xl lg:text-8xl tracking-tight mb-8 leading-[1.3] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
+          <h1 className="font-display font-bold text-2xl sm:text-4xl md:text-7xl lg:text-8xl tracking-tight mb-6 md:mb-8 leading-[1.3] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
             <span className="!text-slate-50">Global User</span> <br />
             <span className="text-gradient">Acquisition</span> <span className="!text-slate-50">Marketing</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-medium">
             Helping mobile apps grow through scalable, high-performance user acquisition campaigns that drive real results.
           </p>
 
@@ -88,7 +88,7 @@ export const StatsSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-950 transition-colors duration-500 relative">
+    <section className="py-12 md:py-24 bg-slate-950 transition-colors duration-500 relative">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, idx) => (
@@ -135,7 +135,7 @@ export const ServicesPreview = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#080808]/50 transition-colors duration-500 overflow-hidden">
+    <section className="section-padding bg-[#080808]/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-6 text-center lg:text-left">
         <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
           <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 text-white uppercase italic">Leading Solutions</h2>
@@ -201,7 +201,7 @@ export const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-slate-950 border-y border-white/5 transition-colors duration-500">
+    <section className="section-padding bg-slate-950 border-y border-white/5 transition-colors duration-500">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="font-display font-bold text-4xl md:text-5xl mb-4 text-white">Client Success Stories</h2>
@@ -235,7 +235,7 @@ export const TestimonialsSection = () => {
 export const CTASection = () => {
   const { openGetStarted } = useModals();
   return (
-    <section className="py-32 bg-slate-950 transition-colors duration-500 relative overflow-hidden">
+    <section className="section-padding bg-slate-950 transition-colors duration-500 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent-start/10 dark:bg-brand-accent-start/20 blur-[150px] rounded-full -z-10"></div>
 
       <div className="container mx-auto px-6">
@@ -277,7 +277,7 @@ export const ConnectSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-background relative overflow-hidden">
+    <section className="section-padding bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -350,7 +350,7 @@ export const AboutUsSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-[#050505] relative overflow-hidden">
+    <section className="section-padding bg-[#050505] relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-20">
           <div className="lg:w-1/2">

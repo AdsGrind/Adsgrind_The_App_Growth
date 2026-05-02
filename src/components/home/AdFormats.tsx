@@ -17,9 +17,9 @@ const AdFormats = () => {
     ];
 
     return (
-        <section className="py-32 bg-transparent relative overflow-hidden">
+        <section className="section-padding bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-20 gap-8">
                     <div className="max-w-2xl">
                         <motion.span 
                             initial={{ opacity: 0 }}

@@ -46,12 +46,12 @@ const AudienceReach = () => {
     ];
 
     return (
-        <section className="py-24 md:py-32 bg-[#050505] relative overflow-hidden">
+        <section className="section-padding bg-[#050505] relative overflow-hidden">
             {/* Pulsing Grid Background */}
             <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '32px 32px' }}></div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 gap-6">
                     <div className="text-left">
                         <div className="flex items-center gap-2 mb-4">
                             <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
