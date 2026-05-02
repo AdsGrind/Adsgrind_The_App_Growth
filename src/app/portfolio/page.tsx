@@ -11,7 +11,16 @@ import { EcoRetailFrameworkModal } from '@/components/portfolio/EcoRetailFramewo
 import { GamingEngagementModal } from '@/components/portfolio/GamingEngagementModal';
 import { SaaSStrategyModal } from '@/components/portfolio/SaaSStrategyModal';
 
-const PROJECTS = [];
+interface Project {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  result: string;
+}
+
+const PROJECTS: Project[] = [];
 
 export default function PortfolioPage() {
   const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
