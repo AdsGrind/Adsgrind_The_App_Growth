@@ -7,7 +7,8 @@ import {
   Trash2, 
   Mail, 
   Building2,
-  ChevronDown
+  ChevronDown,
+  Users
 } from 'lucide-react';
 import { cn } from '@/components/ui';
 import { Lead } from '@/lib/db';
