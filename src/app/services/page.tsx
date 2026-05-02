@@ -4,6 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GlassCard, Button } from '@/components/ui';
 import { Zap, Target, Globe2, ShieldCheck, BarChart3, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ServiceStrategyModal, ServiceType } from '@/components/services/ServiceStrategyModal';
+import { useModals } from '@/context/ModalContext';
 
 const SERVICES = [
   {
@@ -11,51 +13,56 @@ const SERVICES = [
     icon: <Zap className="text-brand-red" size={32} />,
     desc: "Scale your user base rapidly with high-quality installs across all major platforms and global inventories.",
     features: ["Global Reach", "Quality Optimization", "Multi-Channel Delivery", "Rapid Scaling"],
-    color: "from-[#EE1D23]/20 to-transparent"
+    color: "from-[#EE1D23]/20 to-transparent",
+    strategyType: 'CPI' as const
   },
   {
     title: "Cost Per Action (CPA)",
     icon: <Target className="text-brand-orange" size={32} />,
     desc: "Pay only for performance. We focus on driving verified user actions—from registrations to in-app purchases.",
     features: ["Verified Conversions", "Strict KPI Adherence", "Action-Based Pricing", "High Intent Users"],
-    color: "from-[#FF5800]/20 to-transparent"
+    color: "from-[#FF5800]/20 to-transparent",
+    strategyType: 'CPA' as const
   },
   {
     title: "Global User Acquisition",
     icon: <Globe2 className="text-brand-purple" size={32} />,
     desc: "Break into new markets with localized UA strategies. Our global network reaches users in every major GEO.",
     features: ["Localized Campaigns", "Deep GEO Penetration", "Market Intelligence", "24/7 Monitoring"],
-    color: "from-[#9D50BB]/20 to-transparent"
+    color: "from-[#9D50BB]/20 to-transparent",
+    strategyType: 'GLOBAL_UA' as const
   },
   {
     title: "Publisher Solutions",
     icon: <BarChart3 className="text-brand-red" size={32} />,
-    desc: "Maximize your app revenue with premium offers from worldwide advertisers and competitive weekly payouts.",
-    features: ["High eCPM Offers", "Weekly Payouts", "Real-Time Stats", "Dedicated Support"],
-    color: "from-[#EE1D23]/20 to-transparent"
+    desc: "Maximize your app revenue with premium offers from worldwide advertisers and competitive Payouts.",
+    features: ["High eCPM Offers", "Competitive Payouts", "Real-Time Stats", "Dedicated Support"],
+    color: "from-[#EE1D23]/20 to-transparent",
+    strategyType: 'PUBLISHER' as const
   }
 ];
 
 export default function ServicesPage() {
+  const { openGetStarted } = useModals();
+  const [activeStrategy, setActiveStrategy] = React.useState<ServiceType | null>(null);
+
   return (
     <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
       <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-20 text-center mx-auto md:text-left md:mx-0">
-          <motion.h1 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="font-display font-bold text-5xl md:text-7xl mb-6 uppercase italic text-white"
+        <div className="max-w-4xl mb-24 text-center mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Our <span className="text-gradient">Core Solutions</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-400 text-xl leading-relaxed"
-          >
-            End-to-end performance marketing technology designed for scalability and measurable growth in the mobile app ecosystem.
-          </motion.p>
+            <h1 className="font-display font-bold text-3xl md:text-5xl mb-4 uppercase italic text-white leading-tight">
+              Our <span className="text-gradient">Core Solutions</span>
+            </h1>
+            <div className="h-1 w-20 bg-brand-red mx-auto mb-8 rounded-full"></div>
+            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              End-to-end performance marketing technology designed for scalability and measurable growth in the mobile app ecosystem.
+            </p>
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -88,7 +95,11 @@ export default function ServicesPage() {
                   ))}
                 </div>
                 
-                <Button variant="outline" className="w-full justify-between group/btn border-white/10 hover:border-brand-red/50 text-white">
+                <Button 
+                    variant="outline" 
+                    className="w-full justify-between group/btn border-white/10 hover:border-brand-red/50 text-white"
+                    onClick={() => setActiveStrategy(service.strategyType)}
+                >
                   Learn Strategy <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </GlassCard>
@@ -96,6 +107,15 @@ export default function ServicesPage() {
           ))}
         </div>
       </div>
+
+      {activeStrategy && (
+        <ServiceStrategyModal 
+          isOpen={!!activeStrategy} 
+          serviceType={activeStrategy}
+          onClose={() => setActiveStrategy(null)} 
+          onCtaClick={openGetStarted}
+        />
+      )}
     </div>
   );
 }

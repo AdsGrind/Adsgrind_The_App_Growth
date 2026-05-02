@@ -38,5 +38,15 @@
     "message": "jai mata di ",
     "status": "New",
     "createdAt": "2026-05-02T19:53:45.181Z"
+  },
+  {
+    "id": "ff50bc54-12b7-4348-a536-07190e74115d",
+    "name": "Rohit Yadav",
+    "email": "rohityadav561456@gmail.com",
+    "company": "Adsgrind",
+    "budget": "<$5K",
+    "message": "GOAL: App Installs | MESSAGE: Requested custom performance strategy.",
+    "status": "New",
+    "createdAt": "2026-05-02T21:05:53.214Z"
   }
 ]

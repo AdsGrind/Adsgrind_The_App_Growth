@@ -16,7 +16,7 @@ const FAQ_DATA = [
     },
     {
         question: "How are publishers paid?",
-        answer: "Publishers are paid on a weekly basis via Wire, PayPal, or USDT. We offer competitive payouts with a low minimum threshold to ensure steady cash flow for our partners."
+        answer: "Publishers are provided with competitive Payouts via Wire, PayPal, or USDT. We offer a low minimum threshold to ensure steady cash flow for our partners."
     },
     {
         question: "What countries do you support?",

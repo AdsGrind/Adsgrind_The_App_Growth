@@ -5,12 +5,18 @@ import { Navbar, Footer } from '@/components/layout';
 import { WhatsAppButton, AIChatbot } from '@/components/widgets';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { GetStartedModal } from '@/components/home/GetStartedModal';
+import { PerformanceStrategyModal } from '@/components/blog/PerformanceStrategyModal';
+import { MarketStrategyModal } from '@/components/blog/MarketStrategyModal';
+import { FraudInsightModal } from '@/components/blog/FraudInsightModal';
 import { ModalProvider, useModals } from '@/context/ModalContext';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { 
     isAuthOpen, closeAuth, authMode, openAuth,
-    isGetStartedOpen, closeGetStarted, openGetStarted 
+    isGetStartedOpen, closeGetStarted, openGetStarted,
+    isStrategyOpen, closeStrategy,
+    isMarketOpen, closeMarket,
+    isFraudInsightOpen, closeFraudInsight
   } = useModals();
 
   useEffect(() => {
@@ -37,6 +43,18 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
       <GetStartedModal 
         isOpen={isGetStartedOpen} 
         onClose={closeGetStarted} 
+      />
+      <PerformanceStrategyModal
+        isOpen={isStrategyOpen}
+        onClose={closeStrategy}
+      />
+      <MarketStrategyModal
+        isOpen={isMarketOpen}
+        onClose={closeMarket}
+      />
+      <FraudInsightModal
+        isOpen={isFraudInsightOpen}
+        onClose={closeFraudInsight}
       />
     </>
   );

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button, cn } from '@/components/ui';
+import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
@@ -24,6 +25,13 @@ interface NavbarProps {
 export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === '/' && pathname === '/') return true;
+    if (href !== '/' && pathname.startsWith(href)) return true;
+    return false;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,6 +56,7 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
               src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
               alt="AdsGrind Logo" 
               fill
+              sizes="40px"
               className="object-cover"
             />
           </div>
@@ -58,15 +67,28 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link 
+                key={link.name} 
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-all duration-300 relative py-2",
+                  active ? "text-white" : "text-slate-400 hover:text-white"
+                )}
+              >
+                {link.name}
+                {active && (
+                  <motion.div 
+                    layoutId="nav-active"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-red"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Auth Buttons */}
@@ -102,17 +124,23 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             exit={{ opacity: 0, height: 0 }}
             className="absolute top-full left-0 right-0 bg-slate-900 border-b border-white/10 p-6 md:hidden flex flex-col gap-6 shadow-2xl overflow-hidden"
           >
-            {NAV_LINKS.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-xl font-display font-medium text-white flex items-center justify-between group py-2"
-              >
-                {link.name}
-                <ChevronRight size={20} className="text-white/40 group-hover:text-brand-red transition-colors" />
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link 
+                  key={link.name} 
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "text-xl font-display font-medium flex items-center justify-between group py-2 transition-all",
+                    active ? "text-white border-l-4 border-brand-red pl-4" : "text-white/40"
+                  )}
+                >
+                  {link.name}
+                  <ChevronRight size={20} className={cn("transition-colors", active ? "text-brand-red" : "text-white/20 group-hover:text-white")} />
+                </Link>
+              );
+            })}
             <div className="flex flex-col gap-3 pt-6 border-t border-white/5">
               <Button variant="liquid" size="lg" className="w-full" onClick={() => { setIsOpen(false); onSignup?.(); }}>Get Started</Button>
               <a 

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle2, Loader2, Building2, User, Mail, MessageSquare } from 'lucide-react';
+import { X, Send, CheckCircle2, Loader2, Building2, User, Mail, MessageSquare, ChevronDown } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -13,6 +13,7 @@ const contactSchema = z.object({
   name: z.string().min(2, 'Name is required'),
   company: z.string().min(2, 'Company name is required'),
   email: z.string().email('Please enter a valid email address'),
+  budget: z.string().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
@@ -65,7 +66,7 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
     try {
       const result = await sendContactEmail({
         ...data,
-        budget: 'Not Specified (Get Started Modal)',
+        budget: data.budget || 'Not Specified',
       });
 
       if (result.success) {
@@ -194,6 +195,28 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
                         {errors.email && <p className="text-red-400 text-[10px] uppercase font-bold tracking-tighter ml-1">{errors.email.message}</p>}
                       </div>
 
+                      {/* Budget Field */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Monthly Budget (Optional)</label>
+                        <div className="relative group">
+                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <select
+                            {...register('budget')}
+                            className={cn(
+                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all appearance-none cursor-pointer",
+                              errors.budget && "border-red-500/50 focus:border-red-500/50"
+                            )}
+                          >
+                            <option value="" className="bg-[#1A1A1A]">Select your budget</option>
+                            <option value="<$5k" className="bg-[#1A1A1A]">Less than $5,000</option>
+                            <option value="$5k-$20k" className="bg-[#1A1A1A]">$5,000 - $20,000</option>
+                            <option value="$20k-$50k" className="bg-[#1A1A1A]">$20,000 - $50,000</option>
+                            <option value="$50k+" className="bg-[#1A1A1A]">$50,000+</option>
+                          </select>
+                          <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" size={18} />
+                        </div>
+                      </div>
+
                       {/* Message Field */}
                       <div className="space-y-1.5">
                         <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Message</label>
@@ -204,7 +227,7 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
                             rows={4}
                             placeholder="Tell us about your project goals..."
                             className={cn(
-                              "w-full bg-white/5 border border-white/10 rounded-xl px-12 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all resize-none",
+                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all resize-none",
                               errors.message && "border-red-500/50 focus:border-red-500/50"
                             )}
                           />
