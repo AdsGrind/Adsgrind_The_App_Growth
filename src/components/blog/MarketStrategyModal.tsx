@@ -126,7 +126,7 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-[650px] max-h-[95vh] overflow-y-auto rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl custom-scrollbar"
+            className="relative w-full max-w-[650px] max-h-[90vh] overflow-y-auto rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl custom-scrollbar"
           >
             <div className="p-8 sm:p-12">
               <button

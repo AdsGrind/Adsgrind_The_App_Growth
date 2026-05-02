@@ -49,8 +49,8 @@ export default function BlogPage() {
   const { openGetStarted, openStrategy, openMarket, openFraudInsight } = useModals();
 
   return (
-    <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
-      <div className="container mx-auto px-4">
+    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+      <div className="container mx-auto px-6">
         <div className="max-w-[850px] mx-auto mb-12 text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -85,7 +85,7 @@ export default function BlogPage() {
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 15, 2026</span>
                             </div>
-                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
                                 The 2026 Guide to <br />
                                 <span className="text-gradient">Scalable User Acquisition</span>
                             </h2>
@@ -96,7 +96,7 @@ export default function BlogPage() {
                                 <Button 
                                     variant="liquid" 
                                     size="lg" 
-                                    className="px-10 group w-full sm:w-auto h-14 md:h-16 text-lg font-bold uppercase italic"
+                                    className="px-10 group w-full sm:w-auto"
                                     onClick={() => window.location.href = '/guide/scalable-user-acquisition-2026'}
                                 >
                                     Read Full Guide
@@ -136,7 +136,7 @@ export default function BlogPage() {
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 12, 2026</span>
                             </div>
-                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
                                 Mastering CPA: <br />
                                 <span className="text-gradient-orange">Pay Only for Performance</span>
                             </h2>
@@ -144,8 +144,8 @@ export default function BlogPage() {
                                 Learn how to optimize your offer funnel to ensure every conversion delivered is high-quality and verified.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
-                                <Button variant="liquid" size="lg" className="px-10 group w-full sm:w-auto h-14 md:h-16 text-lg font-bold uppercase italic" onClick={openStrategy}>
-                                    Get Strategy
+                                <Button variant="liquid" size="lg" className="px-10 group w-full sm:w-auto" onClick={openStrategy}>
+                                    Get Performance Strategy
                                     <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </div>
@@ -182,7 +182,7 @@ export default function BlogPage() {
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 10, 2026</span>
                             </div>
-                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
                                 Global Traffic Trends: <br />
                                 <span className="text-gradient">Beyond Tier 1 Markets</span>
                             </h2>
@@ -190,8 +190,8 @@ export default function BlogPage() {
                                 Exploring the hyper-growth opportunities in India, SEA, and the Middle East.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 items-center">
-                                <Button variant="liquid" size="lg" className="px-10 group w-full sm:w-auto h-14 md:h-16 text-lg font-bold uppercase italic" onClick={openMarket}>
-                                    Market Strategy
+                                <Button variant="liquid" size="lg" className="px-10 group w-full sm:w-auto" onClick={openMarket}>
+                                    Get Market Strategy
                                     <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </div>
@@ -233,7 +233,7 @@ export default function BlogPage() {
                                 </span>
                                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">April 08, 2026</span>
                             </div>
-                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
+                            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white mb-6 uppercase italic leading-tight">
                                 Fraud Prevention in <br />
                                 <span className="text-gradient">Performance Marketing</span>
                             </h2>
@@ -244,7 +244,7 @@ export default function BlogPage() {
                                 <Button 
                                     variant="liquid" 
                                     size="lg" 
-                                    className="px-10 group w-full sm:w-auto h-14 md:h-16 text-lg font-bold uppercase italic border-white/10"
+                                    className="px-10 group w-full sm:w-auto border-white/10"
                                     onClick={openFraudInsight}
                                 >
                                     Read More

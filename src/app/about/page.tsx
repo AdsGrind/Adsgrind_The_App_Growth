@@ -51,8 +51,8 @@ const Counter = ({ value, duration = 2 }: { value: string, duration?: number }) 
 export default function AboutPage() {
   const { openGetStarted } = useModals();
   return (
-    <div className="pt-24 pb-20 bg-[#050505] min-h-screen">
-      <div className="container mx-auto px-4">
+    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+      <div className="container mx-auto px-6">
         {/* Hero Section */}
         <div className="max-w-4xl mx-auto text-center mb-32">
           <motion.div
@@ -66,7 +66,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display font-bold text-3xl sm:text-5xl md:text-7xl mb-8 leading-tight text-white uppercase italic"
+            className="font-display font-bold text-5xl md:text-7xl mb-10 leading-tight text-white uppercase italic"
           >
             Scaling the <br />
             <span className="text-gradient">Mobile Ecosystem</span>
@@ -75,7 +75,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-slate-500 text-base md:text-xl leading-relaxed"
+            className="text-slate-400 text-xl leading-relaxed"
           >
             Adsgrind is a high-performance user acquisition company dedicated to bridging the gap between premium advertisers and high-performing publishers. We leverage proprietary technology to drive measurable, scalable, and sustainable growth for the world's most ambitious mobile apps.
           </motion.p>
@@ -84,24 +84,24 @@ export default function AboutPage() {
         {/* Mission & Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-             <GlassCard className="h-full p-8 md:p-12 overflow-hidden relative group border-brand-red/10 hover:border-brand-red/30 transition-all duration-500">
+             <GlassCard className="h-full p-12 overflow-hidden relative group border-brand-red/10 hover:border-brand-red/30 transition-all duration-500">
                 <div className="absolute top-0 left-0 w-32 h-32 bg-brand-red/10 blur-[60px]"></div>
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 md:mb-8 border border-white/10 group-hover:scale-110 transition-transform">
-                    <Target className="text-brand-red" size={24} />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                    <Target className="text-brand-red" size={28} />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 uppercase italic text-white">Our Mission</h2>
+                <h2 className="text-3xl font-bold mb-6 uppercase italic text-white">Our Mission</h2>
                 <p className="text-slate-400 text-lg leading-relaxed">
                     To empower advertisers and publishers by providing a transparent, performance-driven marketplace that maximizes ROI and global reach through technical excellence and strategic innovation.
                 </p>
              </GlassCard>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-             <GlassCard className="h-full p-8 md:p-12 overflow-hidden relative group border-brand-orange/10 hover:border-brand-orange/30 transition-all duration-500">
+             <GlassCard className="h-full p-12 overflow-hidden relative group border-brand-orange/10 hover:border-brand-orange/30 transition-all duration-500">
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-brand-orange/10 blur-[60px]"></div>
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 md:mb-8 border border-white/10 group-hover:scale-110 transition-transform">
-                    <Eye className="text-brand-orange" size={24} />
+                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                    <Eye className="text-brand-orange" size={28} />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 uppercase italic text-white">Our Vision</h2>
+                <h2 className="text-3xl font-bold mb-6 uppercase italic text-white">Our Vision</h2>
                 <p className="text-slate-400 text-lg leading-relaxed">
                     To redefine user acquisition for the next billion smartphone users, becoming the most trusted global partner for mobile growth through scalable architectures and human-centric expertise.
                 </p>
@@ -143,7 +143,7 @@ export default function AboutPage() {
                 >
                     Scale & Performance
                 </motion.span>
-                <h2 className="text-3xl md:text-6xl font-bold mb-6 uppercase italic text-white leading-tight">
+                <h2 className="text-4xl md:text-6xl font-bold mb-6 uppercase italic text-white leading-tight">
                     Trusted by <span className="text-gradient">100+ Clients</span> Worldwide
                 </h2>
                 <p className="text-slate-500 text-lg max-w-2xl mx-auto">
@@ -160,18 +160,18 @@ export default function AboutPage() {
                         { label: "Installs", value: "10M+", sub: "Delivered & Verified" },
                         { label: "GEO Reach", value: "Tier 1", sub: "Global Expertise" }
                     ].map((stat, i) => (
-                         <motion.div
+                        <motion.div
                             key={i}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ delay: i * 0.1 }}
-                            className="p-6 md:p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-all group"
+                            className="p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-all group"
                         >
-                            <div className="text-2xl md:text-5xl font-black text-white mb-2 group-hover:text-brand-red transition-colors">
+                            <div className="text-4xl md:text-5xl font-black text-white mb-2 group-hover:text-brand-red transition-colors">
                                 {stat.value.match(/\d/) ? <Counter value={stat.value} /> : stat.value}
                             </div>
-                            <div className="text-[8px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">{stat.label}</div>
-                            <div className="text-[10px] md:text-xs text-slate-600">{stat.sub}</div>
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{stat.label}</div>
+                            <div className="text-xs text-slate-600">{stat.sub}</div>
                         </motion.div>
                     ))}
                 </div>
@@ -265,13 +265,13 @@ export default function AboutPage() {
         </div>
 
         {/* Global Reach CTA */}
-         <GlassCard className="p-8 md:p-16 text-center border-brand-red/10 relative overflow-hidden">
-              <div className="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full -z-10 translate-y-1/2"></div>
-              <h2 className="text-2xl md:text-5xl font-bold mb-8 uppercase italic text-white">Ready to Join the Growth Revolution?</h2>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 <Button variant="liquid" size="lg" className="px-12 w-full sm:w-auto h-14 md:h-16 text-lg font-bold uppercase italic" onClick={openGetStarted}>Start Your Growth</Button>
-              </div>
-         </GlassCard>
+        <GlassCard className="p-16 text-center border-brand-red/10 relative overflow-hidden">
+             <div className="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full -z-10 translate-y-1/2"></div>
+             <h2 className="text-4xl md:text-5xl font-bold mb-8 uppercase italic text-white">Ready to Join the Growth Revolution?</h2>
+             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="liquid" size="lg" className="px-12 w-full sm:w-auto" onClick={openGetStarted}>Start Your Growth</Button>
+             </div>
+        </GlassCard>
       </div>
     </div>
   );
