@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Bot, X, MessageSquare } from 'lucide-react';
 
 export const WhatsAppButton = () => {
@@ -64,7 +64,7 @@ export const AIChatbot = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute bottom-20 right-0 w-[calc(100vw-3rem)] sm:w-80 h-[30rem] sm:h-96 glass-card p-0 flex flex-col overflow-hidden shadow-2xl border-white/10"
+            className="absolute bottom-20 right-0 w-[calc(100vw-3rem)] sm:w-80 h-[30rem] sm:h-96 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-2xl p-0 flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
             <div className="p-4 bg-gradient-brand flex items-center gap-3">
@@ -81,14 +81,14 @@ export const AIChatbot = () => {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 p-4 flex flex-col gap-4 overflow-y-auto bg-slate-950/50">
+            <div className="flex-1 p-4 flex flex-col gap-4 overflow-y-auto bg-slate-950/80">
               <div className="bg-white/5 border border-white/10 rounded-2xl rounded-tl-none p-4 text-sm max-w-[85%] leading-relaxed shadow-sm">
                 Hello! I'm your ADSGRIND growth assistant. How can I help you scale your business today?
               </div>
             </div>
 
             {/* Input Area */}
-            <div className="p-4 border-t border-white/10 bg-slate-900/50 flex gap-2">
+            <div className="p-4 border-t border-white/10 bg-slate-900/80 flex gap-2">
               <input
                 type="text"
                 placeholder="Ask anything..."
@@ -105,4 +105,3 @@ export const AIChatbot = () => {
   );
 };
 
-import { AnimatePresence } from 'framer-motion';
