@@ -226,9 +226,9 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
         <p>© 2026 ADSGRIND. All rights reserved.</p>
         <div className="flex gap-8">
-          <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-          <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
+          <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          <Link href="/cookie" className="hover:text-white transition-colors">Cookie Policy</Link>
         </div>
       </div>
     </footer>
