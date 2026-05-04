@@ -207,16 +207,7 @@ export function SaaSStrategyModal({ isOpen, onClose }: SaaSStrategyModalProps) {
               </motion.div>
             </div>
 
-            {/* Footer */}
-            <div className="p-8 border-t border-white/5 bg-white/[0.02] flex items-center justify-between gap-6 relative z-10">
-              <div className="hidden sm:block">
-                <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">Enter new markets</p>
-                <p className="text-xs text-white/60">Scale your SaaS globally with Adsgrind.</p>
-              </div>
-              <Button variant="liquid" size="lg" className="px-8 group w-full sm:w-auto">
-                Request Market Audit <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
+            {/* No Footer CTA */}
           </motion.div>
         </div>
       )}

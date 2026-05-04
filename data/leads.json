@@ -48,5 +48,15 @@
     "message": "GOAL: App Installs | MESSAGE: Requested custom performance strategy.",
     "status": "New",
     "createdAt": "2026-05-02T21:05:53.214Z"
+  },
+  {
+    "id": "bb652cda-121f-4b4d-badb-a1321a3fed56",
+    "name": "Rohit",
+    "email": "Rohit@adsgrind.com",
+    "company": "Adsgrind",
+    "budget": "Via Chat",
+    "message": "user: I'm a Brand / App Owner | model: Having trouble connecting right now. Reach us directly at business@adsgrind.com or via WhatsApp. | user: I need App Growth | model: Having trouble connecting right now. Reach us directly at business@adsgrind.com or via WhatsApp. | user: How does CPA work? | model: Having trouble connecting right now. Reach us directly at business@adsgrind.com or via WhatsApp.",
+    "status": "New",
+    "createdAt": "2026-05-04T21:26:14.139Z"
   }
 ]

@@ -1,82 +1,91 @@
 "use server";
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+/**
+ * app/actions/chat.ts
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Server actions used by the chat widget.
+ * getChatResponse now delegates to the multi-provider AI service so the same
+ * logic (OpenAI → Gemini → fallback) is used whether the widget calls a server
+ * action or the /api/chat REST endpoint.
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 
-export async function getChatResponse(message: string) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  
-  if (!apiKey) {
-    console.error("GEMINI_API_KEY is not defined in environment variables");
-    return "Configuration error: API Key is missing. Please ensure GEMINI_API_KEY is set in your .env file.";
+import { generateAIResponse, SYSTEM_PROMPT, ChatMessage as ServiceMessage, updateSessionMetadata } from "@/lib/ai-service";
+import { saveLead } from "@/lib/db";
+import crypto from "crypto";
+
+/** Shape the widget passes per message */
+export interface ChatMessage {
+  role: "user" | "model";
+  text: string;
+}
+
+/**
+ * Primary chat function called by the widget.
+ *
+ * Converts the widget's { role: "user"|"model", text } history format into
+ * the OpenAI-compatible { role: "user"|"assistant", content } format, runs it
+ * through the multi-provider service, and returns the plain text reply.
+ *
+ * Special sentinel values returned on non-recoverable errors:
+ *   "QUOTA_EXCEEDED" — both providers hit quota
+ *   "API_ERROR"      — unexpected failure
+ */
+export async function getChatResponse(
+  message: string,
+  history: ChatMessage[] = []
+): Promise<string> {
+  // Convert widget history format → service format
+  const serviceMessages: ServiceMessage[] = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...history.map((m) => ({
+      role: (m.role === "model" ? "assistant" : "user") as "user" | "assistant",
+      content: m.text,
+    })),
+    { role: "user", content: message },
+  ];
+
+  const { reply, provider } = await generateAIResponse(serviceMessages);
+
+  if (provider === "fallback") {
+    // Let the widget decide how to display this (it shows a WhatsApp card)
+    return "QUOTA_EXCEEDED";
   }
 
-  const systemPrompt = `
-You are the official Technical AI Assistant for Adsgrind – The App Growth.
-Your dual role is to represent the founder, Rohit Yadav, and to provide expert engineering support for the company's technical systems, specifically the Nodemailer-based email service.
+  return reply;
+}
 
-ADSGRIND KNOWLEDGE:
-Founder: Rohit Yadav (Founder & Owner)
-Company: Adsgrind – The App Growth (AdTech / Performance Marketing)
-Mission: ROI-driven app growth and UA scaling.
-
-TECHNICAL SUPPORT (EMAIL SYSTEM):
-Role: Help developers configure and debug Nodemailer.
-Required ENV variables:
-- SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, FROM_EMAIL, FROM_NAME
-
-Debugging Rules:
-1. Detect Issues: Identify missing/incorrect SMTP credentials or common Nodemailer errors (auth failed, timeout, invalid host).
-2. Code Examples: Always provide clean setup code for 'nodemailer.createTransport' with correct secure flags (true for 465, false for 587).
-3. Providers: Recommend Amazon SES (Prod), SendGrid, or Gmail (Testing only with App Passwords).
-4. Security: Never expose passwords; always use .env files.
-
-TONE & STYLE:
-- Developer-friendly, clear, and actionable.
-- Engineering tone: Like a CTO or Lead Engineer explaining to the team.
-- Position Adsgrind as a technology-first UA partner.
-- If data is missing, say: "Based on available information about Adsgrind's leadership/systems..."
-`;
-
+/** Save a lead captured through the chat widget into the CRM */
+export async function saveChatLead(data: {
+  name: string;
+  email: string;
+  company?: string;
+  summary?: string;
+  sessionId?: string;
+}): Promise<{ success: boolean }> {
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    
-    // Using the models available for this specific key
-    let model;
-    try {
-      // Primary: gemini-2.0-flash (High performance, available for this key)
-      model = genAI.getGenerativeModel({ 
-        model: "gemini-2.0-flash",
-        systemInstruction: systemPrompt
+    // Sync with session metadata so transcript emails include info
+    if (data.sessionId) {
+      updateSessionMetadata(data.sessionId, {
+        name: data.name,
+        email: data.email,
+        company: data.company
       });
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: message }] }],
-      });
-      const response = await result.response;
-      return response.text();
-    } catch (e: any) {
-      console.warn("Gemini 2.0 Flash failed, trying gemini-flash-latest fallback...", e.message);
-      // Fallback: gemini-flash-latest
-      model = genAI.getGenerativeModel({ 
-        model: "gemini-flash-latest",
-        systemInstruction: systemPrompt
-      });
-      const result = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: message }] }],
-      });
-      const response = await result.response;
-      return response.text();
-    }
-  } catch (error: any) {
-    console.error("Gemini API Error details:", error);
-    
-    if (error.message?.includes("API key not valid")) {
-      return "The provided Gemini API key is invalid. Please double-check the key in your .env file.";
-    }
-    
-    if (error.message?.includes("User location is not supported")) {
-      return "Gemini AI is not currently supported in your region.";
     }
 
-    return `I'm having trouble connecting to my brain. (Error: ${error.message || "Connection failed"})`;
+    await saveLead({
+      id: crypto.randomUUID?.() ?? `chat_${Date.now()}`,
+      name: data.name,
+      email: data.email,
+      company: data.company || "Not provided",
+      budget: "Via Chat",
+      message: `[CHAT LEAD] ${data.summary || "Captured via AI chat widget"}`,
+      status: "New",
+      createdAt: new Date().toISOString(),
+    });
+    return { success: true };
+  } catch (err) {
+    console.error("saveChatLead error:", err);
+    return { success: false };
   }
 }

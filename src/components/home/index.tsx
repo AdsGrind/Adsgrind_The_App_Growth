@@ -40,36 +40,60 @@ export const HeroSection = () => {
         <ThreeHero />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 text-center">
+      {/* Ambient glows */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-orange/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-red/8 blur-[100px] rounded-full -z-10 pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
-          <span className="inline-block py-1.5 px-4 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-xs font-bold tracking-widest uppercase mb-4 md:mb-6 text-brand-primary animate-pulse">
-            Click. Conversion. Growth.
-          </span>
-          <h1 className="font-display font-bold text-2xl sm:text-4xl md:text-7xl lg:text-8xl tracking-tight mb-6 md:mb-8 leading-[1.3] md:leading-[1.1] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
-            <span className="!text-slate-50">Global User</span> <br />
-            <span className="text-gradient">Acquisition</span> <span className="!text-slate-50">Marketing</span>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="mb-5 md:mb-7"
+          >
+            <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold tracking-widest uppercase text-brand-orange">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
+              Performance CPA · CPI · CPE Network
+            </span>
+          </motion.div>
+
+          <h1 className="font-display font-bold text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight mb-5 md:mb-8 leading-[1.15] md:leading-[1.05] !text-slate-50 uppercase italic drop-shadow-[0_8px_24px_rgba(0,0,0,1)]">
+            <span className="!text-slate-50">We Scale Apps</span> <br />
+            <span className="text-gradient">With High-LTV</span> <span className="!text-slate-50">CPA</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-lg md:text-2xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-medium">
-            Helping mobile apps grow through scalable, high-performance user acquisition campaigns that drive real results.
+
+          <p className="text-slate-400 text-base md:text-xl max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-medium">
+            Stop burning budget on vanity installs. We deliver verified, high-intent users through performance-based CPA campaigns that drive measurable app revenue.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12" onClick={openGetStarted}>
-              Get Started <ArrowRight size={20} />
+          {/* Proof strip */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-8 md:mb-10">
+            {['38K+ Verified Conversions', '42% Lower CAC', '5x Average ROAS'].map((proof) => (
+              <span key={proof} className="flex items-center gap-1.5 text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <span className="w-1 h-1 rounded-full bg-brand-orange" />
+                {proof}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5">
+            <Button variant="liquid" size="lg" className="w-full sm:w-auto gap-2 px-8 md:px-12 text-base" onClick={openGetStarted}>
+              Get Growth Plan <ArrowRight size={18} />
             </Button>
-            <a 
-              href="https://adsgrind.offer18.com/m/signup_self_aff?r=&am=" 
-              target="_blank" 
+            <a
+              href="https://wa.me/919625982835"
+              target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto"
             >
-              <Button variant="outline" size="lg" className="w-full px-8 md:px-12 border-brand-orange/20 text-brand-orange hover:bg-brand-orange/5 hover:scale-105 hover:-translate-y-1 transition-all">
-                Become a Publisher
+              <Button variant="outline" size="lg" className="w-full px-8 md:px-10 border-brand-orange/20 text-brand-orange hover:bg-brand-orange/5 hover:scale-105 hover:-translate-y-1 transition-all">
+                Book Strategy Call
               </Button>
             </a>
           </div>
@@ -138,8 +162,9 @@ export const ServicesPreview = () => {
     <section className="section-padding bg-[#080808]/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-6 text-center lg:text-left">
         <div className="text-center mb-16 md:mb-20 max-w-3xl mx-auto">
-          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 text-white uppercase italic">Leading Solutions</h2>
-          <p className="text-slate-400 text-base md:text-lg">We provide end-to-end performance marketing technology for the entire mobile ecosystem.</p>
+          <span className="inline-block py-1 px-4 rounded-full bg-brand-red/10 border border-brand-red/20 text-xs font-bold uppercase tracking-widest text-brand-red mb-4">How We Grow Apps</span>
+          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 text-white uppercase italic">The Performance CPA Engine</h2>
+          <p className="text-slate-400 text-base md:text-lg">We connect high-LTV advertisers with the world's best-converting publisher traffic — all pay-per-result.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -187,46 +212,97 @@ export const ServicesPreview = () => {
 export const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "CEO, TechFlow",
-      body: "ADSGRIND transformed our digital presence. Our organic traffic grew by 300% in just 6 months.",
-      rating: 5
+      name: "Alex M.",
+      role: "Growth Lead, US Fintech App",
+      body: "Adsgrind drove 38,000+ verified CPA conversions in 30 days at a $4.20 average CPA. We've worked with 6 agencies — none came close to this ROI.",
+      rating: 5,
+      tag: "Fintech · CPA Campaign · United States"
     },
     {
-      name: "Michael Chen",
-      role: "Marketing Manager, GlobalEdu",
-      body: "The most technical and results-driven agency we've ever worked with. Truly a partner in our growth.",
-      rating: 5
+      name: "Priya K.",
+      role: "Head of UA, SEA Gaming Studio",
+      body: "500K level completions in week one of launch. The CPE campaign they built was the highest-converting we've ever run. Zero fraud, clean data.",
+      rating: 5,
+      tag: "Gaming · CPE Campaign · Southeast Asia"
+    },
+    {
+      name: "Tom R.",
+      role: "CMO, EU B2B Productivity App",
+      body: "We hit 5x ROAS on OEM traffic we didn't even know existed. Their market entry playbook for Europe was phenomenal — structured, data-driven, and fast.",
+      rating: 5,
+      tag: "SaaS · OEM Traffic · Europe"
     }
   ];
 
   return (
-    <section className="section-padding bg-slate-950 border-y border-white/5 transition-colors duration-500">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-4xl md:text-5xl mb-4 text-white">Client Success Stories</h2>
-          <p className="text-slate-500 dark:text-slate-400">Trusted by leading companies worldwide.</p>
+    <section className="section-padding bg-[#050505] border-y border-white/5 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12 md:mb-16">
+          <span className="inline-block py-1 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange mb-4">Client Results</span>
+          <h2 className="font-display font-bold text-3xl md:text-5xl mb-4 text-white uppercase italic">What App Teams Say</h2>
+          <p className="text-slate-500 text-base max-w-lg mx-auto">Verified results from app advertisers who scaled with us.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, idx) => (
-            <GlassCard key={idx} className="p-8">
-              <div className="flex gap-1 mb-4">
-                {[...Array(t.rating)].map((_, i) => (
-                  <Star key={i} size={16} fill="#7C3AED" color="#7C3AED" />
-                ))}
-              </div>
-              <p className="text-slate-300 italic mb-6 leading-relaxed">"{t.body}"</p>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-brand"></div>
-                <div>
-                  <div className="font-bold text-white">{t.name}</div>
-                  <div className="text-slate-500 dark:text-slate-400 text-xs">{t.role}</div>
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              <GlassCard className="p-6 md:p-8 border-white/5 bg-white/[0.02] h-full flex flex-col gap-4">
+                <div className="flex gap-1">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} size={14} fill="#FF5800" color="#FF5800" />
+                  ))}
                 </div>
-              </div>
-            </GlassCard>
+                <p className="text-slate-300 text-sm leading-relaxed flex-1">&ldquo;{t.body}&rdquo;</p>
+                <div className="pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-orange to-brand-red flex-shrink-0 flex items-center justify-center text-white font-bold text-sm">
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-white text-sm">{t.name}</div>
+                      <div className="text-slate-500 text-xs">{t.role}</div>
+                    </div>
+                  </div>
+                  <div className="mt-3 text-[10px] font-bold uppercase tracking-wider text-brand-orange/60">{t.tag}</div>
+                </div>
+              </GlassCard>
+            </motion.div>
           ))}
         </div>
+
+        {/* Founder credibility strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 p-6 md:p-8 rounded-2xl border border-white/8 bg-white/[0.02] flex flex-col md:flex-row items-center gap-6 max-w-3xl mx-auto"
+        >
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-orange to-brand-red flex-shrink-0 flex items-center justify-center text-white font-bold text-2xl">
+            R
+          </div>
+          <div className="text-center md:text-left">
+            <div className="font-bold text-white text-lg">Rohit Yadav</div>
+            <div className="text-slate-400 text-sm mb-2">Founder & CEO, ADSGRIND</div>
+            <p className="text-slate-500 text-sm leading-relaxed">
+              &ldquo;We built Adsgrind on one principle: advertisers should only pay for results that actually matter to their business. That's CPA at scale.&rdquo;
+            </p>
+            <a
+              href="https://www.linkedin.com/in/rohityadav70111/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 mt-3 text-xs font-bold text-brand-orange hover:text-brand-red transition-colors uppercase tracking-wider"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5"><path d="M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M18.5,18.5V13.2A3.26,3.26 0 0,0 15.24,9.94C13.93,9.94 13,10.63 12.31,11.47V10.16H9.17V18.5H12.31V12.93C12.31,12.26 12.51,11.7 13.06,11.14C13.59,10.6 14.12,10.42 14.7,10.42C15.93,10.42 16.36,11.3 16.36,12.55V18.5H18.5M4.93,10.16V18.5H8.07V10.16H4.93M6.5,5.64C5.5,5.64 4.69,6.45 4.69,7.45C4.69,8.45 5.5,9.26 6.5,9.26C7.5,9.26 8.31,8.45 8.31,7.45C8.31,6.45 7.5,5.64 6.5,5.64Z" /></svg>
+              LinkedIn · Adsgrind
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -235,28 +311,50 @@ export const TestimonialsSection = () => {
 export const CTASection = () => {
   const { openGetStarted } = useModals();
   return (
-    <section className="section-padding bg-slate-950 transition-colors duration-500 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent-start/10 dark:bg-brand-accent-start/20 blur-[150px] rounded-full -z-10"></div>
+    <section className="section-padding bg-[#050505] relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-orange/8 blur-[180px] rounded-full -z-10" />
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-brand-red/5 blur-[120px] rounded-full -z-10" />
 
-      <div className="container mx-auto px-6">
-        <GlassCard className="max-w-5xl mx-auto p-12 md:p-20 text-center relative overflow-hidden border-brand-accent-start/10 dark:border-brand-accent-start/20">
-          <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 leading-[1.2] text-white overflow-visible">Ready to Scale Your <br /><span className="text-gradient inline-block pb-1">Brand to New Heights?</span></h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
-            Stop guessing and start growing. Our data-driven strategies are waiting for you. Get a free audit and consultation today.
+      <div className="container mx-auto px-4 sm:px-6">
+        <GlassCard className="max-w-5xl mx-auto p-8 md:p-16 text-center relative overflow-hidden border-brand-orange/10">
+          {/* Top badge */}
+          <span className="inline-block py-1 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange mb-6">
+            Ready to Scale?
+          </span>
+
+          <h2 className="font-display font-bold text-3xl md:text-6xl mb-6 leading-[1.15] text-white uppercase italic overflow-visible">
+            Scale My App <br /><span className="text-gradient inline-block pb-1">With CPA That Works.</span>
+          </h2>
+          <p className="text-slate-400 text-base md:text-lg mb-10 max-w-2xl mx-auto">
+            Get a free strategy audit from our performance team. We'll map out how to reduce your CAC and scale installs with verified, fraud-free traffic.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto px-12" onClick={openGetStarted}>Contact Sales</Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button variant="liquid" size="lg" className="w-full sm:w-auto px-10 gap-2 text-base" onClick={openGetStarted}>
+              Get Growth Plan <ArrowRight size={18} />
+            </Button>
+            <a
+              href="https://wa.me/919625982835"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto"
+            >
+              <Button variant="outline" size="lg" className="w-full px-10 border-white/10 hover:border-brand-orange/40 hover:text-brand-orange transition-all">
+                Book Strategy Call
+              </Button>
+            </a>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-6 text-sm text-slate-500 dark:text-slate-400">
-            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-success" /> No Credit Card Required</span>
-            <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-brand-success" /> 24-Hour Response Guarantee</span>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+            <span className="flex items-center gap-2"><CheckCircle2 size={15} className="text-brand-success" /> Free Audit Included</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={15} className="text-brand-success" /> 24-Hour Response</span>
+            <span className="flex items-center gap-2"><CheckCircle2 size={15} className="text-brand-success" /> No Lock-In Contracts</span>
           </div>
         </GlassCard>
       </div>
     </section>
-  )
+  );
 }
+
 export const ConnectSection = () => {
   const socialLinks = [
     {
@@ -366,7 +464,7 @@ export const AboutUsSection = () => {
               <span className="text-gradient">Marketing</span> Powerhouse
             </h2>
             <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              ADSGRIND is a global user acquisition company helping mobile apps achieve scalable growth. We bridge the gap between premium advertisers and high-performing publishers through proprietary technology and strategic campaign management.
+              ADSGRIND is a global user acquisition company built to scale mobile apps. We specialize in high-LTV CPA campaigns, delivering verified, fraud-free user actions across Fintech, Gaming, SaaS, and E-commerce verticals. Every dollar you spend with us is accountable.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {values.map((v, i) => (

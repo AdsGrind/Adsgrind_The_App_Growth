@@ -184,18 +184,18 @@ export const Footer = () => {
               <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase mt-[2px]">The App Growth</span>
             </div>
           </Link>
-          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Elevating brands through high-performance digital marketing, strategic SEO, and technical excellence.
+          <p className="text-slate-500 text-sm leading-relaxed">
+            Scaling mobile apps with verified CPA, CPI, and CPE campaigns. Performance-first, fraud-free, globally scalable.
           </p>
         </div>
 
         <div>
           <h4 className="font-semibold mb-6 text-white">Services</h4>
-          <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-400">
-            <li><Link href="/services" className="hover:text-brand-accent-start transition-colors">Search Engine Optimization</Link></li>
-            <li><Link href="/services" className="hover:text-brand-accent-start transition-colors">Mobile Apps Advertising</Link></li>
-            <li><Link href="/services" className="hover:text-brand-accent-start transition-colors">Social Media Marketing</Link></li>
-            <li><Link href="/services" className="hover:text-brand-accent-start transition-colors">Content Strategy</Link></li>
+          <ul className="space-y-4 text-sm text-slate-500">
+            <li><Link href="/services" className="hover:text-brand-orange transition-colors">CPA Campaigns</Link></li>
+            <li><Link href="/services" className="hover:text-brand-orange transition-colors">App Install (CPI)</Link></li>
+            <li><Link href="/services" className="hover:text-brand-orange transition-colors">Cost-Per-Engagement</Link></li>
+            <li><Link href="/services" className="hover:text-brand-orange transition-colors">OEM &amp; Native Traffic</Link></li>
           </ul>
         </div>
 

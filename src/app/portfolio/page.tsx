@@ -1,461 +1,284 @@
 "use client";
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, X, ArrowRight } from 'lucide-react';
-import { GlassCard, Button } from '@/components/ui';
+import { motion } from 'framer-motion';
+import { ArrowRight, TrendingUp, Users, DollarSign, Zap, Shield, BarChart2, Globe } from 'lucide-react';
+import { Button, GlassCard } from '@/components/ui';
+import { useModals } from '@/context/ModalContext';
 
 import { FintechStrategyModal } from '@/components/portfolio/FintechStrategyModal';
 import { EcoRetailFrameworkModal } from '@/components/portfolio/EcoRetailFrameworkModal';
 import { GamingEngagementModal } from '@/components/portfolio/GamingEngagementModal';
 import { SaaSStrategyModal } from '@/components/portfolio/SaaSStrategyModal';
 
-interface Project {
+interface CaseStudy {
   id: string;
+  badge: string;
+  badgeColor: string;
   title: string;
-  category: string;
+  subtitle: string;
   description: string;
-  image: string;
-  result: string;
+  metrics: { label: string; value: string; color: string }[];
+  tags: string[];
+  onView: () => void;
 }
 
-const PROJECTS: Project[] = [];
-
 export default function PortfolioPage() {
-  const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null);
   const [isFintechModalOpen, setIsFintechModalOpen] = useState(false);
   const [isEcoModalOpen, setIsEcoModalOpen] = useState(false);
   const [isGamingModalOpen, setIsGamingModalOpen] = useState(false);
   const [isSaaSModalOpen, setIsSaaSModalOpen] = useState(false);
+  const { openGetStarted } = useModals();
+
+  const caseStudies: CaseStudy[] = [
+    {
+      id: 'fintech',
+      badge: 'Featured',
+      badgeColor: 'bg-brand-orange/10 border-brand-orange/30 text-brand-orange',
+      title: 'Fintech CPA Campaign',
+      subtitle: 'United States · 30 Days',
+      description: 'Scaled a US-based Fintech app\'s user base with a focus on high-LTV verified actions across Native and Video traffic channels, crushing the client\'s CPA targets.',
+      metrics: [
+        { label: 'Verified Conversions', value: '38K+', color: 'text-brand-orange' },
+        { label: 'Avg. CPA', value: '$4.20', color: 'text-brand-success' },
+        { label: 'Conversion Rate', value: '4.8%', color: 'text-white' },
+        { label: 'CAC Reduction', value: '42%', color: 'text-brand-purple' },
+      ],
+      tags: ['CPA', 'Fintech', 'Native', 'Video'],
+      onView: () => setIsFintechModalOpen(true),
+    },
+    {
+      id: 'gaming',
+      badge: 'CPE Engineering',
+      badgeColor: 'bg-brand-purple/10 border-brand-purple/30 text-brand-purple',
+      title: 'Global Game Launch CPE',
+      subtitle: 'Southeast Asia · Week 1',
+      description: 'Engineered a Cost-Per-Engagement strategy for a AAA mobile title, driving 500k+ level completions within the first week with aggressive publisher activation.',
+      metrics: [
+        { label: 'Total Completions', value: '500K+', color: 'text-brand-purple' },
+        { label: 'Day-7 Retention', value: '+28%', color: 'text-brand-success' },
+        { label: 'Publisher Reach', value: '150+', color: 'text-white' },
+        { label: 'Fraud Rate', value: '0.1%', color: 'text-brand-orange' },
+      ],
+      tags: ['CPE', 'Gaming', 'SEA', 'Retention'],
+      onView: () => setIsGamingModalOpen(true),
+    },
+    {
+      id: 'eco',
+      badge: 'CPI Scale',
+      badgeColor: 'bg-brand-success/10 border-brand-success/30 text-brand-success',
+      title: 'Eco-Retail App Growth',
+      subtitle: 'Southeast Asia · Multi-Channel',
+      description: 'Multi-channel app install campaign across SEA market, reducing eCPI by 35% while increasing D30 retention by 20% through intelligent audience segmentation.',
+      metrics: [
+        { label: 'eCPI Reduction', value: '35%↓', color: 'text-brand-success' },
+        { label: 'D30 Retention', value: '+20%', color: 'text-brand-orange' },
+        { label: 'GEOs Reached', value: '8', color: 'text-white' },
+        { label: 'Total Installs', value: '120K+', color: 'text-brand-purple' },
+      ],
+      tags: ['CPI', 'E-Commerce', 'Retention', 'SEA'],
+      onView: () => setIsEcoModalOpen(true),
+    },
+    {
+      id: 'saas',
+      badge: 'OEM Traffic',
+      badgeColor: 'bg-blue-500/10 border-blue-500/30 text-blue-400',
+      title: 'SaaS Market Entry',
+      subtitle: 'Europe · B2B Productivity',
+      description: 'Strategic European market entry for a B2B productivity app using premium OEM traffic, achieving a 5x Return on Ad Spend through precise demographic targeting.',
+      metrics: [
+        { label: 'ROAS', value: '5x', color: 'text-blue-400' },
+        { label: 'Market Reach', value: '12 EU', color: 'text-brand-success' },
+        { label: 'OEM Partners', value: '18+', color: 'text-white' },
+        { label: 'Trial Conversion', value: '31%', color: 'text-brand-orange' },
+      ],
+      tags: ['OEM', 'SaaS', 'B2B', 'Europe'],
+      onView: () => setIsSaaSModalOpen(true),
+    },
+  ];
+
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
 
   return (
-    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
-      <FintechStrategyModal 
-        isOpen={isFintechModalOpen} 
-        onClose={() => setIsFintechModalOpen(false)} 
-      />
-      <EcoRetailFrameworkModal
-        isOpen={isEcoModalOpen}
-        onClose={() => setIsEcoModalOpen(false)}
-      />
-      <GamingEngagementModal
-        isOpen={isGamingModalOpen}
-        onClose={() => setIsGamingModalOpen(false)}
-      />
-      <SaaSStrategyModal
-        isOpen={isSaaSModalOpen}
-        onClose={() => setIsSaaSModalOpen(false)}
-      />
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mb-20 text-center mx-auto">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mb-6"
-          >
-            <span className="py-1 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange">Evidence of Impact</span>
+    <div className="bg-[#050505] min-h-screen overflow-x-hidden">
+      {/* Modals */}
+      <FintechStrategyModal isOpen={isFintechModalOpen} onClose={() => setIsFintechModalOpen(false)} />
+      <EcoRetailFrameworkModal isOpen={isEcoModalOpen} onClose={() => setIsEcoModalOpen(false)} />
+      <GamingEngagementModal isOpen={isGamingModalOpen} onClose={() => setIsGamingModalOpen(false)} />
+      <SaaSStrategyModal isOpen={isSaaSModalOpen} onClose={() => setIsSaaSModalOpen(false)} />
+
+      {/* Hero */}
+      <section className="pt-32 pb-16 md:pb-24 px-4 sm:px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-orange/6 blur-[150px] rounded-full pointer-events-none -z-10" />
+        <div className="max-w-4xl mx-auto text-center w-full">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="mb-5">
+            <span className="py-1.5 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange">
+              Evidence of Impact
+            </span>
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display font-bold text-5xl md:text-7xl mb-6 uppercase italic text-white"
+            className="font-display font-bold text-4xl sm:text-5xl md:text-7xl mb-6 uppercase italic text-white leading-tight"
           >
             Performance <span className="text-gradient">Case Studies</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-slate-400 text-xl leading-relaxed max-w-2xl mx-auto"
+            className="text-slate-400 text-base md:text-xl leading-relaxed max-w-2xl mx-auto"
           >
-            Explosive growth for world-class mobile apps. Explore our data-driven success stories across Fintech, Gaming, and E-commerce.
+            Explosive growth for world-class mobile apps. Data-driven success stories across Fintech, Gaming, SaaS, and E-commerce.
           </motion.p>
+
+          {/* Aggregate stats strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-10 flex flex-wrap items-center justify-center gap-6 md:gap-10"
+          >
+            {[
+              { icon: <Users size={16} />, label: '538K+ Total Installs' },
+              { icon: <TrendingUp size={16} />, label: '42% Avg. CAC Reduction' },
+              { icon: <Shield size={16} />, label: '< 0.2% Avg. Fraud Rate' },
+              { icon: <Globe size={16} />, label: '20+ GEOs Reached' },
+            ].map((s, i) => (
+              <div key={i} className="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                <span className="text-brand-orange">{s.icon}</span>
+                {s.label}
+              </div>
+            ))}
+          </motion.div>
         </div>
+      </section>
 
-        {/* Featured Case Study 1: Fintech */}
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side: Text */}
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="inline-block px-4 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-[10px] font-bold text-brand-orange uppercase tracking-[0.2em]">
-                Featured Case Study
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-6xl font-bold text-white uppercase italic leading-tight">
-                  CPA Campaign <br />
-                  <span className="text-gradient">Fintech CPA Hero</span>
-                </h2>
-                <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                  Scaled a US-based Fintech app's user base with a focus on high-LTV verified actions, achieving 38k+ conversions in 30 days.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Key Impact</div>
-                  <div className="text-2xl font-bold text-white italic">38K+ Conversions</div>
-                </GlassCard>
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Scale Velocity</div>
-                  <div className="text-2xl font-bold text-brand-success italic">Aggressive</div>
-                </GlassCard>
-              </div>
-
-              <Button 
-                variant="liquid" 
-                size="lg" 
-                className="px-10 group w-full sm:w-auto"
-                onClick={() => setIsFintechModalOpen(true)}
-              >
-                View Detailed Strategy <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-
-            {/* Right Side: Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative group order-first lg:order-last"
-            >
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_30px_80px_rgba(120,180,255,0.25)] group-hover:border-white/20 aspect-video">
-                <Image 
-                  src="/images/fintech-cpa-hero.png" 
-                  alt="Fintech CPA Hero Case Study"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                {/* Subtle overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-              </div>
-              
-              {/* Decorative Glows */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-orange/20 blur-[80px] -z-10"></div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-purple/20 blur-[80px] -z-10"></div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Featured Case Study 2: Eco-Retail */}
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side: Image (Alternated) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative group"
-            >
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_30px_80px_rgba(34,197,94,0.25)] group-hover:border-white/20 aspect-video">
-                <Image 
-                  src="/images/eco-retail-growth.png" 
-                  alt="Eco-Retail Growth Case Study"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-              </div>
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-success/20 blur-[80px] -z-10"></div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-primary/20 blur-[80px] -z-10"></div>
-            </motion.div>
-
-            {/* Right Side: Text */}
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="inline-block px-4 py-1.5 rounded-full bg-brand-success/10 border border-brand-success/20 text-[10px] font-bold text-brand-success uppercase tracking-[0.2em]">
-                Scaling Strategy
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-6xl font-bold text-white uppercase italic leading-tight">
-                  CPI Scale <br />
-                  <span className="text-gradient">Eco-Retail Growth</span>
-                </h2>
-                <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                  Multi-channel app install campaign across SEA market, reducing eCPI by 35% while increasing retention by 20%.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Cost Efficiency</div>
-                  <div className="text-2xl font-bold text-brand-success italic">35% Lower eCPI</div>
-                </GlassCard>
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">User Quality</div>
-                  <div className="text-2xl font-bold text-white italic">20% Higher Retention</div>
-                </GlassCard>
-              </div>
-
-              <Button 
-                variant="liquid" 
-                size="lg" 
-                className="px-10 group w-full sm:w-auto"
-                onClick={() => setIsEcoModalOpen(true)}
-              >
-                Explore Scale Framework <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Featured Case Study 3: Global Game Launch */}
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side: Text */}
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="inline-block px-4 py-1.5 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-[10px] font-bold text-brand-purple uppercase tracking-[0.2em]">
-                CPE Engineering
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-6xl font-bold text-white uppercase italic leading-tight">
-                  Global Game <br />
-                  <span className="text-gradient">Launch CPE</span>
-                </h2>
-                <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                  Engineered a Cost-Per-Engagement strategy for a AAA mobile title, driving 500k+ level completions within the first week.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Total Engagement</div>
-                  <div className="text-2xl font-bold text-white italic">500K+ Completions</div>
-                </GlassCard>
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Launch Velocity</div>
-                  <div className="text-2xl font-bold text-brand-orange italic">Explosive</div>
-                </GlassCard>
-              </div>
-
-              <Button 
-                variant="liquid" 
-                size="lg" 
-                className="px-10 group w-full sm:w-auto"
-                onClick={() => setIsGamingModalOpen(true)}
-              >
-                View Engagement System <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-
-            {/* Right Side: Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative group order-first lg:order-last"
-            >
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_30px_80px_rgba(168,85,247,0.25)] group-hover:border-white/20 aspect-video">
-                <Image 
-                  src="/images/global-game-launch.png" 
-                  alt="Global Game Launch Case Study"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-              </div>
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-purple/20 blur-[80px] -z-10"></div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-orange/20 blur-[80px] -z-10"></div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Featured Case Study 4: SaaS Market Entry */}
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side: Image (Alternated) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative group"
-            >
-              <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_30px_80px_rgba(59,130,246,0.25)] group-hover:border-white/20 aspect-video">
-                <Image 
-                  src="/images/saas-market-entry.png" 
-                  alt="SaaS Market Entry Case Study"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
-              </div>
-              <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-primary/20 blur-[80px] -z-10"></div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-brand-success/20 blur-[80px] -z-10"></div>
-            </motion.div>
-
-            {/* Right Side: Text */}
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-[10px] font-bold text-brand-primary uppercase tracking-[0.2em]">
-                Direct UA Growth
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-4xl md:text-6xl font-bold text-white uppercase italic leading-tight">
-                  SaaS Market <br />
-                  <span className="text-gradient">Entry Strategy</span>
-                </h2>
-                <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                  Strategic European market entry for a B2B productivity app, achieving a 5x Return on Ad Spend (ROAS) through premium OEM traffic.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Performance</div>
-                  <div className="text-2xl font-bold text-brand-primary italic">5x ROAS</div>
-                </GlassCard>
-                <GlassCard className="p-6 border-white/5 bg-white/[0.04] backdrop-blur-[10px] rounded-[14px]">
-                  <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1 font-bold">Scale Reach</div>
-                  <div className="text-2xl font-bold text-white italic">Premium OEM</div>
-                </GlassCard>
-              </div>
-
-              <Button 
-                variant="liquid" 
-                size="lg" 
-                className="px-10 group w-full sm:w-auto"
-                onClick={() => setIsSaaSModalOpen(true)}
-              >
-                View Entry Strategy <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-
-        {PROJECTS.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {PROJECTS.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
+      {/* Case Study Cards Grid */}
+      <section className="pb-20 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
+          >
+            {caseStudies.map((cs) => (
+              <motion.div 
+                key={cs.id} 
+                variants={cardVariants} 
                 className="group cursor-pointer"
-                onClick={() => setSelectedProject(project)}
+                onClick={cs.onView}
               >
-                <GlassCard className="p-0 overflow-hidden border-white/5 group-hover:border-brand-orange/50 transition-all duration-500 bg-white/[0.02]">
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image 
-                      src={project.image} 
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors"></div>
-                    <div className="absolute top-4 right-4 py-1.5 px-4 bg-brand-orange rounded-full text-[10px] uppercase font-bold shadow-2xl">
-                      {project.result}
+                <GlassCard className="p-6 md:p-8 border-white/5 bg-white/[0.025] hover:bg-white/[0.04] hover:border-brand-orange/20 transition-all duration-500 h-full flex flex-col gap-5">
+                  {/* Top row: badge + title */}
+                  <div className="flex flex-col gap-3">
+                    <span className={`self-start text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${cs.badgeColor}`}>
+                      {cs.badge}
+                    </span>
+                    <div>
+                      <h2 className="text-xl md:text-2xl font-bold text-white uppercase italic leading-tight group-hover:text-brand-orange transition-colors">
+                        {cs.title}
+                      </h2>
+                      <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mt-1">{cs.subtitle}</p>
                     </div>
                   </div>
-                  <div className="p-8">
-                    <div className="text-[10px] font-bold text-brand-orange uppercase tracking-[0.2em] mb-3">{project.category}</div>
-                    <h3 className="text-2xl font-bold mb-4 flex items-center justify-between text-white uppercase italic">
-                      {project.title} <ArrowRight size={20} className="text-white/20 group-hover:text-brand-orange group-hover:translate-x-1 transition-all" />
-                    </h3>
-                    <p className="text-slate-500 line-clamp-2 text-sm leading-relaxed">
-                      {project.description}
-                    </p>
+
+                  {/* Description */}
+                  <p className="text-slate-400 text-sm leading-relaxed">{cs.description}</p>
+
+                  {/* Metrics grid */}
+                  <div className="grid grid-cols-2 gap-3">
+                    {cs.metrics.map((m, i) => (
+                      <div key={i} className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                        <div className={`text-lg md:text-xl font-black italic ${m.color}`}>{m.value}</div>
+                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mt-0.5">{m.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {cs.tags.map((tag) => (
+                      <span key={tag} className="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-2.5 py-1 rounded-full bg-white/5 border border-white/5">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </GlassCard>
               </motion.div>
             ))}
-          </div>
-        )}
-      </div>
+          </motion.div>
+        </div>
+      </section>
 
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center p-6">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-4xl glass-card p-0 overflow-hidden rounded-[2.5rem] border-white/10"
-            >
-              <button 
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center hover:bg-brand-red transition-colors border border-white/10 text-white"
+      {/* Mid-page proof strip */}
+      <section className="py-10 border-y border-white/5 bg-white/[0.01] overflow-x-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {[
+              { value: '38K+', label: 'CPA Conversions', icon: <BarChart2 size={20} /> },
+              { value: '5x', label: 'Avg. ROAS', icon: <DollarSign size={20} /> },
+              { value: '500K+', label: 'CPE Completions', icon: <Zap size={20} /> },
+              { value: '42%', label: 'Lower CAC', icon: <TrendingUp size={20} /> },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="flex flex-col items-center gap-2"
               >
-                <X size={20} />
-              </button>
-
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="relative aspect-square md:aspect-auto h-full min-h-[400px]">
-                  <Image 
-                    src={selectedProject.image} 
-                    alt={selectedProject.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                <div className="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange">
+                  {stat.icon}
                 </div>
-                <div className="p-12 flex flex-col justify-center bg-[#0a0a0a]">
-                  <div className="text-xs font-bold text-brand-orange uppercase tracking-widest mb-4">{selectedProject.category}</div>
-                  <h2 className="text-4xl font-bold mb-6 text-white uppercase italic leading-tight">{selectedProject.title}</h2>
-                  <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                    {selectedProject.description}
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-6 mb-10">
-                    <div className="p-5 bg-white/5 rounded-3xl border border-white/5">
-                      <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Key Impact</div>
-                      <div className="text-xl font-bold text-white italic">{selectedProject.result}</div>
-                    </div>
-                    <div className="p-5 bg-white/5 rounded-3xl border border-white/5">
-                      <div className="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Scale Velocity</div>
-                      <div className="text-xl font-bold text-white italic">Aggressive</div>
-                    </div>
-                  </div>
-
-                  <Button variant="liquid" className="w-full py-5 text-lg gap-2">
-                    Request Strategy Audit <ExternalLink size={18} />
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
+                <div className="text-2xl md:text-4xl font-black text-white italic">{stat.value}</div>
+                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-tight">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 md:py-28 px-4 sm:px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-orange/6 blur-[160px] rounded-full -z-10 pointer-events-none" />
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <span className="inline-block py-1 px-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-xs font-bold uppercase tracking-widest text-brand-orange">
+              Your App Is Next
+            </span>
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-white uppercase italic leading-tight">
+              Ready to Build Your <br /><span className="text-gradient">Case Study?</span>
+            </h2>
+            <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+              Join the apps already scaling with Adsgrind. Get a free strategy session and see how we can replicate these results for your growth goals.
+            </p>
+            <div className="flex justify-center pt-2">
+              <Button variant="liquid" size="lg" className="w-full sm:w-auto px-10 gap-2 text-base" onClick={openGetStarted}>
+                Get Growth Plan <ArrowRight size={18} />
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
