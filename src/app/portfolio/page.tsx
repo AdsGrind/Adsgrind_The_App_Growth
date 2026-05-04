@@ -107,7 +107,7 @@ export default function PortfolioPage() {
   const cardVariants = {
     hidden: { opacity: 0, y: 24 },
     show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-  };
+  } as const;
 
   return (
     <div className="bg-[#050505] min-h-screen overflow-x-hidden">
