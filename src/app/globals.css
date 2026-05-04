@@ -40,18 +40,20 @@
   --footer-bg: #050505;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  width: 100%;
   max-width: 100vw;
+  position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
   color-scheme: dark;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
 }
 
 img, video, svg {

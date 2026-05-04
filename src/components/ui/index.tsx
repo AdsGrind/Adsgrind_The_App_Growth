@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
+import { cn } from '@/lib/utils';
+export { cn };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'outline' | 'ghost' | 'liquid';
@@ -83,3 +79,5 @@ export const Counter = ({ value, duration = 2, decimals = 0 }: { value: number; 
 
   return <span ref={ref}>0</span>;
 };
+
+export * from './GrowthIndex';

@@ -55,3 +55,37 @@ export async function deleteLead(id: string) {
   const filteredLeads = leads.filter(l => l.id !== id);
   await fs.writeFile(DB_PATH, JSON.stringify(filteredLeads, null, 2));
 }
+
+export interface Subscriber {
+  email: string;
+  subscribedAt: string;
+}
+
+const SUB_PATH = path.join(process.cwd(), 'data', 'subscribers.json');
+
+export async function getSubscribers(): Promise<Subscriber[]> {
+  const dir = path.dirname(SUB_PATH);
+  try {
+    await fs.access(dir);
+  } catch {
+    await fs.mkdir(dir, { recursive: true });
+  }
+
+  try {
+    const data = await fs.readFile(SUB_PATH, 'utf-8');
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+}
+
+export async function saveSubscriber(subscriber: Subscriber) {
+  const subs = await getSubscribers();
+  // Prevent duplicate subscribers
+  if (!subs.some(s => s.email.toLowerCase() === subscriber.email.toLowerCase())) {
+    subs.push(subscriber);
+    await fs.writeFile(SUB_PATH, JSON.stringify(subs, null, 2));
+    return true;
+  }
+  return false;
+}

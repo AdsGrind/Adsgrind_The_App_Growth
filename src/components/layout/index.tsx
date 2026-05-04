@@ -165,6 +165,41 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
 };
 
 export const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === 'loading') return;
+
+    if (!email || !email.includes('@')) {
+      setStatus('error');
+      setMessage('Enter a valid email');
+      return;
+    }
+
+    setStatus('loading');
+    try {
+      // Import the action dynamically to avoid bundle issues in some environments if needed, 
+      // but standard import is fine here.
+      const { subscribeToNewsletter } = await import('@/app/actions/newsletter');
+      const result = await subscribeToNewsletter(email);
+      
+      if (result.success) {
+        setStatus('success');
+        setMessage(result.message || "You’re in. Check your inbox.");
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(result.error || 'Something went wrong. Try again.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setMessage('Something went wrong. Try again.');
+    }
+  };
+
   return (
     <footer className="bg-[var(--footer-bg)] border-t border-white/5 pt-20 pb-10 px-6 mt-auto">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -212,14 +247,35 @@ export const Footer = () => {
         <div>
           <h4 className="font-semibold mb-6 text-white">Newsletter</h4>
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">Stay updated with the latest trends.</p>
-          <div className="flex gap-2">
-            <input 
-              type="email" 
-              placeholder="Email address"
-              className="bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-sm flex-1 focus:outline-none focus:border-brand-accent-start text-white"
-            />
-            <Button variant="liquid" size="sm" className="px-4">Join</Button>
-          </div>
+          <form onSubmit={handleSubscribe} className="space-y-2">
+            <div className="flex gap-2">
+              <input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email address"
+                disabled={status === 'loading'}
+                className="bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-sm flex-1 focus:outline-none focus:border-brand-orange text-white disabled:opacity-50"
+              />
+              <Button 
+                type="submit" 
+                variant="liquid" 
+                size="sm" 
+                className="px-4"
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? '...' : 'Join'}
+              </Button>
+            </div>
+            {message && (
+              <p className={cn(
+                "text-[10px] font-bold uppercase tracking-widest pl-1",
+                status === 'error' ? "text-brand-red" : "text-brand-success"
+              )}>
+                {message}
+              </p>
+            )}
+          </form>
         </div>
       </div>
       
