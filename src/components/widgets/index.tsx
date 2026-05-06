@@ -7,28 +7,40 @@ import { cn } from "@/components/ui";
 import { saveChatLead } from "@/app/actions/chat";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// WhatsApp Button
+// WhatsApp Button — Premium High-Trust
 // ─────────────────────────────────────────────────────────────────────────────
 export const WhatsAppButton = () => (
-  <motion.a
-    href="https://wa.me/919625982835?text=Hi%20ADSGRIND%2C%20I%27d%20like%20to%20inquire%20about%20your%20services."
-    target="_blank"
-    rel="noopener noreferrer"
-    initial={{ scale: 0, opacity: 0 }}
-    animate={{ scale: 1, opacity: 1 }}
-    whileHover={{ scale: 1.1, y: -4 }}
-    whileTap={{ scale: 0.9 }}
-    className="fixed bottom-6 right-24 z-40 w-14 h-14 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-full flex items-center justify-center text-white shadow-[0_10px_25px_-5px_rgba(37,211,102,0.5)] cursor-pointer overflow-hidden group"
+  <motion.div
+    initial={{ x: 20, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    transition={{ delay: 0.5, duration: 0.6 }}
+    className="fixed bottom-[92px] right-6 z-50 flex items-center group"
   >
-    <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-    <svg className="w-8 h-8 relative z-10" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 15.5 17.38 18.23 13.88 18.23C13.83 18.23 13.78 18.23 13.73 18.23C13.68 18.23 13.64 18.21 13.59 18.19L11.53 17.53L10.94 17.9L8.46 19.49L9.12 17.06L9.36 16.17L8.74 15.42C7.81 14.3 7.32 12.92 7.32 11.92C7.32 8.41 10.21 5.51 13.72 5.51" />
-    </svg>
-    <span className="absolute top-1 right-1 flex h-3 w-3">
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
-      <span className="relative inline-flex rounded-full h-3 w-3 bg-white opacity-20" />
+    {/* Tooltip */}
+    <span className="mr-3 px-3 py-1.5 bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+      Chat on WhatsApp
     </span>
-  </motion.a>
+    
+    <motion.a
+      href="https://wa.me/919625982835?text=Hi%20ADSGRIND%2C%20I%27d%20like%20to%20inquire%20about%20your%20services."
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ scale: 1.08, brightness: 1.1 }}
+      whileTap={{ scale: 0.94 }}
+      className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(37,211,102,0.4)] cursor-pointer relative"
+    >
+      {/* Subtle Breathing Glow */}
+      <motion.div 
+        className="absolute inset-0 rounded-full bg-[#25D366]/20"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <svg className="w-8 h-8 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg>
+    </motion.a>
+  </motion.div>
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -38,36 +50,27 @@ interface Message {
   id: string;
   text: string;
   sender: "user" | "bot";
-  /** Only on the first bot message */
   quickReplies?: string[];
-  /** Whether this message is currently streaming */
   streaming?: boolean;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Constants
-// ─────────────────────────────────────────────────────────────────────────────
 const QUICK_REPLIES = [
-  "I'm a Brand / App Owner",
-  "I'm an Agency",
-  "I need App Growth",
-  "How does CPA work?",
+  "Brand Scale",
+  "Agency Connect",
+  "UA Infrastructure",
+  "CPA Intelligence",
 ];
 
 const WELCOME_MESSAGE: Message = {
   id: "welcome",
-  text: "Growth Intelligence online.\n\nWhat are you trying to scale?",
+  text: "Protocol online.\n\nSpecify your scaling objective.",
   sender: "bot",
   quickReplies: QUICK_REPLIES,
 };
 
-// Detect email + name patterns for passive lead capture (no intercept logic)
+// Detect email + name patterns
 const EMAIL_RE = /[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/;
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Streaming reveal hook
-// Animates text word-by-word so it feels like the AI is typing in real time
-// ─────────────────────────────────────────────────────────────────────────────
 function useStreamingText(fullText: string, active: boolean): string {
   const [displayed, setDisplayed] = React.useState("");
 
@@ -76,11 +79,7 @@ function useStreamingText(fullText: string, active: boolean): string {
       setDisplayed(fullText);
       return;
     }
-    // Reset on each new active text
     setDisplayed("");
-
-    // Tokenise preserving whitespace so newlines render correctly.
-    // Match sequences of non-whitespace OR individual whitespace chars.
     const tokens = fullText.match(/(\S+|\s)/g) ?? [];
     let i = 0;
     let cancelled = false;
@@ -89,20 +88,15 @@ function useStreamingText(fullText: string, active: boolean): string {
       if (cancelled || i >= tokens.length) return;
       const token = tokens[i++];
       setDisplayed((prev) => prev + token);
-      setTimeout(next, token.trim() ? 18 + Math.random() * 24 : 4);
+      setTimeout(next, token.trim() ? 12 + Math.random() * 18 : 2);
     };
     next();
-
     return () => { cancelled = true; };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fullText, active]);
 
   return displayed;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// StreamingBotMessage — renders the last bot message with word-by-word reveal
-// ─────────────────────────────────────────────────────────────────────────────
 function StreamingBotMessage({ text, onDone }: { text: string; onDone: () => void }) {
   const displayed = useStreamingText(text, true);
   const doneRef = React.useRef(false);
@@ -118,15 +112,12 @@ function StreamingBotMessage({ text, onDone }: { text: string; onDone: () => voi
     <span className="whitespace-pre-wrap">
       {displayed}
       {displayed !== text && (
-        <span className="inline-block w-[2px] h-[13px] bg-brand-orange ml-0.5 animate-pulse align-middle" />
+        <span className="inline-block w-[2px] h-[13px] bg-white ml-0.5 animate-pulse align-middle" />
       )}
     </span>
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// AIChatbot
-// ─────────────────────────────────────────────────────────────────────────────
 export const AIChatbot = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [messages, setMessages] = React.useState<Message[]>([WELCOME_MESSAGE]);
@@ -137,7 +128,6 @@ export const AIChatbot = () => {
   const [leadSaved, setLeadSaved] = React.useState(false);
   const [apiErrorCount, setApiErrorCount] = React.useState(0);
 
-  // Stable session ID — persisted in sessionStorage so refreshing = new session
   const sessionIdRef = React.useRef<string>("");
   const passiveLeadRef = React.useRef<{ name?: string; email?: string }>({});
 
@@ -145,7 +135,6 @@ export const AIChatbot = () => {
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
-  // Generate or restore sessionId on mount
   React.useEffect(() => {
     const stored = sessionStorage.getItem("adsgrind_chat_session");
     if (stored) {
@@ -157,43 +146,26 @@ export const AIChatbot = () => {
     }
   }, []);
 
-  // Pulse trigger button after 8s if chat not yet opened
   React.useEffect(() => {
-    const t = setTimeout(() => setHasPulsed(true), 8000);
+    const t = setTimeout(() => setHasPulsed(true), 12000);
     return () => clearTimeout(t);
   }, []);
 
-  // Auto-scroll to bottom
   React.useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  // Focus input when opened
   React.useEffect(() => {
     if (isOpen) setTimeout(() => inputRef.current?.focus(), 250);
   }, [isOpen]);
 
-  // ── Passive lead detection ─────────────────────────────────────────────────
-  // Scans outgoing user messages for email addresses silently
   const detectAndSaveLead = React.useCallback(
     async (userText: string, botReply: string) => {
       if (leadSaved) return;
-
       const emailMatch = userText.match(EMAIL_RE);
-      if (emailMatch) {
-        passiveLeadRef.current.email = emailMatch[0];
-      }
-
-      // Look for a name pattern in the current exchange:
-      // e.g. "I'm Rohit" / "my name is Rohit" / "this is Rohit"
-      const nameMatch = userText.match(
-        /(?:i'm|i am|my name is|this is|call me|it's|its)\s+([A-Z][a-z]+)/i
-      );
-      if (nameMatch) {
-        passiveLeadRef.current.name = nameMatch[1];
-      }
-
-      // If we have both, save quietly
+      if (emailMatch) passiveLeadRef.current.email = emailMatch[0];
+      const nameMatch = userText.match(/(?:i'm|i am|my name is|this is|call me|it's|its)\s+([A-Z][a-z]+)/i);
+      if (nameMatch) passiveLeadRef.current.name = nameMatch[1];
       if (passiveLeadRef.current.email && passiveLeadRef.current.name && !leadSaved) {
         setLeadSaved(true);
         await saveChatLead({
@@ -207,13 +179,10 @@ export const AIChatbot = () => {
     [leadSaved]
   );
 
-  // ── Core message processor — calls /api/chat REST endpoint ───────────────
   const sendMessage = React.useCallback(
     async (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || isLoading) return;
-
-      // Optimistically render user message
       const userId = `u_${Date.now()}`;
       setMessages((prev) => [...prev, { id: userId, text: trimmed, sender: "user" }]);
       setInput("");
@@ -224,47 +193,24 @@ export const AIChatbot = () => {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: trimmed,
-            sessionId: sessionIdRef.current,
-          }),
+          body: JSON.stringify({ message: trimmed, sessionId: sessionIdRef.current }),
         });
-
         const data = await res.json() as { reply: string; provider: string };
         const { reply, provider } = data;
-
         const botId = `b_${Date.now()}`;
-
-        // Quota / fallback → show WhatsApp CTA card
         if (provider === "fallback") {
-          setMessages((prev) => [
-            ...prev,
-            { id: botId, text: reply, sender: "bot" as const, ...({
-              // @ts-ignore
-              type: "quota"
-            }) },
-          ]);
+          setMessages((prev) => [...prev, { id: botId, text: reply, sender: "bot" as const, ...({ type: "quota" }) }]);
         } else {
-          // Normal reply — stream word-by-word
           setStreamingId(botId);
-          setMessages((prev) => [
-            ...prev,
-            { id: botId, text: reply, sender: "bot" as const, streaming: true },
-          ]);
+          setMessages((prev) => [...prev, { id: botId, text: reply, sender: "bot" as const, streaming: true }]);
           setApiErrorCount(0);
           detectAndSaveLead(trimmed, reply);
         }
       } catch {
         setApiErrorCount((c) => c + 1);
         const errId = `b_err_${Date.now()}`;
-        const errMsg =
-          apiErrorCount === 0
-            ? "Connection hiccup. Try again or reach us at business@adsgrind.com"
-            : "Still having trouble. WhatsApp is the fastest: wa.me/919625982835";
-        setMessages((prev) => [
-          ...prev,
-          { id: errId, text: errMsg, sender: "bot" },
-        ]);
+        const errMsg = apiErrorCount === 0 ? "Connection interrupted. Retry." : "Hub unreachable. Contact: business@adsgrind.com";
+        setMessages((prev) => [...prev, { id: errId, text: errMsg, sender: "bot" }]);
       } finally {
         setIsLoading(false);
       }
@@ -277,11 +223,9 @@ export const AIChatbot = () => {
   }, []);
 
   const handleReset = () => {
-    // Generate a new sessionId to clear server-side history
     const newId = `sess_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
     sessionIdRef.current = newId;
     sessionStorage.setItem("adsgrind_chat_session", newId);
-
     setMessages([WELCOME_MESSAGE]);
     passiveLeadRef.current = {};
     setInput("");
@@ -298,118 +242,73 @@ export const AIChatbot = () => {
     }
   };
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // Render
-  // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <motion.div
+      initial={{ x: 20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.6, duration: 0.6 }}
+      className="fixed bottom-6 right-6 z-50 flex items-center group"
+    >
+      {/* Tooltip */}
+      {!isOpen && (
+        <span className="mr-3 px-3 py-1.5 bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+          Talk to AI
+        </span>
+      )}
 
-      {/* ── Trigger Button ── */}
       <motion.button
         onClick={() => { setIsOpen((o) => !o); setHasPulsed(false); }}
-        whileHover={{ scale: 1.08, y: -3 }}
-        whileTap={{ scale: 0.9 }}
-        className="relative w-14 h-14 bg-gradient-to-br from-brand-red to-brand-orange rounded-full flex items-center justify-center text-white shadow-[0_8px_30px_-4px_rgba(238,29,35,0.5)] overflow-hidden group"
-        aria-label={isOpen ? "Close chat" : "Open chat"}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.94 }}
+        className="relative w-14 h-14 bg-[#FF3B3B] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(255,59,59,0.35)]"
       >
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <motion.div
-          animate={{ rotate: isOpen ? 90 : 0 }}
-          transition={{ duration: 0.22 }}
-          className="relative z-10"
-        >
-          {isOpen ? <X size={22} /> : <Bot size={26} />}
+        <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+          {isOpen ? <X size={24} /> : <Bot size={28} />}
         </motion.div>
-
-        {/* Pulse ring */}
-        {hasPulsed && !isOpen && (
-          <span className="absolute inset-0 rounded-full border-2 border-brand-orange/60 animate-ping pointer-events-none" />
-        )}
-
-        {/* Online dot */}
-        {!isOpen && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-success rounded-full border-2 border-[#050505] flex items-center justify-center">
-            <span className="w-1.5 h-1.5 bg-white rounded-full" />
-          </span>
-        )}
       </motion.button>
 
-      {/* ── Chat Panel ── */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92, y: 14 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.92, y: 14 }}
-            transition={{ type: "spring", damping: 26, stiffness: 320 }}
-            className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[26rem] bg-[#0a0a0a] border border-white/[0.08] rounded-3xl flex flex-col shadow-[0_24px_64px_-8px_rgba(0,0,0,0.8)] z-50"
-            style={{ maxHeight: "min(38rem, calc(100vh - 6rem))" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[24rem] bg-black border border-white/10 flex flex-col shadow-2xl z-50"
+            style={{ maxHeight: "calc(100vh - 8rem)" }}
           >
-
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-[#150500]/80 to-[#0d0d0d] border-b border-white/[0.05] flex-shrink-0 rounded-t-3xl">
-              <div className="flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-red/25 to-brand-orange/15 border border-brand-orange/20 flex items-center justify-center flex-shrink-0">
-                  <Bot size={18} className="text-brand-orange" />
-                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-brand-success rounded-full border-2 border-[#0a0a0a]" />
+            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-8 bg-[#FF3B3B] flex items-center justify-center text-white">
+                  <Bot size={16} />
                 </div>
                 <div>
-                  <h4 className="text-[13px] font-black tracking-widest uppercase italic text-white leading-none">
-                    ADSGRIND AI
-                  </h4>
-                  <p className="text-[9px] font-bold text-brand-orange/60 uppercase tracking-[0.18em] mt-0.5">
-                    Growth Intelligence · Online
-                  </p>
+                  <h4 className="text-[11px] font-bold tracking-[0.3em] uppercase text-white leading-none">Intelligence_Node</h4>
+                  <p className="text-[9px] font-bold text-white/30 uppercase tracking-widest mt-1.5">Operational · ADSGRIND</p>
                 </div>
               </div>
-              <button
-                onClick={handleReset}
-                title="Start over"
-                className="p-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-white/30 hover:text-white/70 transition-all border border-white/[0.05]"
-              >
-                <RotateCcw size={13} />
+              <button onClick={handleReset} className="text-white/20 hover:text-white transition-colors">
+                <RotateCcw size={14} />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3.5 custom-scrollbar min-h-0">
+            <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6 custom-scrollbar min-h-0">
               {messages.map((msg, idx) => {
-                const isLastBot = msg.sender === "bot" && idx === messages.length - 1;
                 const isStreaming = msg.id === streamingId;
-
                 return (
-                  <div
-                    key={msg.id}
-                    className={cn(
-                      "flex flex-col gap-2",
-                      msg.sender === "user" ? "items-end" : "items-start"
-                    )}
-                  >
+                  <div key={msg.id} className={cn("flex flex-col gap-3", msg.sender === "user" ? "items-end" : "items-start")}>
                     <motion.div
-                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.18 }}
+                      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                       className={cn(
-                        "rounded-2xl px-4 py-3 text-sm max-w-[88%] leading-relaxed",
-                        msg.sender === "user"
-                          ? "bg-gradient-to-br from-brand-red to-brand-orange text-white font-medium rounded-tr-sm shadow-[0_4px_14px_-4px_rgba(238,29,35,0.45)]"
-                          : "bg-white/[0.05] border border-white/[0.07] text-slate-200 rounded-tl-sm"
+                        "p-4 text-xs tracking-wide leading-relaxed",
+                        msg.sender === "user" ? "bg-white text-black font-bold" : "bg-white/[0.03] border border-white/10 text-white/70"
                       )}
                     >
                       {(msg as any).type === "quota" ? (
-                        <div className="flex flex-col gap-2.5">
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            Our AI is temporarily at capacity. Talk to the team directly — we respond fast.
-                          </p>
-                          <a
-                            href="https://wa.me/919625982835?text=Hi%20ADSGRIND%2C%20I%27d%20like%20to%20discuss%20scaling%20my%20app."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] hover:bg-[#25D366]/25 px-3 py-2 rounded-xl transition-all w-fit"
-                          >
-                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 15.5 17.38 18.23 13.88 18.23C13.83 18.23 13.78 18.23 13.73 18.23C13.68 18.23 13.64 18.21 13.59 18.19L11.53 17.53L10.94 17.9L8.46 19.49L9.12 17.06L9.36 16.17L8.74 15.42C7.81 14.3 7.32 12.92 7.32 11.92C7.32 8.41 10.21 5.51 13.72 5.51" /></svg>
-                            Chat on WhatsApp
-                          </a>
+                        <div className="space-y-4">
+                          <p>AI node at capacity. Connect directly for immediate deployment.</p>
+                          <a href="https://wa.me/919625982835" className="block w-full py-2 border border-white/20 text-center text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">WhatsApp Protocol</a>
                         </div>
                       ) : isStreaming ? (
                         <StreamingBotMessage text={msg.text} onDone={handleStreamDone} />
@@ -417,90 +316,41 @@ export const AIChatbot = () => {
                         <span className="whitespace-pre-wrap">{msg.text}</span>
                       )}
                     </motion.div>
-
-                    {/* Quick reply chips — only on welcome message */}
-                    {msg.quickReplies && msg.quickReplies.length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.12 }}
-                        className="flex flex-wrap gap-1.5 max-w-[90%]"
-                      >
+                    {msg.quickReplies && (
+                      <div className="flex flex-wrap gap-2">
                         {msg.quickReplies.map((qr) => (
-                          <button
-                            key={qr}
-                            onClick={() => sendMessage(qr)}
-                            disabled={isLoading || streamingId !== null}
-                            className="text-[10px] font-bold uppercase tracking-wider text-brand-orange border border-brand-orange/30 hover:border-brand-orange/70 hover:bg-brand-orange/8 px-3 py-1.5 rounded-full transition-all disabled:opacity-35 disabled:cursor-not-allowed"
-                          >
-                            {qr}
-                          </button>
+                          <button key={qr} onClick={() => sendMessage(qr)} className="text-[9px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-3 py-1.5 hover:border-white hover:text-white transition-all">{qr}</button>
                         ))}
-                      </motion.div>
+                      </div>
                     )}
                   </div>
                 );
               })}
-
-              {/* Loading indicator (shows while waiting for API) */}
               {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="self-start flex items-center gap-1.5 bg-white/[0.05] border border-white/[0.07] rounded-2xl rounded-tl-sm px-4 py-3"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-orange/50 animate-bounce" />
-                </motion.div>
+                <div className="flex gap-1.5 p-2">
+                  {[0, 1, 2].map((i) => <span key={i} className="w-1 h-1 bg-white/20 animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />)}
+                </div>
               )}
-
-              <div ref={messagesEndRef} className="h-px" />
+              <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
-            <div className="px-4 pb-4 pt-3 border-t border-white/[0.05] flex-shrink-0 bg-[#0a0a0a] rounded-b-3xl">
-              <div className="flex items-end gap-2">
+            <div className="p-6 border-t border-white/10">
+              <div className="flex items-end gap-4">
                 <textarea
-                  ref={(el) => {
-                    (inputRef as any).current = el;
-                    (textareaRef as any).current = el;
-                  }}
-                  rows={1}
-                  value={input}
-                  onChange={(e) => {
-                    setInput(e.target.value);
-                    e.target.style.height = "44px";
-                    e.target.style.height =
-                      Math.min(e.target.scrollHeight, 96) + "px";
-                  }}
+                  ref={(el) => { (inputRef as any).current = el; (textareaRef as any).current = el; }}
+                  rows={1} value={input}
+                  onChange={(e) => { setInput(e.target.value); e.target.style.height = "auto"; e.target.style.height = e.target.scrollHeight + "px"; }}
                   onKeyDown={handleKeyDown}
-                  placeholder="Ask about CPA, installs, scaling..."
-                  disabled={isLoading || streamingId !== null}
-                  className="flex-1 bg-white/[0.04] border border-white/[0.08] hover:border-white/[0.12] focus:border-brand-orange/35 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-slate-600 focus:outline-none transition-all resize-none custom-scrollbar disabled:opacity-50"
-                  style={{ minHeight: "44px", maxHeight: "96px" }}
+                  placeholder="Operational query..."
+                  className="flex-1 bg-transparent border-b border-white/10 py-2 text-xs text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all resize-none uppercase tracking-widest"
                 />
-                <button
-                  onClick={() => sendMessage(input)}
-                  disabled={!input.trim() || isLoading || streamingId !== null}
-                  className={cn(
-                    "w-11 h-11 rounded-2xl flex items-center justify-center text-white transition-all flex-shrink-0",
-                    input.trim() && !isLoading && !streamingId
-                      ? "bg-gradient-to-br from-brand-red to-brand-orange shadow-[0_4px_14px_-4px_rgba(238,29,35,0.5)] hover:brightness-110 active:scale-90"
-                      : "bg-white/[0.05] text-white/20 cursor-not-allowed"
-                  )}
-                  aria-label="Send"
-                >
-                  <Send size={16} />
-                </button>
+                <button onClick={() => sendMessage(input)} disabled={!input.trim()} className="text-white/30 hover:text-white disabled:opacity-0 transition-all"><Send size={18} /></button>
               </div>
-              <p className="text-center text-[9px] text-white/15 font-bold uppercase tracking-widest mt-2.5 select-none">
-                Powered by ADSGRIND Intelligence
-              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };

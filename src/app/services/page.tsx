@@ -2,42 +2,38 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GlassCard, Button } from '@/components/ui';
+import { GlassCard, Button, cn } from '@/components/ui';
 import { Zap, Target, Globe2, ShieldCheck, BarChart3, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { ServiceStrategyModal, ServiceType } from '@/components/services/ServiceStrategyModal';
 import { useModals } from '@/context/ModalContext';
 
 const SERVICES = [
   {
-    title: "App Install Campaigns (CPI)",
-    icon: <Zap className="text-brand-red" size={32} />,
+    title: "App Install (CPI)",
+    icon: <Zap className="text-white" size={24} />,
     desc: "Scale your user base rapidly with high-quality installs across all major platforms and global inventories.",
     features: ["Global Reach", "Quality Optimization", "Multi-Channel Delivery", "Rapid Scaling"],
-    color: "from-[#EE1D23]/20 to-transparent",
     strategyType: 'CPI' as const
   },
   {
     title: "Cost Per Action (CPA)",
-    icon: <Target className="text-brand-orange" size={32} />,
+    icon: <Target className="text-white" size={24} />,
     desc: "Pay only for performance. We focus on driving verified user actions—from registrations to in-app purchases.",
     features: ["Verified Conversions", "Strict KPI Adherence", "Action-Based Pricing", "High Intent Users"],
-    color: "from-[#FF5800]/20 to-transparent",
     strategyType: 'CPA' as const
   },
   {
     title: "Global User Acquisition",
-    icon: <Globe2 className="text-brand-purple" size={32} />,
+    icon: <Globe2 className="text-white" size={24} />,
     desc: "Break into new markets with localized UA strategies. Our global network reaches users in every major GEO.",
     features: ["Localized Campaigns", "Deep GEO Penetration", "Market Intelligence", "24/7 Monitoring"],
-    color: "from-[#9D50BB]/20 to-transparent",
     strategyType: 'GLOBAL_UA' as const
   },
   {
     title: "Publisher Solutions",
-    icon: <BarChart3 className="text-brand-red" size={32} />,
+    icon: <BarChart3 className="text-white" size={24} />,
     desc: "Maximize your app revenue with premium offers from worldwide advertisers and competitive Payouts.",
     features: ["High eCPM Offers", "Competitive Payouts", "Real-Time Stats", "Dedicated Support"],
-    color: "from-[#EE1D23]/20 to-transparent",
     strategyType: 'PUBLISHER' as const
   }
 ];
@@ -47,64 +43,76 @@ export default function ServicesPage() {
   const [activeStrategy, setActiveStrategy] = React.useState<ServiceType | null>(null);
 
   return (
-    <div className="pt-32 pb-20 bg-[#050505] min-h-screen">
+    <div className="pt-32 pb-20 bg-[#000000] min-h-screen">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mb-24 text-center mx-auto px-4">
+        <div className="max-w-5xl mb-32 mx-auto text-center flex flex-col items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center"
           >
-            <h1 className="font-display font-bold text-3xl md:text-5xl mb-4 uppercase italic text-white leading-tight">
-              Our <span className="text-gradient">Core Solutions</span>
+             <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/30 border-b border-white/20 pb-2 mb-10 block">Infrastructure</span>
+            <h1 className="font-display font-bold text-5xl md:text-8xl mb-12 uppercase text-white leading-none tracking-[-0.04em]">
+              Precision<br />Infrastructure.
             </h1>
-            <div className="h-1 w-20 bg-brand-red mx-auto mb-8 rounded-full"></div>
-            <p className="text-slate-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-              End-to-end performance marketing technology designed for scalability and measurable growth in the mobile app ecosystem.
+            <p className="text-white/40 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
+              End-to-end performance marketing technology designed for scalability and measurable growth in the global mobile ecosystem.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10">
           {SERVICES.map((service, idx) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
+              className={cn(
+                "p-16 hover:bg-white/[0.02] transition-all duration-500",
+                idx % 2 === 0 && "md:border-r border-white/10",
+                idx < 2 && "border-b border-white/10",
+                idx >= 2 && "border-b md:border-b-0 border-white/10"
+              )}
             >
-              <GlassCard className="h-full p-10 flex flex-col relative overflow-hidden group border-white/5 hover:border-white/20 transition-all duration-500">
-                <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${service.color} blur-[100px] -z-10 group-hover:scale-125 transition-transform duration-700`}></div>
-                
-                <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 border border-white/20 flex items-center justify-center mb-10 text-white">
                   {service.icon}
                 </div>
                 
-                <h2 className="text-2xl font-bold mb-4 text-white uppercase italic">{service.title}</h2>
-                <p className="text-slate-400 mb-8 leading-relaxed">
+                <h2 className="text-2xl font-bold mb-6 text-white uppercase tracking-tight leading-none">{service.title}</h2>
+                <p className="text-white/40 mb-12 leading-relaxed text-sm">
                   {service.desc}
                 </p>
                 
-                <div className="space-y-4 mb-12 mt-auto">
+                <div className="space-y-4 mb-16">
                   {service.features.map(feature => (
-                    <div key={feature} className="flex items-center gap-3 text-sm text-slate-300 font-medium">
-                      <CheckCircle2 size={16} className="text-brand-orange" />
+                    <div key={feature} className="flex items-center gap-3 text-[10px] text-white/60 font-bold uppercase tracking-widest">
+                      <div className="w-1.5 h-1.5 bg-white/20" />
                       {feature}
                     </div>
                   ))}
                 </div>
                 
-                <Button 
-                    variant="outline" 
-                    className="w-full justify-between group/btn border-white/10 hover:border-brand-red/50 text-white"
+                <button 
+                    className="w-full py-4 border border-white/10 text-white text-[11px] font-bold uppercase tracking-[0.2em] transition-all hover:bg-white hover:text-black"
                     onClick={() => setActiveStrategy(service.strategyType)}
                 >
-                  Learn Strategy <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </GlassCard>
+                  Learn Strategy
+                </button>
             </motion.div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-40 border border-white/10 p-16 md:p-32 text-center hover:bg-white/[0.02] transition-all duration-500">
+             <h2 className="text-4xl md:text-7xl font-bold mb-12 uppercase text-white tracking-[-0.03em] leading-none">Ready to Scale?</h2>
+             <button 
+                className="px-16 py-6 bg-white text-black text-[12px] font-bold uppercase tracking-[0.2em] transition-all hover:bg-white/90" 
+                onClick={openGetStarted}
+              >
+                Initiate Growth Audit
+              </button>
         </div>
       </div>
 

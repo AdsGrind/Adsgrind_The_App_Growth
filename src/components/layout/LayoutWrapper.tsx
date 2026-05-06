@@ -10,6 +10,7 @@ import { MarketStrategyModal } from '@/components/blog/MarketStrategyModal';
 import { FraudInsightModal } from '@/components/blog/FraudInsightModal';
 import { ModalProvider, useModals } from '@/context/ModalContext';
 import { Loader } from '@/components/ui/Loader';
+import { GlobalParticles } from '@/components/ui/GlobalParticles';
 import { motion, AnimatePresence } from 'framer-motion';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -61,8 +62,9 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="flex flex-col min-h-screen"
+            className="flex flex-col min-h-screen relative"
           >
+            <GlobalParticles />
             <Navbar onLogin={() => openAuth('login')} onSignup={openGetStarted} />
             <main className="flex-1">
               {children}

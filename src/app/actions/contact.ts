@@ -63,7 +63,7 @@ export async function sendContactEmail(formData: {
     const safeMarkets = escape(markets?.join(', ') || 'Global / Tier 1');
     const safeMessage = escape(message).replace(/\n/g, '<br>');
 
-    // 1. Admin Email Template (Premium Dark + Red)
+    // 1. Admin Email Template (Institutional Monochrome)
     const adminHtml = `
       <!DOCTYPE html>
       <html lang="en">
@@ -71,84 +71,53 @@ export async function sendContactEmail(formData: {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>New Growth Inquiry</title>
-        <style>
-          @media only screen and (max-width: 600px) {
-            .container { width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; }
-            .brand-text { font-size: 22px !important; }
-            .content-padding { padding: 30px 20px !important; }
-          }
-        </style>
       </head>
-      <body style="margin: 0; padding: 0; background-color: #0B0B0B; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B0B0B; padding: 40px 0;">
+      <body style="margin: 0; padding: 0; background-color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #000000; padding: 60px 0;">
           <tr>
             <td align="center">
-              <table class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto;">
-                <!-- Header / Brand -->
+              <table width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto; border: 1px solid #222222;">
+                <!-- Header -->
                 <tr>
-                  <td align="center" style="padding-bottom: 30px;">
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                      <tr>
-                        <td align="center">
-                          <img src="${logoUrl}" alt="ADSGRIND" width="40" height="40" style="display: block; border-radius: 10px;">
-                          <p style="font-size: 14px; color: #A0A0A0; margin-top: 8px; font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-                            ADSGRIND
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
+                  <td align="center" style="padding: 40px; border-bottom: 1px solid #111111;">
+                    <img src="${logoUrl}" alt="ADSGRIND" width="40" height="40" style="filter: grayscale(100%);">
+                    <p style="font-size: 11px; color: #666666; margin-top: 15px; font-weight: bold; letter-spacing: 4px; text-transform: uppercase;">
+                      Institutional Hub
+                    </p>
                   </td>
                 </tr>
 
-                <!-- Main Card -->
+                <!-- Content -->
                 <tr>
-                  <td class="content-padding" style="background-color: #141414; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 40px;">
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                      <tr>
-                        <td style="padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                          <p style="margin: 0; color: #FF5800; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Inquiry Analysis</p>
-                          <h1 style="margin: 8px 0 0 0; color: #ffffff; font-size: 24px; font-weight: 700; line-height: 1.3;">NEW STRATEGIC OPPORTUNITY</h1>
-                        </td>
-                      </tr>
+                  <td style="padding: 60px 50px; background-color: #050505;">
+                    <p style="margin: 0; color: #ffffff; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; opacity: 0.3;">Transmission Analysis</p>
+                    <h1 style="margin: 15px 0 40px 0; color: #ffffff; font-size: 24px; font-weight: bold; letter-spacing: -0.02em; text-transform: uppercase;">New Strategic Lead</h1>
+                    
+                    <div style="border-left: 2px solid #333333; padding-left: 30px; margin-bottom: 50px;">
+                      <p style="margin: 0 0 10px 0; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Identity</p>
+                      <p style="margin: 0 0 25px 0; font-size: 18px; color: #ffffff; font-weight: bold;">${safeName}</p>
                       
-                      <tr>
-                        <td style="padding-top: 30px;">
-                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                              <td style="padding-bottom: 20px;">
-                                <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Partner Details</p>
-                                <p style="margin: 6px 0 0 0; font-size: 16px; color: #ffffff; font-weight: 600;">${safeName}</p>
-                                <p style="margin: 4px 0 0 0; font-size: 14px; color: rgba(255,255,255,0.5);">${safeCompany}</p>
-                                <p style="margin: 4px 0 0 0; font-size: 14px; color: #FF5800;"><a href="mailto:${safeEmail}" style="color: #FF5800; text-decoration: none;">${safeEmail}</a></p>
-                              </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-bottom: 20px;">
-                                    <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Growth Profile</p>
-                                    <p style="margin: 6px 0 0 0; font-size: 14px; color: #ffffff;">Markets: <span style="color: #FF5800; font-weight: 700;">${safeMarkets}</span></p>
-                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #ffffff;">Primary Goal: <strong>${safeGoal}</strong></p>
-                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #ffffff;">Budget: <strong>${safeBudget}</strong></p>
-                                </td>
-                            </tr>
-                            <tr>
-                              <td style="padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                                <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Additional Intelligence</p>
-                                <div style="margin: 12px 0 0 0; padding: 20px; background-color: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; word-break: break-word; overflow-wrap: anywhere;">
-                                  ${safeMessage}
-                                </div>
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
+                      <p style="margin: 0 0 10px 0; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Organization</p>
+                      <p style="margin: 0 0 25px 0; font-size: 16px; color: #ffffff;">${safeCompany}</p>
+                      
+                      <p style="margin: 0 0 10px 0; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Protocol Address</p>
+                      <p style="margin: 0 0 25px 0; font-size: 14px; color: #ffffff;">${safeEmail}</p>
+
+                      <p style="margin: 0 0 10px 0; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Budget Level</p>
+                      <p style="margin: 0; font-size: 14px; color: #ffffff; font-weight: bold;">${safeBudget}</p>
+                    </div>
+
+                    <p style="margin: 0 0 10px 0; font-size: 10px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Mission Brief</p>
+                    <div style="padding: 30px; background-color: #000000; border: 1px solid #111111; font-size: 14px; color: #999999; line-height: 1.8;">
+                      ${safeMessage}
+                    </div>
                   </td>
                 </tr>
 
                 <!-- Footer -->
                 <tr>
-                  <td align="center" style="padding-top: 30px;">
-                    <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 1px;">Adsgrind Intelligence • ${date}</p>
+                  <td align="center" style="padding: 30px; border-top: 1px solid #111111;">
+                    <p style="margin: 0; font-size: 9px; color: #333333; text-transform: uppercase; letter-spacing: 3px;">Adsgrind System • ${date}</p>
                   </td>
                 </tr>
               </table>
@@ -160,38 +129,36 @@ export async function sendContactEmail(formData: {
     `;
 
     await transporter.sendMail({
-      from: `"Adsgrind Expansion" <${smtpUser}>`,
+      from: `"Adsgrind Transmission" <${smtpUser}>`,
       to: 'business@adsgrind.com',
-      subject: `🌍 Expansion Inquiry: ${safeCompany} - ${safeMarkets}`,
+      subject: `🚨 Strategic Transmission: ${safeCompany}`,
       html: adminHtml,
     });
 
-    // 2. User Auto-Reply (Strategic)
+    // 2. User Auto-Reply (Institutional)
     const userHtml = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>We received your expansion request</title>
+        <title>Transmission Received</title>
       </head>
-      <body style="margin: 0; padding: 0; background-color: #0B0B0B; font-family: sans-serif;">
-        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #0B0B0B; padding: 40px 0;">
+      <body style="margin: 0; padding: 0; background-color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #000000; padding: 60px 0;">
           <tr>
             <td align="center">
-              <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #141414; border-radius: 16px; padding: 60px 50px; text-align: center;">
+              <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #050505; border: 1px solid #222222; text-align: center; padding: 80px 40px;">
                 <tr>
                   <td>
-                    <img src="${logoUrl}" alt="ADSGRIND" width="40" height="40" style="border-radius: 10px; margin-bottom: 24px;">
-                    <h2 style="color: #ffffff; font-size: 28px; margin: 0; text-transform: uppercase; font-style: italic;">Expansion Strategy Requested</h2>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.6; margin-top: 24px;">
-                      Hi ${safeName}, thanks for requesting a market entry strategy for <strong>${safeCompany}</strong> in <strong>${safeMarkets}</strong>.
+                    <img src="${logoUrl}" alt="ADSGRIND" width="50" style="filter: grayscale(100%); margin-bottom: 40px;">
+                    <h1 style="color: #ffffff; font-size: 26px; margin: 0; text-transform: uppercase; letter-spacing: 6px; font-weight: bold;">Protocol Logged</h1>
+                    <p style="color: #666666; font-size: 14px; line-height: 1.8; margin: 30px auto; max-width: 400px; text-transform: uppercase; letter-spacing: 1px;">
+                      Hi ${safeName}, we have received your strategic inquiry for <strong>${safeCompany}</strong>. 
+                      A growth specialist will contact you within 24 hours to initiate deployment.
                     </p>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.6; margin-top: 16px;">
-                      Our global markets team is preparing localized traffic insights and acquisition benchmarks tailored to your ${safeGoal} objectives.
-                    </p>
-                    <div style="margin-top: 40px;">
-                      <a href="https://adsgrind.com" style="background-color: #FF5800; color: #ffffff; padding: 16px 36px; border-radius: 12px; font-weight: 800; text-decoration: none; display: inline-block;">Explore Global Intelligence</a>
+                    <div style="margin-top: 50px;">
+                      <a href="https://adsgrind.com" style="background-color: #ffffff; color: #000000; padding: 18px 40px; font-weight: bold; text-decoration: none; display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 3px;">Review Infrastructure</a>
                     </div>
                   </td>
                 </tr>
@@ -204,9 +171,9 @@ export async function sendContactEmail(formData: {
     `;
 
     await transporter.sendMail({
-      from: `"Adsgrind Team" <${smtpUser}>`,
+      from: `"Adsgrind Hub" <${smtpUser}>`,
       to: email,
-      subject: 'Global Market Strategy Request Received - Adsgrind',
+      subject: 'Transmission Received: Institutional Growth Protocol',
       html: userHtml,
     });
 

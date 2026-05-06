@@ -55,7 +55,7 @@ export const GlassCard = ({ className, hover = true, ...props }: GlassCardProps)
   );
 };
 
-export const Counter = ({ value, duration = 2, decimals = 0 }: { value: number; duration?: number; decimals?: number }) => {
+export const Counter = ({ value, duration = 2, decimals = 0, prefix = "", suffix = "" }: { value: number; duration?: number; decimals?: number; prefix?: string; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
 
@@ -66,18 +66,19 @@ export const Counter = ({ value, duration = 2, decimals = 0 }: { value: number; 
         ease: "easeOut",
         onUpdate: (latest) => {
           if (ref.current) {
-            ref.current.textContent = latest.toLocaleString(undefined, {
+            const formatted = latest.toLocaleString(undefined, {
               minimumFractionDigits: decimals,
               maximumFractionDigits: decimals
             });
+            ref.current.textContent = `${prefix}${formatted}${suffix}`;
           }
         },
       });
       return () => controls.stop();
     }
-  }, [isInView, value, duration, decimals]);
+  }, [isInView, value, duration, decimals, prefix, suffix]);
 
-  return <span ref={ref}>0</span>;
+  return <span ref={ref}>{prefix}0{suffix}</span>;
 };
 
 export * from './GrowthIndex';

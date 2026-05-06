@@ -50,24 +50,38 @@ export const BrandsMarquee = () => {
                     }}
                     className="flex-shrink-0 relative group/brand"
                 >
-                    {/* Glow Layer (Pseudo-element replacement) */}
-                    <div className="absolute -inset-4 bg-brand-primary/10 rounded-[20px] blur-2xl opacity-0 group-hover/brand:opacity-100 transition-opacity duration-500" />
+                    {/* Glow Layer */}
+                    <div className="absolute -inset-4 bg-white/5 rounded-[20px] blur-2xl opacity-0 group-hover/brand:opacity-100 transition-opacity duration-500" />
                     
-                    <div className="relative flex flex-col items-center gap-3">
-                        <div className="bg-white/[0.03] backdrop-blur-sm border border-white/5 rounded-xl px-4 py-3 md:px-8 md:py-6 flex items-center justify-center transition-all duration-300 group-hover/brand:bg-white/[0.08] group-hover/brand:border-white/10 group-hover/brand:shadow-[0_0_25px_rgba(120,180,255,0.15)]">
-                            <div className="relative h-6 w-16 md:h-12 md:w-32 flex items-center justify-center">
+                    <div className="relative flex flex-col items-center group/brand">
+                        <div className="relative bg-white/[0.04] backdrop-blur-md border border-white/[0.08] rounded-xl px-5 py-4 md:px-9 md:py-7 flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.4),inset_0_0_20px_rgba(255,255,255,0.03)] transition-all duration-500 group-hover/brand:bg-white/[0.06] group-hover/brand:border-white/[0.15] group-hover/brand:translate-y-[-4px] overflow-hidden min-w-[140px] md:min-w-[200px]">
+                            {/* Logo - Full Visibility Always */}
+                            <div className="relative h-6 w-16 md:h-10 md:w-32 flex items-center justify-center transition-all duration-500">
                                 <Image
                                     src={brand.logo}
                                     alt={brand.name}
                                     fill
                                     sizes="(max-width: 768px) 60px, 120px"
-                                    className="object-contain filter brightness-110 contrast-110 opacity-90 group-hover/brand:opacity-100 transition-opacity"
+                                    className="object-contain transition-all duration-500"
                                 />
                             </div>
                         </div>
-                        <span className="text-[9px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest opacity-0 group-hover/brand:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/brand:translate-y-0">
-                            {brand.name}
-                        </span>
+
+                        {/* Glossy Brand Name - Below Box Reveal */}
+                        <div className="mt-4 opacity-0 group-hover/brand:opacity-100 translate-y-2 group-hover/brand:translate-y-0 transition-all duration-500 text-center">
+                            <span 
+                                className="text-[10px] font-bold uppercase tracking-[0.3em] bg-clip-text text-transparent bg-gradient-to-r from-white via-white/80 to-white/60 animate-shine"
+                                style={{
+                                    backgroundImage: 'linear-gradient(90deg, #ffffff 0%, #eaeaea 30%, #ffffff 60%, #cccccc 100%)',
+                                    backgroundSize: '200% auto',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    textShadow: '0 0 10px rgba(255,255,255,0.2)'
+                                }}
+                            >
+                                {brand.name}
+                            </span>
+                        </div>
                     </div>
                 </motion.div>
                 ))}

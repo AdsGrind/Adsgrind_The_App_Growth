@@ -108,11 +108,11 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-[500px] overflow-hidden rounded-2xl sm:rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl"
+            className="relative w-full max-w-[500px] overflow-hidden rounded-2xl sm:rounded-[2rem] bg-[#000000] border border-white/10 shadow-2xl"
           >
-            {/* Subtle glow effect behind */}
-            <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-orange/10 blur-[80px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-brand-purple/10 blur-[80px] rounded-full pointer-events-none" />
+            {/* Institutional Backdrop: White/Grey Glow */}
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
 
             <div className="relative p-6 sm:p-10">
               {/* Close Button */}
@@ -132,79 +132,79 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
                     exit={{ opacity: 0, x: 10 }}
                   >
                     <div className="mb-8">
-                      <h2 className="text-3xl font-display font-bold text-white mb-2 italic">
-                        GET <span className="text-brand-orange">STARTED</span>
+                      <h2 className="text-3xl font-display font-bold text-white mb-2 uppercase tracking-tighter">
+                        GET STARTED.
                       </h2>
-                      <p className="text-white/50 text-sm">
-                        Tell us about your project and let's build something exceptional.
+                      <p className="text-[10px] text-white/30 font-bold uppercase tracking-[0.4em]">
+                        Specify your growth objective.
                       </p>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                       {/* Name Field */}
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Full Name</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Full Name</label>
                         <div className="relative group">
-                          <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <input
                             {...register('name')}
                             type="text"
                             placeholder="John Doe"
                             className={cn(
-                              "w-full bg-white/5 border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all",
-                              errors.name && "border-red-500/50 focus:border-red-500/50"
+                              "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all uppercase tracking-widest",
+                              errors.name && "border-white/20"
                             )}
                           />
                         </div>
-                        {errors.name && <p className="text-red-400 text-[10px] uppercase font-bold tracking-tighter ml-1">{errors.name.message}</p>}
+                        {errors.name && <p className="text-white/40 text-[9px] uppercase font-bold tracking-widest ml-1">{errors.name.message}</p>}
                       </div>
 
                       {/* Company Field */}
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Company Name</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Company Name</label>
                         <div className="relative group">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <input
                             {...register('company')}
                             type="text"
                             placeholder="AdsGrind Inc."
                             className={cn(
-                              "w-full bg-white/5 border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all",
-                              errors.company && "border-red-500/50 focus:border-red-500/50"
+                              "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all uppercase tracking-widest",
+                              errors.company && "border-white/20"
                             )}
                           />
                         </div>
-                        {errors.company && <p className="text-red-400 text-[10px] uppercase font-bold tracking-tighter ml-1">{errors.company.message}</p>}
+                        {errors.company && <p className="text-white/40 text-[9px] uppercase font-bold tracking-widest ml-1">{errors.company.message}</p>}
                       </div>
 
                       {/* Email Field */}
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Email Address</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Email Address</label>
                         <div className="relative group">
-                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <input
                             {...register('email')}
                             type="email"
                             placeholder="john@example.com"
                             className={cn(
-                              "w-full bg-white/5 border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all",
-                              errors.email && "border-red-500/50 focus:border-red-500/50"
+                              "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all uppercase tracking-widest",
+                              errors.email && "border-white/20"
                             )}
                           />
                         </div>
-                        {errors.email && <p className="text-red-400 text-[10px] uppercase font-bold tracking-tighter ml-1">{errors.email.message}</p>}
+                        {errors.email && <p className="text-white/40 text-[9px] uppercase font-bold tracking-widest ml-1">{errors.email.message}</p>}
                       </div>
 
                       {/* Budget Field */}
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Monthly Budget (Optional)</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Monthly Budget (Optional)</label>
                         <div className="relative group">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <select
                             {...register('budget')}
                             className={cn(
-                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all appearance-none cursor-pointer",
-                              errors.budget && "border-red-500/50 focus:border-red-500/50"
+                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3.5 text-sm text-white focus:outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all appearance-none cursor-pointer uppercase tracking-widest",
+                              errors.budget && "border-white/20"
                             )}
                           >
                             <option value="" className="bg-[#1A1A1A]">Select your budget</option>
@@ -219,24 +219,24 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
 
                       {/* Message Field */}
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold uppercase tracking-wider text-white/30 ml-1">Message</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Message</label>
                         <div className="relative group">
-                          <MessageSquare className="absolute left-4 top-4 text-white/20 group-focus-within:text-brand-orange transition-colors" size={18} />
+                          <MessageSquare className="absolute left-4 top-4 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <textarea
                             {...register('message')}
                             rows={4}
                             placeholder="Tell us about your project goals..."
                             className={cn(
-                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange/20 transition-all resize-none",
-                              errors.message && "border-red-500/50 focus:border-red-500/50"
+                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-4 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white focus:ring-1 focus:ring-white/10 transition-all resize-none uppercase tracking-widest",
+                              errors.message && "border-white/20"
                             )}
                           />
                         </div>
-                        {errors.message && <p className="text-red-400 text-[10px] uppercase font-bold tracking-tighter ml-1">{errors.message.message}</p>}
+                        {errors.message && <p className="text-white/40 text-[9px] uppercase font-bold tracking-widest ml-1">{errors.message.message}</p>}
                       </div>
 
                       {error && (
-                        <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs text-center">
+                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-white/60 text-[10px] font-bold uppercase tracking-widest text-center">
                           {error}
                         </div>
                       )}
@@ -244,17 +244,17 @@ export function GetStartedModal({ isOpen, onClose }: GetStartedModalProps) {
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-brand-orange hover:bg-orange-600 text-white font-bold h-14 rounded-xl shadow-lg shadow-brand-orange/20 transition-all flex items-center justify-center gap-2 group"
+                        className="w-full bg-white hover:bg-white/90 text-black font-bold h-14 rounded-xl shadow-2xl transition-all flex items-center justify-center gap-2 group text-[11px] uppercase tracking-[0.3em]"
                       >
                         {isSubmitting ? (
                           <>
-                            <Loader2 size={20} className="animate-spin" />
+                            <Loader2 size={16} className="animate-spin" />
                             <span>Processing...</span>
                           </>
                         ) : (
                           <>
                             <span>SEND MESSAGE</span>
-                            <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                           </>
                         )}
                       </Button>

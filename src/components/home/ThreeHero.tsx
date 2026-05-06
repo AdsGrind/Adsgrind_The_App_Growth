@@ -1,105 +1,131 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, Float, PerspectiveCamera } from '@react-three/drei';
+import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { useTheme } from '../layout/ThemeProvider';
-import { cn } from '@/components/ui';
 
-const Particles = ({ count = 5000 }) => {
+/** Institutional white/grey floating particles */
+const AeroParticles = ({ count = 3000 }) => {
   const points = useMemo(() => {
     const p = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-        p[i * 3] = (Math.random() - 0.5) * 10;
-        p[i * 3 + 1] = (Math.random() - 0.5) * 10;
-        p[i * 3 + 2] = (Math.random() - 0.5) * 10;
+      const radius = 4 + Math.random() * 8;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      p[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      p[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      p[i * 3 + 2] = radius * Math.cos(phi);
+
+      // Monochrome: grey → white gradient
+      const t = Math.random();
+      colors[i * 3] = 0.5 + t * 0.5;     // R
+      colors[i * 3 + 1] = 0.5 + t * 0.5; // G
+      colors[i * 3 + 2] = 0.5 + t * 0.5; // B
     }
-    return p;
+    return { positions: p, colors };
   }, [count]);
 
   const ref = useRef<THREE.Points>(null);
 
   useFrame((state) => {
     if (ref.current) {
-        ref.current.rotation.y += 0.001;
-        ref.current.rotation.x += 0.0005;
+      ref.current.rotation.y += 0.0004;
+      ref.current.rotation.x += 0.0001;
     }
   });
 
-    const { theme } = useTheme();
-    
-    return (
-        <points ref={ref}>
-            <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    count={points.length / 3}
-                    array={points}
-                    itemSize={3}
-                    args={[points, 3]}
-                />
-            </bufferGeometry>
-            <pointsMaterial
-                size={0.015}
-                color={theme === 'dark' ? "#9333EA" : "#7C3AED"}
-                transparent
-                opacity={theme === 'dark' ? 0.6 : 0.4}
-                sizeAttenuation
-            />
-        </points>
-    );
+  return (
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={points.positions.length / 3}
+          array={points.positions}
+          itemSize={3}
+          args={[points.positions, 3]}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          count={points.colors.length / 3}
+          array={points.colors}
+          itemSize={3}
+          args={[points.colors, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.012}
+        vertexColors
+        transparent
+        opacity={0.4}
+        sizeAttenuation
+      />
+    </points>
+  );
 };
 
-const AnimatedSphere = () => {
-    const meshRef = useRef<THREE.Mesh>(null);
-    
-    useFrame((state) => {
-        if (meshRef.current) {
-            const time = state.clock.getElapsedTime();
-            meshRef.current.rotation.x = time * 0.2;
-            meshRef.current.rotation.y = time * 0.3;
-        }
-    });
+/** Wireframe torus knot — monochrome structural element */
+const AeroStructure = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const innerRef = useRef<THREE.Mesh>(null);
 
-    const { theme } = useTheme();
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    if (meshRef.current) {
+      meshRef.current.rotation.x = t * 0.08;
+      meshRef.current.rotation.y = t * 0.12;
+    }
+    if (innerRef.current) {
+      innerRef.current.rotation.x = -t * 0.06;
+      innerRef.current.rotation.z = t * 0.09;
+    }
+  });
 
-    return (
-        <Float speed={2} rotationIntensity={1} floatIntensity={1}>
-            <mesh ref={meshRef}>
-                <torusKnotGeometry args={[1, 0.3, 128, 32]} />
-                <meshStandardMaterial 
-                    color={theme === 'dark' ? "#E100FF" : "#A855F7"} 
-                    emissive={theme === 'dark' ? "#7F00FF" : "#7C3AED"} 
-                    emissiveIntensity={theme === 'dark' ? 0.5 : 0.3} 
-                    wireframe 
-                />
-            </mesh>
-        </Float>
-    );
-}
+  return (
+    <group position={[1.2, 0, -2]}>
+      {/* Outer torus knot - white wireframe */}
+      <mesh ref={meshRef}>
+        <torusKnotGeometry args={[1.1, 0.28, 120, 24, 2, 3]} />
+        <meshStandardMaterial
+          color="#ffffff"
+          emissive="#888888"
+          emissiveIntensity={0.2}
+          wireframe
+          transparent
+          opacity={0.2}
+        />
+      </mesh>
+      {/* Inner ring */}
+      <mesh ref={innerRef}>
+        <torusGeometry args={[1.7, 0.015, 8, 80]} />
+        <meshStandardMaterial
+          color="#ffffff"
+          emissive="#ffffff"
+          emissiveIntensity={0.3}
+          transparent
+          opacity={0.3}
+        />
+      </mesh>
+    </group>
+  );
+};
 
 export const ThreeHero = () => {
-    const { theme } = useTheme();
   return (
-    <div className={cn(
-        "absolute inset-0 -z-10 transition-colors duration-700",
-        "bg-[#020617]"
-    )}>
+    <div className="absolute inset-0 -z-10">
       <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-        <ambientLight intensity={theme === 'dark' ? 0.3 : 0.8} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-        <Particles count={2000} />
-        <AnimatedSphere />
+        <PerspectiveCamera makeDefault position={[0, 0, 6]} />
+        <ambientLight intensity={0.15} />
+        <pointLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
+        <pointLight position={[-5, -5, -5]} intensity={0.3} color="#ffffff" />
+        <AeroParticles count={2500} />
+        <AeroStructure />
       </Canvas>
-      <div className={cn(
-          "absolute inset-0 transition-all duration-700",
-          theme === 'dark' 
-            ? "bg-gradient-to-b from-transparent via-[#020617]/20 to-[#020617]" 
-            : "bg-gradient-to-b from-transparent via-white/20 to-white"
-      )} />
+      {/* Radial fade to black at edges */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_90%)]" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#000000] to-transparent" />
     </div>
   );
 };

@@ -13,22 +13,21 @@ const InteractiveGlobe = dynamic(() => import('./InteractiveGlobe').then(mod => 
 const RegionCard = ({ region, reach, topMarkets }: { region: string; reach: number; topMarkets: string }) => {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            whileHover={{ translateY: -4 }}
             className="group"
         >
-            <div className="bg-[#0B0B0B] border border-white/10 rounded-2xl p-5 transition-all duration-300 group-hover:border-brand-orange/40 group-hover:shadow-[0_0_20px_rgba(255,88,0,0.1)]">
-                <div className="flex justify-between items-start mb-4">
-                    <span className="text-[#A0A0A0] text-sm font-medium uppercase tracking-wider">{region}</span>
-                    <span className="text-2xl font-bold text-brand-orange">
-                        <Counter value={reach} />%
+            <div className="bg-[#000000] border border-white/10 p-8 transition-all duration-300 group-hover:bg-white/[0.03]">
+                <div className="flex justify-between items-start mb-6">
+                    <span className="text-white/30 text-[10px] font-bold uppercase tracking-[0.2em]">{region}</span>
+                    <span className="text-3xl font-bold text-white tracking-tighter">
+                        <Counter value={reach} suffix="%" />
                     </span>
                 </div>
                 <div className="space-y-1">
-                    <span className="text-[10px] text-slate-500 uppercase tracking-[0.2em] block">Top Markets</span>
-                    <p className="text-xs text-slate-400 font-medium">{topMarkets}</p>
+                    <span className="text-[9px] text-white/20 uppercase tracking-[0.3em] block mb-2">Market Hubs</span>
+                    <p className="text-[10px] text-white/40 uppercase tracking-widest leading-relaxed">{topMarkets}</p>
                 </div>
             </div>
         </motion.div>
@@ -46,39 +45,38 @@ const AudienceReach = () => {
     ];
 
     return (
-        <section className="section-padding bg-[#050505] relative overflow-hidden">
-            {/* Pulsing Grid Background */}
-            <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '32px 32px' }}></div>
-
+        <section className="py-40 bg-[#000000] border-y border-white/10">
             <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 gap-6">
-                    <div className="text-left">
-                        <div className="flex items-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
-                            <span className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em]">Live Network</span>
-                        </div>
-                        <h2 className="font-display font-bold text-4xl md:text-6xl uppercase italic text-white leading-tight">
-                            LIVE <span className="text-gradient">NETWORK</span>
-                        </h2>
-                        <p className="text-slate-500 mt-2 text-sm md:text-base">Real-time global performance distribution across key markets.</p>
+                <div className="mb-24">
+                    <div className="flex items-center gap-2 mb-8">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-[0.4em]">Global Distribution</span>
                     </div>
+                    <h2 className="font-display font-bold text-5xl md:text-7xl uppercase text-white tracking-[-0.03em] leading-none">
+                        Live Network.
+                    </h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border border-white/10">
                     {/* Visual Globe Column */}
-                    <div className="lg:col-span-6 xl:col-span-7">
-                        <div className="relative aspect-square md:aspect-video lg:aspect-square xl:aspect-video w-full rounded-3xl overflow-hidden bg-[#080808] border border-white/5 flex items-center justify-center">
+                    <div className="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-white/10">
+                        <div className="relative aspect-square w-full bg-[#000000] flex items-center justify-center p-12">
                             <InteractiveGlobe />
-                            {/* Overlay to ensure no text/clutter on globe as requested */}
-                            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60"></div>
+                            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-60" />
                         </div>
                     </div>
 
                     {/* Region Performance Grid Column */}
-                    <div className="lg:col-span-6 xl:col-span-5">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-                            {geoData.map((geo) => (
-                                <RegionCard key={geo.region} {...geo} />
+                    <div className="lg:col-span-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+                            {geoData.map((geo, idx) => (
+                                <div key={geo.region} className={cn(
+                                    idx % 2 === 0 && "sm:border-r border-white/10",
+                                    idx < 4 && "border-b border-white/10",
+                                    idx >= 4 && "border-b sm:border-b-0 border-white/10"
+                                )}>
+                                    <RegionCard {...geo} />
+                                </div>
                             ))}
                         </div>
                     </div>

@@ -126,7 +126,7 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-[650px] max-h-[90vh] overflow-y-auto rounded-[2rem] bg-[#0B0B0B] border border-white/10 shadow-2xl custom-scrollbar"
+            className="relative w-full max-w-[650px] max-h-[90vh] overflow-y-auto rounded-[2rem] bg-[#000000] border border-white/10 shadow-2xl custom-scrollbar"
           >
             <div className="p-8 sm:p-12">
               <button
@@ -144,27 +144,27 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <div className="mb-10">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center text-brand-red">
-                            <Globe2 size={20} />
+                    <div className="mb-12">
+                      <div className="flex items-center gap-4 mb-8">
+                        <div className="w-12 h-12 border border-white/20 flex items-center justify-center text-white">
+                            <Globe2 size={24} />
                         </div>
-                        <h2 className="text-3xl font-display font-bold text-white uppercase italic tracking-tight">
-                            Market Entry <span className="text-brand-red">Strategy</span>
+                        <h2 className="text-4xl font-display font-bold text-white uppercase tracking-tighter">
+                            MARKET ENTRY.
                         </h2>
                       </div>
-                      <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                      <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.3em] leading-relaxed mb-8">
                         Expand into high-growth markets with a data-driven acquisition plan tailored to your app's unique value proposition.
                       </p>
-                      <div className="flex flex-wrap gap-4 py-4 border-y border-white/5">
-                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                            <MapPin size={12} className="text-brand-red" /> India Focus
+                      <div className="flex flex-wrap gap-8 py-6 border-y border-white/5">
+                        <div className="flex items-center gap-3 text-[10px] font-bold text-white/30 uppercase tracking-[0.4em]">
+                            <MapPin size={14} className="text-white/20" /> INDIA_FOCUS
                         </div>
-                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                            <Zap size={12} className="text-brand-red" /> SEA Growth
+                        <div className="flex items-center gap-3 text-[10px] font-bold text-white/30 uppercase tracking-[0.4em]">
+                            <Zap size={14} className="text-white/20" /> SEA_GROWTH
                         </div>
-                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-                            <TrendingUp size={12} className="text-brand-red" /> ME Expansion
+                        <div className="flex items-center gap-3 text-[10px] font-bold text-white/30 uppercase tracking-[0.4em]">
+                            <TrendingUp size={14} className="text-white/20" /> ME_EXPANSION
                         </div>
                       </div>
                     </div>
@@ -172,30 +172,30 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Full Identity</label>
                           <div className="relative group">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-red transition-colors" size={16} />
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <input
                               {...register('name')}
                               placeholder="Enter your name"
                               className={cn(
-                                "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all",
-                                errors.name && "border-red-500/50"
+                                "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                                errors.name && "border-white/20"
                               )}
                             />
                           </div>
                         </div>
 
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Company / App</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Organization</label>
                           <div className="relative group">
-                            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-red transition-colors" size={16} />
+                            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <input
                               {...register('company')}
                               placeholder="e.g. GlobalApp Inc."
                               className={cn(
-                                "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all",
-                                errors.company && "border-red-500/50"
+                                "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                                errors.company && "border-white/20"
                               )}
                             />
                           </div>
@@ -203,15 +203,15 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Work Email</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Network Address</label>
                         <div className="relative group">
-                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-red transition-colors" size={16} />
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <input
                             {...register('email')}
                             placeholder="name@company.com"
                             className={cn(
-                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all",
-                              errors.email && "border-red-500/50"
+                              "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                              errors.email && "border-white/20"
                             )}
                           />
                         </div>
@@ -219,7 +219,7 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
 
                       {/* Target Markets Selection */}
                       <div className="space-y-3">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Target Markets</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Target Markets</label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                           {AVAILABLE_MARKETS.map((market) => (
                             <button
@@ -227,27 +227,27 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                               type="button"
                               onClick={() => toggleMarket(market.label)}
                               className={cn(
-                                "p-3 rounded-xl border text-[11px] font-bold transition-all text-center",
+                                "p-3 border text-[10px] font-bold transition-all text-center tracking-widest uppercase",
                                 selectedMarkets.includes(market.label)
-                                  ? "bg-brand-red/10 border-brand-red text-white"
-                                  : "bg-[#141414] border-white/5 text-slate-500 hover:border-white/10"
+                                  ? "bg-white text-black border-white"
+                                  : "bg-white/[0.02] border-white/10 text-white/40 hover:border-white/20"
                               )}
                             >
                               {market.label}
                             </button>
                           ))}
                         </div>
-                        {errors.markets && <p className="text-red-400 text-[9px] uppercase font-bold tracking-tighter ml-1">{errors.markets.message}</p>}
+                        {errors.markets && <p className="text-white/40 text-[9px] uppercase font-bold tracking-widest ml-1">{errors.markets.message}</p>}
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Monthly Budget</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Operational Scale</label>
                           <div className="relative group">
-                            <BarChart3 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-red transition-colors" size={16} />
+                            <BarChart3 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <select
                               {...register('budget')}
-                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all appearance-none cursor-pointer"
+                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-white transition-all appearance-none cursor-pointer uppercase tracking-widest"
                             >
                               <option value="">Select range</option>
                               <option value="<$10K">Less than $10K</option>
@@ -255,17 +255,17 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                               <option value="$50K–$100K">$50K – $100K</option>
                               <option value="$100K+">$100K+</option>
                             </select>
-                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none" size={16} />
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" size={16} />
                           </div>
                         </div>
 
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Primary Goal</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Primary Objective</label>
                           <div className="relative group">
-                            <Target className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-red transition-colors" size={16} />
+                            <Target className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <select
                               {...register('goal')}
-                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all appearance-none cursor-pointer"
+                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-white transition-all appearance-none cursor-pointer uppercase tracking-widest"
                             >
                               <option value="">Select objective</option>
                               <option value="Market Entry">Market Entry</option>
@@ -273,23 +273,23 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                               <option value="User Quality">User Quality / ROAS</option>
                               <option value="Branding">Local Branding</option>
                             </select>
-                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none" size={16} />
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" size={16} />
                           </div>
                         </div>
                       </div>
 
                       {/* Value Section */}
-                      <div className="p-6 rounded-2xl bg-brand-red/[0.03] border border-brand-red/10 mt-8">
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-red mb-4">Strategic Deliverables</h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 mt-8">
+                        <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40 mb-6">Mission Deliverables</h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {[
                             { icon: <MapPin size={14} />, text: "Market acquisition plan" },
                             { icon: <Target size={14} />, text: "GEO targeting strategy" },
                             { icon: <Globe2 size={14} />, text: "Local traffic insights" },
                             { icon: <Rocket size={14} />, text: "Expansion roadmap" }
                           ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-2 text-[11px] text-slate-400">
-                              <span className="text-brand-red">{item.icon}</span>
+                            <div key={i} className="flex items-center gap-3 text-[10px] text-white/20 uppercase tracking-[0.2em]">
+                              <span className="text-white/20">{item.icon}</span>
                               {item.text}
                             </div>
                           ))}
@@ -300,10 +300,10 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                         <Button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full bg-brand-red hover:bg-red-700 text-white font-black h-14 rounded-xl shadow-xl shadow-brand-red/20 transition-all text-sm uppercase italic flex items-center justify-center gap-2 group"
+                          className="w-full bg-white hover:bg-white/90 text-black font-bold h-14 rounded-xl shadow-2xl transition-all text-[11px] uppercase tracking-[0.3em] flex items-center justify-center gap-2 group"
                         >
                           {isSubmitting ? (
-                            <Loader2 size={20} className="animate-spin" />
+                            <Loader2 size={16} className="animate-spin" />
                           ) : (
                             <>
                               Get My Market Strategy
@@ -311,13 +311,13 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                             </>
                           )}
                         </Button>
-                        <p className="text-center text-[10px] text-slate-600 mt-4 uppercase tracking-widest leading-relaxed">
-                            No spam. No commitments. <br /> Just actionable insights for your expansion.
+                        <p className="text-center text-[9px] text-white/20 mt-6 uppercase tracking-[0.2em] leading-relaxed">
+                            Encrypted Transmission. Zero Commitment.
                         </p>
                       </div>
 
                       {error && (
-                        <p className="text-red-400 text-[10px] font-bold text-center uppercase tracking-tighter">{error}</p>
+                        <p className="text-white/40 text-[10px] font-bold text-center uppercase tracking-widest">{error}</p>
                       )}
                     </form>
                   </motion.div>
@@ -328,12 +328,12 @@ export function MarketStrategyModal({ isOpen, onClose }: MarketStrategyModalProp
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-20 text-center"
                   >
-                    <div className="w-20 h-20 rounded-full bg-brand-red/10 flex items-center justify-center text-brand-red mb-8">
+                    <div className="w-20 h-20 border border-white/20 flex items-center justify-center text-white mb-8">
                       <CheckCircle2 size={40} />
                     </div>
-                    <h3 className="text-3xl font-display font-bold text-white mb-4 uppercase italic">Strategy Requested</h3>
-                    <p className="text-slate-400 max-w-sm">
-                      Our global markets team is analyzing your request. We'll reach out with localized insights for your expansion shortly.
+                    <h3 className="text-3xl font-display font-bold text-white mb-4 uppercase tracking-tighter">PROTOCOL LOGGED.</h3>
+                    <p className="text-white/40 text-sm max-w-sm uppercase tracking-widest leading-relaxed">
+                      Our global markets team is analyzing your dataset. Transmission of localized insights is imminent.
                     </p>
                   </motion.div>
                 )}

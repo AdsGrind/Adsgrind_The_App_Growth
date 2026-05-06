@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button, cn } from '@/components/ui';
 import { usePathname } from 'next/navigation';
+import { subscribeToNewsletter } from '@/app/actions/newsletter';
 
 const NAV_LINKS = [
   { name: 'Home', href: '/' },
@@ -44,34 +45,35 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
   return (
     <nav 
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4",
-        scrolled ? "bg-[var(--navbar-bg)] border-b border-white/10 py-3 shadow-2xl" : "bg-transparent"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-6",
+        scrolled ? "bg-black border-b border-white/10 py-4 shadow-2xl" : "bg-[#000000] py-6"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="relative w-10 h-10 overflow-hidden rounded-full border border-white/20">
+        <Link href="/" className="flex items-center gap-6 group">
+          <div className="relative w-11 h-11 flex-shrink-0 rounded-full overflow-hidden">
             <Image 
               src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
-              alt="ADSGRIND Logo" 
+              alt="ADSGRIND" 
               fill
-              sizes="40px"
-              className="object-cover"
+              priority
+              sizes="44px"
+              className="object-contain grayscale brightness-[2] contrast-[1.5] mix-blend-screen transition-transform group-hover:scale-105 rounded-full"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.25))' }}
             />
           </div>
-          <div className="flex flex-col items-start leading-none hidden sm:flex">
-            <span className="font-display font-bold text-[18px] tracking-[0.5px] text-white">
+          <div className="flex flex-col items-start leading-tight">
+            <span className="font-mono font-bold text-lg tracking-[0.2em] text-white uppercase">
               ADSGRIND
             </span>
-            <span className="text-[12px] font-normal text-white/60 tracking-[0.3px] uppercase mt-[2px]">
-              The App Growth
+            <span className="text-[10px] font-bold tracking-[0.3em] text-white/60 uppercase">
+              THE APP GROWTH
             </span>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => {
             const active = isActive(link.href);
             return (
@@ -79,15 +81,15 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
                 key={link.name} 
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-all duration-300 relative py-2",
-                  active ? "text-white" : "text-slate-400 hover:text-white"
+                  "text-[10px] font-bold uppercase tracking-[0.3em] transition-all duration-300 relative py-2",
+                  active ? "text-white" : "text-white/30 hover:text-white"
                 )}
               >
                 {link.name}
                 {active && (
                   <motion.div 
                     layoutId="nav-active"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-red"
+                    className="absolute bottom-0 left-0 right-0 h-px bg-white"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -97,25 +99,31 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
         </div>
 
         {/* Auth Buttons */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-8">
           <a 
             href="https://adsgrind10843948.offer18.com/m/signup" 
             target="_blank" 
             rel="noopener noreferrer"
+            className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors"
           >
-              <Button variant="ghost" size="sm" className="hover:scale-105 hover:-translate-y-0.5 transition-all">Log In</Button>
+            Login
           </a>
-          <Button variant="liquid" size="sm" onClick={onSignup}>Get Started</Button>
+          <button 
+            onClick={onSignup}
+            className="px-8 py-3 border border-white text-[10px] font-bold uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all"
+          >
+            Inquiry
+          </button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-4 md:hidden">
           <button 
-            className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors flex items-center justify-center"
+            className="text-white p-2 hover:bg-white/10 transition-colors flex items-center justify-center"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={32} className="text-white" /> : <Menu size={32} className="text-white" />}
+            {isOpen ? <X size={24} className="text-white" /> : <Menu size={24} className="text-white" />}
           </button>
         </div>
       </div>
@@ -124,10 +132,10 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 right-0 bg-slate-900 border-b border-white/10 p-6 md:hidden flex flex-col gap-6 shadow-2xl overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 bg-[#000000] border-b border-white/10 p-12 md:hidden flex flex-col gap-10 shadow-2xl overflow-hidden min-h-screen"
           >
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
@@ -137,24 +145,28 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-xl font-display font-medium flex items-center justify-between group py-2 transition-all",
-                    active ? "text-white border-l-4 border-brand-red pl-4" : "text-white/40"
+                    "text-4xl font-mono font-bold uppercase tracking-tighter transition-all",
+                    active ? "text-white" : "text-white/20"
                   )}
                 >
                   {link.name}
-                  <ChevronRight size={20} className={cn("transition-colors", active ? "text-brand-red" : "text-white/20 group-hover:text-white")} />
                 </Link>
               );
             })}
-            <div className="flex flex-col gap-3 pt-6 border-t border-white/5">
-              <Button variant="liquid" size="lg" className="w-full" onClick={() => { setIsOpen(false); onSignup?.(); }}>Get Started</Button>
+            <div className="flex flex-col gap-4 pt-12 border-t border-white/10 mt-auto">
+                <button 
+                    onClick={() => { setIsOpen(false); onSignup?.(); }}
+                    className="w-full py-6 bg-white text-black text-[12px] font-bold uppercase tracking-[0.4em]"
+                >
+                    Get Started
+                </button>
               <a 
                 href="https://adsgrind10843948.offer18.com/m/signup" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full"
               >
-                <Button variant="outline" size="lg" className="w-full border-white/10 hover:scale-105 hover:-translate-y-1 transition-all" onClick={() => setIsOpen(false)}>Log In</Button>
+                <button className="w-full py-6 border border-white/20 text-white text-[12px] font-bold uppercase tracking-[0.4em]">Login Portal</button>
               </a>
             </div>
           </motion.div>
@@ -175,103 +187,97 @@ export const Footer = () => {
 
     if (!email || !email.includes('@')) {
       setStatus('error');
-      setMessage('Enter a valid email');
+      setMessage('Invalid address');
       return;
     }
 
     setStatus('loading');
     try {
-      // Import the action dynamically to avoid bundle issues in some environments if needed, 
-      // but standard import is fine here.
-      const { subscribeToNewsletter } = await import('@/app/actions/newsletter');
       const result = await subscribeToNewsletter(email);
       
       if (result.success) {
         setStatus('success');
-        setMessage(result.message || "You’re in. Check your inbox.");
+        setMessage(result.message || "Subscription Active");
         setEmail('');
       } else {
         setStatus('error');
-        setMessage(result.error || 'Something went wrong. Try again.');
+        setMessage(result.error || 'Retry submission');
       }
     } catch (err) {
+      console.error('Newsletter error:', err);
       setStatus('error');
-      setMessage('Something went wrong. Try again.');
+      setMessage('Network error. Try again.');
     }
   };
 
   return (
-    <footer className="bg-[var(--footer-bg)] border-t border-white/5 pt-20 pb-10 px-6 mt-auto">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-        <div className="col-span-1 md:col-span-1">
-          <Link href="/" className="flex items-center gap-2 mb-6">
-            <div className="relative w-8 h-8 overflow-hidden rounded-full border border-white/10">
-              <Image 
-                src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
-                alt="ADSGRIND Logo" 
-                fill
-                sizes="32px"
-                className="object-cover"
-              />
+    <footer className="bg-[#000000] border-t border-white/10 pt-32 pb-16 px-6 mt-auto">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20 mb-32">
+        <div className="col-span-1">
+          <Link href="/" className="flex items-center gap-6 mb-12 group">
+            <div className="relative w-10 h-10 flex-shrink-0 rounded-full overflow-hidden">
+                <Image 
+                    src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
+                    alt="Logo" 
+                    fill
+                    sizes="40px"
+                    className="object-contain grayscale brightness-[2] contrast-[1.5] mix-blend-screen transition-transform group-hover:scale-105 rounded-full"
+                    style={{ filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.2))' }}
+                />
             </div>
-            <div className="flex flex-col items-start leading-none">
-              <span className="font-display font-bold text-lg text-white">ADSGRIND</span>
-              <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase mt-[2px]">The App Growth</span>
+            <div className="flex flex-col items-start leading-tight">
+                <span className="font-mono font-bold text-lg tracking-[0.2em] text-white">ADSGRIND</span>
+                <span className="text-[10px] font-bold tracking-[0.3em] text-white/60 uppercase">THE APP GROWTH</span>
             </div>
           </Link>
-          <p className="text-slate-500 text-sm leading-relaxed">
-            Scaling mobile apps with verified CPA, CPI, and CPE campaigns. Performance-first, fraud-free, globally scalable.
+          <p className="text-white/30 text-[11px] leading-relaxed uppercase tracking-widest">
+            Institutional performance marketing. Engineered scale. Verified human traffic.
           </p>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-6 text-white">Services</h4>
-          <ul className="space-y-4 text-sm text-slate-500">
-            <li><Link href="/services" className="hover:text-brand-orange transition-colors">CPA Campaigns</Link></li>
-            <li><Link href="/services" className="hover:text-brand-orange transition-colors">App Install (CPI)</Link></li>
-            <li><Link href="/services" className="hover:text-brand-orange transition-colors">Cost-Per-Engagement</Link></li>
-            <li><Link href="/services" className="hover:text-brand-orange transition-colors">OEM &amp; Native Traffic</Link></li>
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-10 text-white">Capabilities</h4>
+          <ul className="space-y-4 text-[10px] font-bold uppercase tracking-widest text-white/40">
+            <li><Link href="/services" className="hover:text-white transition-colors">Performance UA</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Scale Audit</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Direct Inventory</Link></li>
+            <li><Link href="/services" className="hover:text-white transition-colors">Network Data</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-6 text-white">Company</h4>
-          <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-400">
-            <li><Link href="/about" className="hover:text-brand-accent-start transition-colors">About Us</Link></li>
-            <li><Link href="/portfolio" className="hover:text-brand-accent-start transition-colors">Portfolio</Link></li>
-            <li><Link href="/blog" className="hover:text-brand-accent-start transition-colors">Insights</Link></li>
-            <li><Link href="/contact" className="hover:text-brand-accent-start transition-colors">Contact</Link></li>
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-10 text-white">Infrastructure</h4>
+          <ul className="space-y-4 text-[10px] font-bold uppercase tracking-widest text-white/40">
+            <li><Link href="/about" className="hover:text-white transition-colors">Institutional Profile</Link></li>
+            <li><Link href="/portfolio" className="hover:text-white transition-colors">Audit History</Link></li>
+            <li><Link href="/blog" className="hover:text-white transition-colors">Intelligence</Link></li>
+            <li><Link href="/contact" className="hover:text-white transition-colors">Hub Connect</Link></li>
           </ul>
         </div>
 
         <div>
-          <h4 className="font-semibold mb-6 text-white">Newsletter</h4>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">Stay updated with the latest trends.</p>
-          <form onSubmit={handleSubscribe} className="space-y-2">
-            <div className="flex gap-2">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-10 text-white">Intelligence Feed</h4>
+          <p className="text-[10px] text-white/30 mb-8 uppercase tracking-widest">Deploy performance insights to your inbox.</p>
+          <form onSubmit={handleSubscribe} className="space-y-4">
+            <div className="flex border-b border-white/20 group focus-within:border-white transition-colors">
               <input 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
+                placeholder="Secure Email"
                 disabled={status === 'loading'}
-                className="bg-slate-800 border border-white/10 rounded-lg px-4 py-2 text-sm flex-1 focus:outline-none focus:border-brand-orange text-white disabled:opacity-50"
+                className="bg-transparent py-3 text-[10px] flex-1 focus:outline-none text-white disabled:opacity-50 uppercase tracking-widest"
               />
-              <Button 
+              <button 
                 type="submit" 
-                variant="liquid" 
-                size="sm" 
-                className="px-4"
+                className="px-4 py-3 text-white text-[10px] font-bold uppercase tracking-[0.2em] disabled:opacity-50"
                 disabled={status === 'loading'}
               >
                 {status === 'loading' ? '...' : 'Join'}
-              </Button>
+              </button>
             </div>
             {message && (
-              <p className={cn(
-                "text-[10px] font-bold uppercase tracking-widest pl-1",
-                status === 'error' ? "text-brand-red" : "text-brand-success"
-              )}>
+              <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/50">
                 {message}
               </p>
             )}
@@ -279,12 +285,12 @@ export const Footer = () => {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
-        <p>© 2026 ADSGRIND. All rights reserved.</p>
-        <div className="flex gap-8">
-          <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-          <Link href="/cookie" className="hover:text-white transition-colors">Cookie Policy</Link>
+      <div className="max-w-7xl mx-auto pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-12 text-[9px] font-bold uppercase tracking-[0.2em] text-white/20">
+        <p>© 2026 ADSGRIND. ALL RIGHTS RESERVED.</p>
+        <div className="flex gap-12">
+          <Link href="/privacy" className="px-2 py-1 border border-white/5 rounded-sm hover:border-white/20 hover:text-white transition-all">Privacy</Link>
+          <Link href="/terms" className="px-2 py-1 border border-white/5 rounded-sm hover:border-white/20 hover:text-white transition-all">Terms</Link>
+          <Link href="/cookie" className="px-2 py-1 border border-white/5 rounded-sm hover:border-white/20 hover:text-white transition-all">Protocol</Link>
         </div>
       </div>
     </footer>

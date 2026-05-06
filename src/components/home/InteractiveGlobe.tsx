@@ -7,22 +7,22 @@ import * as THREE from 'three';
 
 // Coordinates for the markers
 const MARKERS = [
-  { id: 'in', name: 'India', lat: 20.5937, lng: 78.9629, reach: '95%', color: '#EE1D23' },
-  { id: 'us', name: 'United States', lat: 37.0902, lng: -95.7129, reach: '90%', color: '#EE1D23' },
-  { id: 'eu', name: 'Europe', lat: 54.5260, lng: 15.2551, reach: '80%', color: '#EE1D23' },
-  { id: 'sea', name: 'Southeast Asia', lat: 13.41, lng: 103.52, reach: '70%', color: '#EE1D23' },
-  { id: 'me', name: 'Middle East', lat: 29.2985, lng: 42.5510, reach: '75%', color: '#EE1D23' },
-  { id: 'la', name: 'Latin America', lat: -14.2350, lng: -51.9253, reach: '85%', color: '#EE1D23' },
+  { id: 'in', name: 'India', lat: 20.5937, lng: 78.9629, reach: '95%', color: '#FFFFFF' },
+  { id: 'us', name: 'United States', lat: 37.0902, lng: -95.7129, reach: '90%', color: '#FFFFFF' },
+  { id: 'eu', name: 'Europe', lat: 54.5260, lng: 15.2551, reach: '80%', color: '#FFFFFF' },
+  { id: 'sea', name: 'Southeast Asia', lat: 13.41, lng: 103.52, reach: '70%', color: '#FFFFFF' },
+  { id: 'me', name: 'Middle East', lat: 29.2985, lng: 42.5510, reach: '75%', color: '#FFFFFF' },
+  { id: 'la', name: 'Latin America', lat: -14.2350, lng: -51.9253, reach: '85%', color: '#FFFFFF' },
 ];
 
 // Arcs to draw between regions
 const ARCS = [
-  { from: 'us', to: 'in', color: '#EE1D23' },
-  { from: 'eu', to: 'in', color: '#94A3B8' },
-  { from: 'sea', to: 'in', color: '#FF5800' },
-  { from: 'us', to: 'eu', color: '#94A3B8' },
-  { from: 'la', to: 'us', color: '#EE1D23' },
-  { from: 'me', to: 'in', color: '#FF5800' },
+  { from: 'us', to: 'in', color: '#FFFFFF' },
+  { from: 'eu', to: 'in', color: '#FFFFFF' },
+  { from: 'sea', to: 'in', color: '#FFFFFF' },
+  { from: 'us', to: 'eu', color: '#FFFFFF' },
+  { from: 'la', to: 'us', color: '#FFFFFF' },
+  { from: 'me', to: 'in', color: '#FFFFFF' },
 ];
 
 const convertLatLongToSphere = (lat: number, lng: number, radius: number) => {
@@ -52,13 +52,12 @@ const Arc = ({ from, to, color }: { from: THREE.Vector3, to: THREE.Vector3, colo
     const time = state.clock.elapsedTime;
     if (lineRef.current) {
         const m = lineRef.current.material as THREE.LineBasicMaterial;
-        m.opacity = 0.15 + Math.sin(time * 1.5) * 0.05;
+        m.opacity = 0.1 + Math.sin(time * 1.5) * 0.05;
     }
     if (pulseRef.current) {
         const t = (time * 0.3) % 1; // Pulse speed
         const pos = curve.getPointAt(t);
         pulseRef.current.position.set(pos.x, pos.y, pos.z);
-        // Pulse size oscillation
         const s = 1 + Math.sin(time * 10) * 0.3;
         pulseRef.current.scale.set(s, s, s);
     }
@@ -73,12 +72,12 @@ const Arc = ({ from, to, color }: { from: THREE.Vector3, to: THREE.Vector3, colo
                 args={[new Float32Array(points.flatMap(p => [p.x, p.y, p.z])), 3]}
                 />
             </bufferGeometry>
-            <lineBasicMaterial attach="material" color={color} transparent opacity={0.2} linewidth={1} blending={THREE.AdditiveBlending} />
+            <lineBasicMaterial attach="material" color={color} transparent opacity={0.15} linewidth={1} blending={THREE.AdditiveBlending} />
         </line>
         
         {/* Data Pulse Dot */}
         <mesh ref={pulseRef}>
-            <sphereGeometry args={[0.02, 8, 8]} />
+            <sphereGeometry args={[0.015, 8, 8]} />
             <meshBasicMaterial color={color} blending={THREE.AdditiveBlending} />
         </mesh>
     </group>
@@ -88,21 +87,21 @@ const Arc = ({ from, to, color }: { from: THREE.Vector3, to: THREE.Vector3, colo
 // Component for vertical light beams
 const LightBeam = ({ position, color }: { position: THREE.Vector3, color: string }) => {
     const beamRef = useRef<THREE.Mesh>(null);
-    const height = 0.8;
+    const height = 1.0;
 
     useFrame((state) => {
         if (beamRef.current) {
-            const s = 0.8 + Math.sin(state.clock.elapsedTime * 4) * 0.2;
+            const s = 0.5 + Math.sin(state.clock.elapsedTime * 4) * 0.1;
             beamRef.current.scale.set(s, 1, s);
             const m = beamRef.current.material as THREE.MeshBasicMaterial;
-            m.opacity = 0.05 + Math.sin(state.clock.elapsedTime * 2) * 0.02;
+            m.opacity = 0.03 + Math.sin(state.clock.elapsedTime * 2) * 0.01;
         }
     });
 
     return (
         <mesh ref={beamRef} position={[0, height / 2, 0]}>
-            <cylinderGeometry args={[0.005, 0.03, height, 8]} />
-            <meshBasicMaterial color={color} transparent opacity={0.1} blending={THREE.AdditiveBlending} />
+            <cylinderGeometry args={[0.002, 0.02, height, 8]} />
+            <meshBasicMaterial color={color} transparent opacity={0.05} blending={THREE.AdditiveBlending} />
         </mesh>
     );
 };
@@ -110,8 +109,6 @@ const LightBeam = ({ position, color }: { position: THREE.Vector3, color: string
 
 const GlobeMarker = ({ position, label, reach }: { position: THREE.Vector3, label: string, reach: string }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  
-  // Calculate orientation to face away from center (normal to surface)
   const orientation = new THREE.Quaternion();
   orientation.setFromUnitVectors(new THREE.Vector3(0, 1, 0), position.clone().normalize());
 
@@ -119,42 +116,42 @@ const GlobeMarker = ({ position, label, reach }: { position: THREE.Vector3, labe
     if (meshRef.current) {
       const time = state.clock.getElapsedTime();
       const s = 1 + Math.sin(time * 4) * 0.2;
-      meshRef.current.scale.set(s, 1, s); // Scale flat on surface
+      meshRef.current.scale.set(s, 1, s);
     }
   });
 
   return (
     <group position={position} quaternion={orientation}>
-      {/* Outer Glow Ring - Flat on surface */}
+      {/* Outer Glow Ring */}
       <mesh ref={meshRef} rotation={[-Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.06, 0.1, 32]} />
-        <meshBasicMaterial color="#EE1D23" transparent opacity={0.5} side={THREE.DoubleSide} />
+        <ringGeometry args={[0.04, 0.07, 32]} />
+        <meshBasicMaterial color="#FFFFFF" transparent opacity={0.3} side={THREE.DoubleSide} />
       </mesh>
       
       {/* Center Point */}
       <mesh>
-        <sphereGeometry args={[0.02, 16, 16]} />
-        <meshBasicMaterial color="#EE1D23" />
+        <sphereGeometry args={[0.015, 16, 16]} />
+        <meshBasicMaterial color="#FFFFFF" />
       </mesh>
 
-      {/* Label - Anchored slightly above surface */}
+      {/* Label */}
       <Html 
         distanceFactor={10} 
-        position={[0, 0.05, 0]} 
+        position={[0, 0.08, 0]} 
         center 
         occlude 
         className="pointer-events-none select-none"
       >
         <div className="flex flex-col items-center">
-          <div className="bg-brand-black/90 backdrop-blur-xl px-2.5 py-1 rounded-full border border-white/10 text-[8px] font-bold text-white uppercase tracking-[0.2em] mb-1 shadow-2xl whitespace-nowrap">
+          <div className="bg-black/90 backdrop-blur-xl px-2 py-0.5 border border-white/10 text-[7px] font-bold text-white uppercase tracking-[0.3em] mb-1 whitespace-nowrap">
             {label}
           </div>
-          <div className="text-[10px] font-black text-brand-red tracking-tighter">{reach}</div>
+          <div className="text-[9px] font-bold text-white/40 tracking-[0.1em]">{reach}</div>
         </div>
       </Html>
 
-      {/* Subtle Beam - Vertical relative to surface */}
-      <LightBeam position={new THREE.Vector3(0, 0, 0)} color="#EE1D23" />
+      {/* Vertical Data Stream */}
+      <LightBeam position={new THREE.Vector3(0, 0, 0)} color="#FFFFFF" />
     </group>
   );
 };
@@ -163,52 +160,48 @@ const GlobeCore = () => {
   const globeRef = useRef<THREE.Group>(null);
   const atmosphereRef = useRef<THREE.Mesh>(null);
 
-  // High-resolution premium textures
-  const dayMap = useLoader(THREE.TextureLoader, 'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+  // Use night map for a dark, monochrome city-lights look
   const nightMap = useLoader(THREE.TextureLoader, 'https://unpkg.com/three-globe/example/img/earth-night.jpg');
-  const bumpMap = useLoader(THREE.TextureLoader, 'https://unpkg.com/three-globe/example/img/earth-topology.png');
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
     if (globeRef.current) {
-      globeRef.current.rotation.y += 0.001; // Slower, more cinematic rotation
+      globeRef.current.rotation.y += 0.0008; 
     }
     if (atmosphereRef.current) {
-        atmosphereRef.current.scale.setScalar(1.02 + Math.sin(time * 0.5) * 0.01);
+        atmosphereRef.current.scale.setScalar(1.02 + Math.sin(time * 0.5) * 0.005);
     }
   });
 
   const markerPositions = useMemo(() => {
     return MARKERS.reduce((acc, m) => {
-        acc[m.id] = convertLatLongToSphere(m.lat, m.lng, 2.1); // Reduced radius from 2.5
+        acc[m.id] = convertLatLongToSphere(m.lat, m.lng, 2.1);
         return acc;
     }, {} as Record<string, THREE.Vector3>);
   }, []);
 
   return (
-    <group ref={globeRef} position={[0, 0, 0]}> {/* Perfect centering at origin */}
-      {/* Base Earth Layer */}
+    <group ref={globeRef} position={[0, 0, 0]}>
+      {/* Base Earth Layer - Institutional Dark */}
       <mesh receiveShadow castShadow>
         <sphereGeometry args={[2.1, 128, 128]} />
         <meshStandardMaterial 
-          map={dayMap}
-          bumpMap={bumpMap}
-          bumpScale={0.05}
-          roughness={0.7}
-          metalness={0.2}
+          color="#050505"
+          roughness={0.9}
+          metalness={0.1}
           emissiveMap={nightMap}
-          emissive={new THREE.Color('#FFCC00')} 
-          emissiveIntensity={1.5}
+          emissive={new THREE.Color('#FFFFFF')} 
+          emissiveIntensity={1.2}
         />
       </mesh>
 
-      {/* Atmospheric Glow Shell */}
+      {/* Atmospheric Glow */}
       <mesh ref={atmosphereRef}>
         <sphereGeometry args={[2.15, 64, 64]} />
         <meshStandardMaterial 
-          color="#1e3a8a"
+          color="#FFFFFF"
           transparent
-          opacity={0.1}
+          opacity={0.05}
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
         />
@@ -239,12 +232,11 @@ const GlobeCore = () => {
 
 export const InteractiveGlobe = () => {
   return (
-    <div className="w-full h-full min-h-[450px] md:min-h-[700px] relative">
-      <div className="absolute inset-0 pointer-events-none bg-radial-gradient from-transparent via-brand-black/20 to-brand-black/80 z-10" />
+    <div className="w-full h-full min-h-[450px] relative">
       <Canvas 
         shadows 
         dpr={[1, 2]} 
-        camera={{ position: [0, 0, 8], fov: 45 }} // Pulled camera back slightly
+        camera={{ position: [0, 0, 8], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
       >
         <SceneController />
@@ -260,7 +252,6 @@ const SceneController = () => {
     const { camera, viewport } = useThree();
     
     useFrame(() => {
-        // Dynamic camera positioning based on viewport width
         const isMobile = viewport.width < 10; 
         const targetZ = isMobile ? 10 : 8;
         camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.1);
@@ -280,14 +271,12 @@ const SceneController = () => {
                 rotateSpeed={0.5}
             />
             
-            {/* Cinematic Lighting Setup */}
-            <ambientLight intensity={0.2} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} color="#3b82f6" castShadow />
-            <pointLight position={[-10, -5, -10]} intensity={1.5} color="#1e3a8a" />
-            <directionalLight position={[5, 3, 5]} intensity={1.5} color="#ffffff" />
+            <ambientLight intensity={0.1} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#FFFFFF" castShadow />
+            <pointLight position={[-10, -5, -10]} intensity={0.5} color="#FFFFFF" />
+            <directionalLight position={[5, 3, 5]} intensity={1} color="#FFFFFF" />
             
-            {/* Starry Background */}
-            <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={0.5} />
+            <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={0.2} />
         </>
     );
 }

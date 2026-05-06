@@ -2,77 +2,51 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GlassCard } from '@/components/ui';
 import { TrendingUp, Smartphone, Users, DollarSign } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Counter } from '@/components/ui';
 
 const MarketOpportunity = () => {
     const opportunities = [
-        { 
-          title: "Billion Smartphone Users", 
-          value: "6.8", 
-          suffix: "B+", 
-          icon: <Smartphone className="text-brand-orange" />,
-          desc: "A massive, expanding pool of potential users worldwide."
-        },
-        { 
-          title: "Competing Apps", 
-          value: "5", 
-          suffix: "M+", 
-          icon: <TrendingUp className="text-brand-red" />,
-          desc: "Cutting through the noise requires expert UA strategies."
-        },
-        { 
-          title: "Rising Ad Budgets", 
-          value: "350", 
-          suffix: "B", 
-          icon: <DollarSign className="text-brand-purple" />,
-          desc: "Digital spend is shifting rapidly towards mobile performance."
-        },
-        { 
-          title: "Performance Focus", 
-          value: "85", 
-          suffix: "%", 
-          icon: <Users className="text-brand-success" />,
-          desc: "Advertisers are prioritizing ROI over pure impressions."
-        }
+        { title: "Smartphone Users", numValue: 6.8, suffix: "B+", decimals: 1, icon: <Smartphone className="text-white" size={16} />, desc: "A massive, expanding pool of addressable users worldwide." },
+        { title: "Competing Apps", numValue: 5, suffix: "M+", icon: <TrendingUp className="text-white" size={16} />, desc: "Cutting through the noise requires precision UA strategies." },
+        { title: "Mobile Ad Spend", numValue: 350, prefix: "$", suffix: "B", icon: <DollarSign className="text-white" size={16} />, desc: "Digital budgets shifting rapidly toward mobile performance." },
+        { title: "Performance Focus", numValue: 85, suffix: "%", icon: <Users className="text-white" size={16} />, desc: "Advertisers now prioritizing verified ROI over impressions." },
     ];
 
     return (
-        <section className="section-padding bg-transparent overflow-hidden">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col lg:flex-row items-center gap-20">
+        <section className="py-40 bg-[#000000] border-y border-white/10">
+            <div className="container mx-auto px-6 relative">
+                <div className="flex flex-col lg:flex-row items-center gap-24">
                     <div className="lg:w-1/2">
-                        <motion.span 
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            className="text-xs font-bold uppercase tracking-[0.3em] text-brand-orange mb-4 block"
-                        >
-                            Market Opportunity
-                        </motion.span>
-                        <h2 className="font-display font-bold text-4xl md:text-6xl mb-8 leading-tight text-white uppercase italic">
-                            The Mobile <span className="text-gradient">Explosion</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-8 block">Intelligence</span>
+                        <h2 className="font-display font-bold text-5xl md:text-7xl mb-10 leading-[0.95] text-white uppercase tracking-[-0.04em]">
+                            The Mobile<br />Economy.
                         </h2>
-                        <p className="text-slate-400 text-lg mb-10 leading-relaxed max-w-xl">
-                            The mobile landscape is evolving at a breakneck pace. With billions of users and millions of competing apps, the demand for measurable, performance-focused marketing has never been higher.
+                        <p className="text-white/50 text-xl mb-16 leading-relaxed max-w-xl">
+                            Billions of users. Millions of competing apps. The demand for measurable, performance-focused user acquisition is an institutional necessity.
                         </p>
-                        
-                        <div className="space-y-6">
+
+                        <div className="space-y-8">
                             {[
-                                { label: "Smartphone Adoption", value: 92 },
+                                { label: "Smartphone Adoption Rate", value: 92 },
                                 { label: "Average Time on Mobile", value: 78 },
-                                { label: "Performance Spend Shift", value: 65 }
+                                { label: "Performance Spend Shift", value: 65 },
                             ].map((bar, i) => (
-                                <div key={bar.label} className="space-y-2">
-                                    <div className="flex justify-between text-sm font-bold uppercase tracking-wider">
-                                        <span className="text-slate-300">{bar.label}</span>
-                                        <span className="text-brand-orange">{bar.value}%</span>
+                                <div key={bar.label} className="space-y-3">
+                                    <div className="flex justify-between text-[10px] font-bold uppercase tracking-[0.2em]">
+                                        <span className="text-white/40">{bar.label}</span>
+                                        <span className="text-white">
+                                            <Counter value={bar.value} suffix="%" />
+                                        </span>
                                     </div>
-                                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-                                        <motion.div 
+                                    <div className="h-px w-full bg-white/10 overflow-hidden">
+                                        <motion.div
                                             initial={{ width: 0 }}
                                             whileInView={{ width: `${bar.value}%` }}
+                                            viewport={{ once: true }}
                                             transition={{ duration: 1.5, delay: i * 0.2 }}
-                                            className="h-full bg-gradient-to-r from-brand-red to-brand-orange"
+                                            className="h-full bg-white"
                                         />
                                     </div>
                                 </div>
@@ -80,25 +54,34 @@ const MarketOpportunity = () => {
                         </div>
                     </div>
 
-                    <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-0 border border-white/10">
                         {opportunities.map((item, idx) => (
                             <motion.div
                                 key={item.title}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
+                                className={cn(
+                                    "p-10 hover:bg-white/[0.02] transition-colors",
+                                    idx % 2 === 0 && "sm:border-r border-white/10",
+                                    idx < 2 && "border-b border-white/10",
+                                    idx >= 2 && "border-b sm:border-b-0 border-white/10"
+                                )}
                             >
-                                <GlassCard className="h-full p-8 border-white/5 hover:border-white/20 transition-all duration-500">
-                                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-6">
-                                        {item.icon}
-                                    </div>
-                                    <div className="text-3xl font-bold mb-2 flex items-baseline gap-1">
-                                        {item.value}
-                                        <span className="text-lg text-slate-500">{item.suffix}</span>
-                                    </div>
-                                    <h4 className="text-sm font-bold uppercase tracking-wider mb-4 text-white">{item.title}</h4>
-                                    <p className="text-xs text-slate-500 leading-relaxed italic">{item.desc}</p>
-                                </GlassCard>
+                                <div className="w-8 h-8 border border-white/20 flex items-center justify-center mb-8 text-white">
+                                    {item.icon}
+                                </div>
+                                <div className="text-4xl font-bold text-white mb-2">
+                                    <Counter 
+                                        value={item.numValue} 
+                                        prefix={item.prefix} 
+                                        suffix={item.suffix} 
+                                        decimals={item.decimals} 
+                                    />
+                                </div>
+                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] mb-4 text-white/40">{item.title}</h4>
+                                <p className="text-[11px] text-white/30 leading-relaxed uppercase tracking-widest">{item.desc}</p>
                             </motion.div>
                         ))}
                     </div>

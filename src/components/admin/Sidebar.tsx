@@ -24,11 +24,21 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-[#0B0B0B] border-r border-white/10 flex flex-col h-screen fixed left-0 top-0 z-50">
+    <aside className="w-64 bg-[#000000] border-r border-white/10 flex flex-col h-screen fixed left-0 top-0 z-50">
       <div className="p-8">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 rounded-lg bg-brand-orange flex items-center justify-center font-bold text-white italic">A</div>
-          <span className="font-display font-bold text-lg text-white uppercase italic tracking-tight">ADSGRIND</span>
+        <div className="flex items-center gap-6 mb-12">
+          <div className="relative w-11 h-11 flex-shrink-0 rounded-full overflow-hidden">
+            <img 
+              src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
+              alt="ADSGRIND" 
+              className="w-full h-full object-contain grayscale brightness-[2] contrast-[1.5] mix-blend-screen rounded-full"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.25))' }}
+            />
+          </div>
+          <div className="flex flex-col items-start leading-tight">
+            <span className="font-display font-bold text-[18px] tracking-[0.2em] text-white">ADSGRIND</span>
+            <span className="text-[9px] font-bold tracking-[0.4em] text-white/70 uppercase">The App Growth</span>
+          </div>
         </div>
 
         <nav className="space-y-2">
@@ -39,17 +49,17 @@ export function Sidebar() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center justify-between px-4 py-3 rounded-xl transition-all group",
+                  "flex items-center justify-between px-4 py-3 transition-all group",
                   isActive 
-                    ? "bg-brand-orange/10 text-brand-orange border border-brand-orange/20" 
-                    : "text-white/40 hover:text-white hover:bg-white/5"
+                    ? "bg-white/[0.05] text-white border-l-2 border-white" 
+                    : "text-white/30 hover:text-white/60 hover:bg-white/[0.02]"
                 )}
               >
                 <div className="flex items-center gap-3">
-                  <item.icon size={20} className={cn("transition-colors", isActive ? "text-brand-orange" : "group-hover:text-white")} />
-                  <span className="text-sm font-medium">{item.name}</span>
+                  <item.icon size={18} className={cn("transition-colors", isActive ? "text-white" : "group-hover:text-white/50")} />
+                  <span className="text-[11px] font-bold uppercase tracking-widest">{item.name}</span>
                 </div>
-                {isActive && <div className="w-1.5 h-1.5 rounded-full bg-brand-orange" />}
+                {isActive && <div className="w-1 h-1 rounded-full bg-white animate-pulse" />}
               </Link>
             );
           })}

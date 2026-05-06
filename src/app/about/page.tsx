@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Eye, Target, Users, Award, ShieldCheck, Heart } from 'lucide-react';
-import { GlassCard, Button, GrowthIndex } from '@/components/ui';
+import { GlassCard, Button, GrowthIndex, cn } from '@/components/ui';
 import { useModals } from '@/context/ModalContext';
 
 const TEAM = [
@@ -14,181 +14,165 @@ const TEAM = [
 ];
 
 const VALUES = [
-  { title: "Integrity", icon: <ShieldCheck className="text-brand-accent-start" />, desc: "We believe in transparent, honest partnerships with our clients." },
-  { title: "Innovation", icon: <Eye className="text-brand-accent-start" />, desc: "We stay ahead of the curve, utilizing AI and cutting-edge tech." },
-  { title: "Impact", icon: <Target className="text-brand-accent-start" />, desc: "Results matter. We drive growth that you can see and measure." },
+  { title: "Precision", icon: <ShieldCheck className="text-white" />, desc: "We deploy verified, fraud-free user actions with aerospace-grade precision." },
+  { title: "Intelligence", icon: <Eye className="text-white" />, desc: "Data-driven decisions backed by institutional attribution systems." },
+  { title: "Authority", icon: <Target className="text-white" />, desc: "We drive measurable growth that defines market leadership." },
 ];
-
-const Counter = ({ value, duration = 2 }: { value: string, duration?: number }) => {
-    const [count, setCount] = React.useState(0);
-    const numericValue = parseInt(value.replace(/\D/g, ''));
-    const suffix = value.replace(/[0-9]/g, '');
-
-    React.useEffect(() => {
-        let start = 0;
-        const end = numericValue;
-        if (isNaN(end)) return;
-        
-        const totalFrames = duration * 60;
-        const increment = end / totalFrames;
-        
-        const timer = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-                setCount(end);
-                clearInterval(timer);
-            } else {
-                setCount(Math.floor(start));
-            }
-        }, 1000 / 60);
-        
-        return () => clearInterval(timer);
-    }, [numericValue, duration]);
-
-    return <span>{count}{suffix}</span>;
-};
 
 export default function AboutPage() {
   const { openGetStarted } = useModals();
   return (
-    <div className="pt-24 md:pt-32 pb-12 md:pb-20 bg-[#050505] min-h-screen overflow-x-hidden">
-      <div className="container mx-auto px-4 sm:px-6 w-full max-w-full">
+    <div className="pt-32 pb-20 bg-[#000000] min-h-screen">
+      <div className="container mx-auto px-6">
         {/* Hero Section */}
-        <div className="max-w-4xl mx-auto text-center mb-12 md:mb-32 px-2">
+        <div className="max-w-5xl mx-auto mb-48 text-center flex flex-col items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-4 md:mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mb-10"
           >
-            <span className="py-1 px-4 rounded-full bg-brand-red/10 border border-brand-red/20 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-red animate-pulse">Our DNA</span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/30 border-b border-white/20 pb-2">Institutional Profile</span>
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="font-display font-bold text-3xl sm:text-5xl md:text-7xl mb-6 md:mb-10 leading-tight text-white uppercase italic break-words"
+            className="font-display font-bold text-5xl md:text-8xl mb-12 leading-[0.95] text-white uppercase tracking-[-0.04em]"
           >
-            Scaling the <br className="hidden sm:block" />
-            <span className="text-gradient">Mobile Ecosystem</span>
+            Infrastructure For<br />
+            <span className="text-white/40">Growth Scaling.</span>
           </motion.h1>
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-slate-400 text-base sm:text-xl leading-relaxed max-w-full"
+            transition={{ delay: 0.1 }}
+            className="text-white/50 text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto"
           >
-            ADSGRIND is a high-performance user acquisition company dedicated to bridging the gap between premium advertisers and high-performing publishers. We leverage proprietary technology to drive measurable, scalable, and sustainable growth for the world's most ambitious mobile apps.
+            ADSGRIND is a high-performance performance marketing infrastructure dedicated to bridging the gap between premium global brands and verified mobile inventories.
           </motion.p>
         </div>
 
-        {/* Mission & Vision */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-32">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-             <GlassCard className="h-full p-6 sm:p-12 overflow-hidden relative group border-brand-red/10 hover:border-brand-red/30 transition-all duration-500 w-full">
-                <div className="absolute top-0 left-0 w-32 h-32 bg-brand-red/10 blur-[60px] pointer-events-none"></div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 sm:mb-8 border border-white/10 group-hover:scale-110 transition-transform">
-                    <Target className="text-brand-red" size={24} />
+        {/* Mission & Vision Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10 mb-48">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+             <div className="p-16 border-b md:border-b-0 md:border-r border-white/10 h-full hover:bg-white/[0.02] transition-colors">
+                <div className="w-10 h-10 border border-white/20 flex items-center justify-center mb-10">
+                    <Target className="text-white" size={20} />
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 uppercase italic text-white">Our Mission</h2>
-                <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-                    To empower advertisers and publishers by providing a transparent, performance-driven marketplace that maximizes ROI and global reach through technical excellence and strategic innovation.
+                <h2 className="text-[10px] font-bold mb-8 uppercase tracking-[0.4em] text-white/30">Mission Protocol</h2>
+                <p className="text-white text-xl leading-relaxed uppercase tracking-tight font-bold mb-6">
+                    Verified Global Scalability.
                 </p>
-             </GlassCard>
+                <p className="text-white/40 text-lg leading-relaxed">
+                    To empower market leaders by providing a transparent, performance-driven marketplace that maximizes ROI through technical excellence.
+                </p>
+             </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-             <GlassCard className="h-full p-6 sm:p-12 overflow-hidden relative group border-brand-orange/10 hover:border-brand-orange/30 transition-all duration-500 w-full">
-                <div className="absolute bottom-0 right-0 w-32 h-32 bg-brand-orange/10 blur-[60px] pointer-events-none"></div>
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 sm:mb-8 border border-white/10 group-hover:scale-110 transition-transform">
-                    <Eye className="text-brand-orange" size={24} />
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+             <div className="p-16 h-full hover:bg-white/[0.02] transition-colors">
+                <div className="w-10 h-10 border border-white/20 flex items-center justify-center mb-10">
+                    <Eye className="text-white" size={20} />
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6 uppercase italic text-white">Our Vision</h2>
-                <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-                    To redefine user acquisition for the next billion smartphone users, becoming the most trusted global partner for mobile growth through scalable architectures and human-centric expertise.
+                <h2 className="text-[10px] font-bold mb-8 uppercase tracking-[0.4em] text-white/30">Vision Objective</h2>
+                <p className="text-white text-xl leading-relaxed uppercase tracking-tight font-bold mb-6">
+                    Redefining User Acquisition.
                 </p>
-             </GlassCard>
+                <p className="text-white/40 text-lg leading-relaxed">
+                    To become the most trusted global partner for mobile growth through scalable architectures and fraud-free verified inventory.
+                </p>
+             </div>
           </motion.div>
         </div>
 
-        {/* Core Values */}
-        <div className="mb-12 md:mb-32 text-center w-full">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-16 uppercase italic text-white">The ADSGRIND Standard</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {/* Values */}
+        <div className="mb-48">
+            <div className="mb-24">
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-6 block">Verification Standards</span>
+              <h2 className="text-4xl md:text-6xl font-bold uppercase text-white tracking-tight leading-none">Institutional Integrity.</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/10">
                 {VALUES.map((v, i) => (
                     <motion.div 
                         key={v.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         transition={{ delay: i * 0.1 }}
-                        className="flex flex-col items-center group w-full"
+                        className={cn(
+                          "p-16 hover:bg-white/[0.02] transition-colors",
+                          i < 2 && "md:border-r border-white/10",
+                          "border-b md:border-b-0 border-white/10"
+                        )}
                     >
-                        <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:bg-brand-purple/20 group-hover:border-brand-purple/50 transition-all">
-                            <div className="text-brand-purple">
-                                {v.icon}
-                            </div>
+                        <div className="w-8 h-8 border border-white/20 flex items-center justify-center mb-8 text-white">
+                            {v.icon}
                         </div>
-                        <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-wider">{v.title}</h3>
-                        <p className="text-slate-500 max-w-full px-4">{v.desc}</p>
+                        <h3 className="text-xs font-bold mb-6 text-white uppercase tracking-[0.3em]">{v.title}</h3>
+                        <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-widest">{v.desc}</p>
                     </motion.div>
                 ))}
             </div>
         </div>
 
-        {/* Growth & Results Section */}
-        <div className="mb-12 md:mb-32 w-full">
-            <div className="text-center mb-10 md:mb-20 px-2">
-                <motion.span 
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-red mb-4 block"
-                >
-                    Scale & Performance
-                </motion.span>
-                <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 uppercase italic text-white leading-tight break-words">
-                    Trusted by <span className="text-gradient">100+ Clients</span> Worldwide
+        {/* Scale Metrics */}
+        <div className="mb-48">
+            <div className="flex flex-col lg:flex-row items-end justify-between mb-24 gap-8">
+              <div className="max-w-2xl">
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-6 block">Performance Index</span>
+                <h2 className="text-4xl md:text-7xl font-bold uppercase text-white leading-none tracking-tighter">
+                  Market Reach.<br />
+                  <span className="text-white/40">Verified Scale.</span>
                 </h2>
-                <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto">
-                    Driving consistent growth for apps and brands across global markets with data-backed precision.
-                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 border border-white/10">
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full">
+                <div className="grid grid-cols-2 gap-0 border-b lg:border-b-0 lg:border-r border-white/10">
                     {[
-                        { label: "Happy Clients", value: "100+", sub: "Global Brands" },
-                        { label: "Publishers", value: "1000+", sub: "Direct Inventory" },
-                        { label: "Installs", value: "10M+", sub: "Delivered & Verified" },
-                        { label: "GEO Reach", value: "Tier 1", sub: "Global Expertise" }
+                        { label: "Active Nodes", value: "100+", sub: "Global Brands" },
+                        { label: "Inventory Access", value: "1000+", sub: "Direct Publishers" },
+                        { label: "Monthly Output", value: "10M+", sub: "Verified Installs" },
+                        { label: "Network Trust", value: "100%", sub: "Fraud Detection" }
                     ].map((stat, i) => (
-                        <motion.div
+                        <div
                             key={i}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="p-6 sm:p-8 rounded-3xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-all group w-full"
+                            className={cn(
+                              "p-12 border-white/10",
+                              i % 2 === 0 && "border-r",
+                              i < 2 && "border-b"
+                            )}
                         >
-                            <div className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-2 group-hover:text-brand-red transition-colors">
-                                {stat.value.match(/\d/) ? <Counter value={stat.value} /> : stat.value}
+                            <div className="text-4xl font-bold text-white mb-4 tracking-tighter">
+                                {stat.value}
                             </div>
-                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{stat.label}</div>
-                            <div className="text-xs text-slate-600">{stat.sub}</div>
-                        </motion.div>
+                            <div className="text-[10px] font-bold text-white/40 uppercase tracking-[0.3em] mb-2">{stat.label}</div>
+                            <div className="text-[9px] text-white/20 uppercase tracking-[0.4em]">{stat.sub}</div>
+                        </div>
                     ))}
                 </div>
 
-                {/* Growth Graph Visual - Now using the Premium GrowthIndex Component */}
-                <GrowthIndex />
+                {/* Growth Visualization */}
+                <div className="p-1">
+                    <GrowthIndex className="border-0 h-full" />
+                </div>
             </div>
         </div>
 
-        {/* Global Reach CTA */}
-        <GlassCard className="p-8 sm:p-16 text-center border-brand-red/10 relative overflow-hidden w-full">
-             <div className="absolute inset-0 bg-brand-red/5 blur-[100px] rounded-full -z-10 translate-y-1/2 pointer-events-none"></div>
-             <h2 className="text-3xl sm:text-5xl font-bold mb-6 sm:mb-8 uppercase italic text-white break-words">Ready to Join the Growth Revolution?</h2>
-             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button variant="liquid" size="lg" className="px-12 w-full sm:w-auto" onClick={openGetStarted}>Start Your Growth</Button>
+        {/* CTA Section */}
+        <div className="border border-white/10 p-20 md:p-40 text-center hover:bg-white/[0.02] transition-colors duration-700 relative overflow-hidden group">
+             <div className="relative z-10">
+                <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/30 mb-10 block">Protocol Initiation</span>
+                <h2 className="text-5xl md:text-8xl font-bold mb-16 uppercase text-white tracking-[-0.04em] leading-none">Ready To Scale?</h2>
+                <button 
+                    className="px-20 py-6 bg-white text-black text-[12px] font-bold uppercase tracking-[0.4em] transition-all hover:bg-white/90" 
+                    onClick={openGetStarted}
+                >
+                    Initiate Audit
+                </button>
              </div>
-        </GlassCard>
+             {/* Background decoration */}
+             <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-white/20 transition-colors" />
+             <div className="absolute bottom-0 right-0 w-full h-1 bg-white/5 group-hover:bg-white/20 transition-colors" />
+        </div>
       </div>
     </div>
   );

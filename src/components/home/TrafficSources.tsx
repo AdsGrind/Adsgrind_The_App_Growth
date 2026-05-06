@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GlassCard } from '@/components/ui';
+import { GlassCard, cn } from '@/components/ui';
 import { 
     Smartphone, 
     Layout, 
@@ -16,55 +16,59 @@ import {
 
 const TrafficSources = () => {
     const sources = [
-        { title: "Mobile Apps", icon: <Smartphone />, desc: "Direct in-app traffic from global partners." },
-        { title: "Display Networks", icon: <Layout />, desc: "Broad reach across premium display ad networks." },
-        { title: "Native Platforms", icon: <Target />, desc: "Engagement-driven ads that blend seamlessly." },
-        { title: "Social Media", icon: <Share2 />, desc: "High-intent traffic from all major social platforms." },
-        { title: "Incent & Non-Incent", icon: <Gift />, desc: "Tailored campaigns for diverse user motivations." },
-        { title: "OEM Traffic", icon: <Briefcase />, desc: "Pre-installed app placements on top devices." },
-        { title: "Influencer Traffic", icon: <Users />, desc: "Trusted endorsements that drive authentic growth." },
-        { title: "Push Notification", icon: <Bell />, desc: "Real-time engagement directly on user screens." }
+        { title: "Mobile Apps", icon: <Smartphone size={20} />, desc: "Direct in-app traffic from global partners." },
+        { title: "Display Networks", icon: <Layout size={20} />, desc: "Broad reach across premium display ad networks." },
+        { title: "Native Platforms", icon: <Target size={20} />, desc: "Engagement-driven ads that blend seamlessly." },
+        { title: "Social Media", icon: <Share2 size={20} />, desc: "High-intent traffic from all major social platforms." },
+        { title: "Incent & Non-Incent", icon: <Gift size={20} />, desc: "Tailored campaigns for diverse user motivations." },
+        { title: "OEM Traffic", icon: <Briefcase size={20} />, desc: "Pre-installed app placements on top devices." },
+        { title: "Influencer Traffic", icon: <Users size={20} />, desc: "Trusted endorsements that drive authentic growth." },
+        { title: "Push Notification", icon: <Bell size={20} />, desc: "Real-time engagement directly on user screens." }
     ];
 
     return (
-        <section className="section-padding bg-[#0a0a0a] relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 blur-[150px] rounded-full -z-10"></div>
-            
+        <section className="py-40 bg-[#000000] border-y border-white/10">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-10 md:mb-20 max-w-3xl mx-auto">
+                <div className="mb-24">
                     <motion.span 
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
-                        className="text-xs font-bold uppercase tracking-[0.3em] text-brand-red mb-4 block"
+                        className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-8 block"
                     >
                         Channels & Inventory
                     </motion.span>
-                    <h2 className="font-display font-bold text-4xl md:text-6xl mb-4 md:mb-8 uppercase italic text-white">
-                        Premium <span className="text-gradient">Traffic</span> Sources
+                    <h2 className="font-display font-bold text-5xl md:text-7xl mb-10 uppercase text-white tracking-[-0.03em] leading-none">
+                        Premium<br />Traffic Access.
                     </h2>
-                    <p className="text-slate-400 text-lg">
-                        We leverage a diverse mix of high-fidelity traffic sources to ensure your app reaches the right audience at the right time.
+                    <p className="text-white/40 text-xl max-w-2xl leading-relaxed">
+                        Diverse mix of high-fidelity traffic sources ensuring precise audience reach at institutional scale.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10">
                     {sources.map((source, idx) => (
                         <motion.div
                             key={source.title}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
                             transition={{ delay: idx * 0.05 }}
+                            className={cn(
+                                "p-12 transition-all duration-300 hover:bg-white/[0.03] group",
+                                (idx + 1) % 4 !== 0 && "lg:border-r border-white/10",
+                                (idx + 1) % 2 !== 0 && "sm:border-r lg:border-r-0 border-white/10",
+                                idx < 4 && "lg:border-b border-white/10",
+                                idx < 6 && "sm:border-b lg:border-b-0 border-white/10",
+                                "border-b sm:border-b-0 border-white/10"
+                            )}
                         >
-                            <GlassCard className="p-6 md:p-8 h-full border-white/5 hover:border-brand-red/30 transition-all duration-500 group">
-                                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all duration-500 text-2xl">
-                                    {source.icon}
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 text-white">{source.title}</h3>
-                                <p className="text-sm text-slate-500 leading-relaxed group-hover:text-slate-300 transition-colors">
-                                    {source.desc}
-                                </p>
-                            </GlassCard>
+                            <div className="w-10 h-10 border border-white/20 flex items-center justify-center mb-10 text-white group-hover:bg-white group-hover:text-black transition-all">
+                                {source.icon}
+                            </div>
+                            <h3 className="text-sm font-bold mb-4 text-white uppercase tracking-widest">{source.title}</h3>
+                            <p className="text-[11px] text-white/30 leading-relaxed uppercase tracking-widest">
+                                {source.desc}
+                            </p>
                         </motion.div>
                     ))}
                 </div>

@@ -99,11 +99,11 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
             className="absolute inset-0 bg-black/80 backdrop-blur-xl"
           />
 
-          <motion.div
+            <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0B0B0B] border border-white/10 shadow-2xl custom-scrollbar"
+            className="relative w-full max-w-[600px] max-h-[90vh] overflow-y-auto rounded-3xl bg-[#000000] border border-white/10 shadow-2xl custom-scrollbar"
           >
             <div className="p-8 sm:p-12">
               <button
@@ -122,14 +122,14 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                     exit={{ opacity: 0, y: -10 }}
                   >
                     <div className="mb-10 text-center sm:text-left">
-                      <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4 uppercase italic">
-                        Get Your Custom <span className="text-brand-orange">Strategy</span>
+                      <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-4 uppercase tracking-tighter">
+                        GET YOUR STRATEGY.
                       </h2>
-                      <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                        Tell us about your app and goals — we'll build a data-driven acquisition plan tailored for you.
+                      <p className="text-[10px] text-white/30 font-bold uppercase tracking-[0.4em] mb-4">
+                        Data-driven acquisition planning.
                       </p>
-                      <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest border-t border-white/5 pt-4 inline-block">
-                        No guesswork. No generic plans. Just growth.
+                      <p className="text-white/20 text-[9px] font-bold uppercase tracking-widest border-t border-white/5 pt-4 inline-block">
+                        Precision engineering. zero generic output.
                       </p>
                     </div>
 
@@ -137,15 +137,15 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {/* Name */}
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Full Name</label>
                           <div className="relative group">
-                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-orange transition-colors" size={16} />
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <input
                               {...register('name')}
                               placeholder="Enter your full name"
                               className={cn(
-                                "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-all",
-                                errors.name && "border-red-500/50"
+                                "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                                errors.name && "border-white/20"
                               )}
                             />
                           </div>
@@ -153,15 +153,15 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
 
                         {/* Company */}
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Company / App Name</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Company / App Name</label>
                           <div className="relative group">
-                            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-orange transition-colors" size={16} />
+                            <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <input
                               {...register('company')}
                               placeholder="e.g. FitTrack App"
                               className={cn(
-                                "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-all",
-                                errors.company && "border-red-500/50"
+                                "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                                errors.company && "border-white/20"
                               )}
                             />
                           </div>
@@ -170,16 +170,16 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
 
                       {/* Email */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Work Email</label>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Work Email</label>
                         <div className="relative group">
-                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-orange transition-colors" size={16} />
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                           <input
                             {...register('email')}
                             type="email"
                             placeholder="name@company.com"
                             className={cn(
-                              "w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-all",
-                              errors.email && "border-red-500/50"
+                              "w-full bg-white/[0.02] border border-white/10 rounded-xl px-12 py-3 text-sm text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all uppercase tracking-widest",
+                              errors.email && "border-white/20"
                             )}
                           />
                         </div>
@@ -188,12 +188,12 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         {/* Budget */}
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Monthly Budget</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Monthly Budget</label>
                           <div className="relative group">
-                            <TrendingUp className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-orange transition-colors" size={16} />
+                            <TrendingUp className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <select
                               {...register('budget')}
-                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-all appearance-none cursor-pointer"
+                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-white transition-all appearance-none cursor-pointer uppercase tracking-widest"
                             >
                               <option value="">Select range</option>
                               <option value="<$5K">Less than $5K</option>
@@ -201,18 +201,18 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                               <option value="$20K–$50K">$20K – $50K</option>
                               <option value="$50K+">$50K+</option>
                             </select>
-                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none" size={16} />
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" size={16} />
                           </div>
                         </div>
 
                         {/* Goal */}
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Primary Goal</label>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 ml-1">Primary Goal</label>
                           <div className="relative group">
-                            <Target className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-brand-orange transition-colors" size={16} />
+                            <Target className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-white transition-colors" size={16} />
                             <select
                               {...register('goal')}
-                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-brand-orange transition-all appearance-none cursor-pointer"
+                              className="w-full bg-[#141414] border border-white/10 rounded-xl px-12 py-3 text-sm text-white focus:outline-none focus:border-white transition-all appearance-none cursor-pointer uppercase tracking-widest"
                             >
                               <option value="">Select objective</option>
                               <option value="App Installs">App Installs</option>
@@ -220,14 +220,14 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                               <option value="Purchases">Purchases</option>
                               <option value="Other">Other / Branding</option>
                             </select>
-                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 pointer-events-none" size={16} />
+                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" size={16} />
                           </div>
                         </div>
                       </div>
 
                       {/* Value Section */}
-                      <div className="p-6 rounded-2xl bg-brand-orange/[0.03] border border-brand-orange/10 mt-8">
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-orange mb-4">What You'll Receive</h4>
+                      <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 mt-8">
+                        <h4 className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40 mb-4">Transmission Payload</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {[
                             { icon: <Zap size={14} />, text: "Custom CPI / CPA strategy" },
@@ -235,8 +235,8 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                             { icon: <Layers size={14} />, text: "Optimized channel mix" },
                             { icon: <TrendingUp size={14} />, text: "Scaling roadmap" }
                           ].map((item, i) => (
-                            <div key={i} className="flex items-center gap-2 text-[11px] text-slate-400">
-                              <span className="text-brand-orange">{item.icon}</span>
+                            <div key={i} className="flex items-center gap-2 text-[10px] text-white/30 uppercase tracking-widest">
+                              <span className="text-white/20">{item.icon}</span>
                               {item.text}
                             </div>
                           ))}
@@ -247,10 +247,10 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                         <Button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full bg-brand-orange hover:bg-orange-600 text-white font-black h-14 rounded-xl shadow-xl shadow-brand-orange/20 transition-all text-sm uppercase italic flex items-center justify-center gap-2 group"
+                          className="w-full bg-white hover:bg-white/90 text-black font-bold h-14 rounded-xl shadow-2xl transition-all text-[11px] uppercase tracking-[0.3em] flex items-center justify-center gap-2 group"
                         >
                           {isSubmitting ? (
-                            <Loader2 size={20} className="animate-spin" />
+                            <Loader2 size={16} className="animate-spin" />
                           ) : (
                             <>
                               Get My Strategy
@@ -258,13 +258,13 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                             </>
                           )}
                         </Button>
-                        <p className="text-center text-[10px] text-slate-600 mt-4 uppercase tracking-widest">
-                            No spam. No commitments. Just a clear growth plan.
+                        <p className="text-center text-[9px] text-white/20 mt-4 uppercase tracking-[0.2em]">
+                            End-to-end encryption. No commitments.
                         </p>
                       </div>
 
                       {error && (
-                        <p className="text-red-400 text-[10px] font-bold text-center uppercase tracking-tighter">{error}</p>
+                        <p className="text-white/40 text-[10px] font-bold text-center uppercase tracking-widest">{error}</p>
                       )}
                     </form>
                   </motion.div>
@@ -275,12 +275,12 @@ export function PerformanceStrategyModal({ isOpen, onClose }: PerformanceStrateg
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-20 text-center"
                   >
-                    <div className="w-20 h-20 rounded-full bg-brand-orange/10 flex items-center justify-center text-brand-orange mb-8">
+                    <div className="w-20 h-20 border border-white/20 flex items-center justify-center text-white mb-8">
                       <CheckCircle2 size={40} />
                     </div>
-                    <h3 className="text-3xl font-display font-bold text-white mb-4 uppercase italic">Strategy Requested</h3>
-                    <p className="text-slate-400 max-w-sm">
-                      Thanks! Our strategy team is analyzing your data and will reach out with your custom growth plan shortly.
+                    <h3 className="text-3xl font-display font-bold text-white mb-4 uppercase tracking-tighter">STRATEGY LOGGED.</h3>
+                    <p className="text-white/40 text-sm max-w-sm uppercase tracking-widest leading-relaxed">
+                      Our engineering team is analyzing your dataset. Transmission of custom growth plan is imminent.
                     </p>
                   </motion.div>
                 )}

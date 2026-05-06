@@ -48,14 +48,15 @@ export async function subscribeToNewsletter(email: string) {
       await transporter.sendMail({
         from: `"Adsgrind System" <${smtpUser}>`,
         to: 'business@adsgrind.com',
-        subject: `New Newsletter Subscriber 🚀`,
+        subject: `Institutional Subscription 🚀`,
         html: `
-          <div style="background-color: #0B0B0B; color: #ffffff; padding: 40px; font-family: sans-serif;">
-            <h2 style="color: #FF5800;">New Growth Subscriber</h2>
-            <p>A new user has subscribed to the Adsgrind newsletter.</p>
-            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Timestamp:</strong> ${date}</p>
+          <div style="background-color: #000000; color: #ffffff; padding: 60px; font-family: 'Inter', sans-serif; border: 1px solid #333333;">
+            <h2 style="color: #ffffff; text-transform: uppercase; letter-spacing: 4px; font-size: 14px; margin-bottom: 30px; border-bottom: 1px solid #333333; padding-bottom: 20px;">New Growth Subscriber</h2>
+            <div style="background: rgba(255,255,255,0.03); padding: 30px; border: 1px solid #222222;">
+              <p style="margin: 0 0 15px 0; font-size: 12px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Identity:</p>
+              <p style="margin: 0 0 30px 0; font-size: 18px; font-weight: bold;">${email}</p>
+              <p style="margin: 0 0 15px 0; font-size: 12px; color: #666666; text-transform: uppercase; letter-spacing: 2px;">Timestamp:</p>
+              <p style="margin: 0; font-size: 14px; color: #999999;">${date}</p>
             </div>
           </div>
         `
@@ -65,18 +66,19 @@ export async function subscribeToNewsletter(email: string) {
       await transporter.sendMail({
         from: `"Adsgrind Strategy" <${smtpUser}>`,
         to: email,
-        subject: `Welcome to Adsgrind`,
+        subject: `Protocol Initiated: Welcome to Adsgrind`,
         html: `
-          <div style="background-color: #0B0B0B; color: #ffffff; padding: 40px; font-family: sans-serif; text-align: center;">
-            <img src="${logoUrl}" width="50" style="border-radius: 10px; margin-bottom: 20px;">
-            <h2 style="font-style: italic; text-transform: uppercase;">You're In.</h2>
-            <p style="color: #A0A0A0; font-size: 16px;">
-              Welcome to the inner circle of app growth. 
-              Expect performance insights, growth strategies, and real campaign data delivered straight to your terminal.
+          <div style="background-color: #000000; color: #ffffff; padding: 80px 40px; font-family: 'Inter', sans-serif; text-align: center; border: 1px solid #333333;">
+            <img src="${logoUrl}" width="60" style="margin-bottom: 40px; filter: grayscale(100%);">
+            <h1 style="font-weight: bold; text-transform: uppercase; letter-spacing: 8px; font-size: 24px; margin-bottom: 20px;">Protocol Initiated.</h1>
+            <p style="color: #666666; font-size: 14px; line-height: 1.8; max-width: 400px; margin: 0 auto 50px auto; text-transform: uppercase; letter-spacing: 1px;">
+              You have successfully integrated into the Adsgrind intelligence feed. 
+              Engineered performance insights and institutional growth data will follow.
             </p>
-            <div style="margin-top: 30px;">
-              <a href="https://adsgrind.com" style="background: #FF5800; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold;">Explore Infrastructure</a>
+            <div style="margin-top: 40px;">
+              <a href="https://adsgrind.com" style="display: inline-block; background: #ffffff; color: #000000; padding: 18px 40px; text-decoration: none; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 3px;">Explore Infrastructure</a>
             </div>
+            <p style="margin-top: 60px; font-size: 10px; color: #333333; letter-spacing: 2px; text-transform: uppercase;">© 2026 Adsgrind. All Rights Reserved.</p>
           </div>
         `
       });
