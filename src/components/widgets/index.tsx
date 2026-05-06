@@ -25,7 +25,7 @@ export const WhatsAppButton = () => (
       href="https://wa.me/919625982835?text=Hi%20ADSGRIND%2C%20I%27d%20like%20to%20inquire%20about%20your%20services."
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ scale: 1.08, brightness: 1.1 }}
+      whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.94 }}
       className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(37,211,102,0.4)] cursor-pointer relative"
     >
