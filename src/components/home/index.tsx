@@ -291,25 +291,25 @@ const LiveIntelligenceSection = () => {
                    </div>
                 </div>
                 
-                <div className="p-8 space-y-8">
+                <div className="p-5 sm:p-8 space-y-6 sm:space-y-8">
                    {/* Metrics Row */}
-                   <div className="grid grid-cols-3 gap-6">
-                      <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl">
-                         <div className="text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">ROI Index</div>
-                         <div className="text-xl font-bold text-white">+218%</div>
+                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                      <div className="p-5 sm:p-6 bg-white/[0.02] border border-white/5 rounded-2xl text-center group/card hover:border-brand-orange/20 transition-colors">
+                         <div className="text-[10px] text-white/30 font-bold uppercase tracking-widest mb-2">ROI Index</div>
+                         <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">+218%</div>
                       </div>
-                      <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl">
-                         <div className="text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">CAC Target</div>
-                         <div className="text-xl font-bold text-white">-42.5%</div>
+                      <div className="p-5 sm:p-6 bg-white/[0.02] border border-white/5 rounded-2xl text-center group/card hover:border-brand-orange/20 transition-colors">
+                         <div className="text-[10px] text-white/30 font-bold uppercase tracking-widest mb-2">CAC Target</div>
+                         <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">-42.5%</div>
                       </div>
-                      <div className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl">
-                         <div className="text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">Live Nodes</div>
-                         <div className="text-xl font-bold text-white">500+</div>
+                      <div className="p-5 sm:p-6 bg-white/[0.02] border border-white/5 rounded-2xl text-center col-span-2 md:col-span-1 group/card hover:border-brand-orange/20 transition-colors">
+                         <div className="text-[10px] text-white/30 font-bold uppercase tracking-widest mb-2">Live Nodes</div>
+                         <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">500+</div>
                       </div>
                    </div>
 
                    {/* Graph Area */}
-                   <div className="h-64 relative border-b border-l border-white/10 flex items-end gap-1.5 px-4 pb-4 overflow-hidden">
+                   <div className="h-48 sm:h-64 relative border-b border-l border-white/10 flex items-end gap-1 sm:gap-1.5 px-2 sm:px-4 pb-2 sm:pb-4 overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-t from-brand-orange/5 to-transparent pointer-events-none" />
                       {[40, 60, 45, 85, 55, 95, 75, 88, 65, 92, 80, 98].map((h, i) => (
                         <motion.div 

@@ -192,10 +192,11 @@ export default function ServicesPage() {
 
               {/* Live Intelligence Dashboard */}
               <div className="relative group">
-                 <div className="absolute inset-0 bg-brand-orange/5 blur-[120px] rounded-full opacity-50" />
-                 
-                 <div className="relative bg-surface-2 border border-white/10 rounded-[3rem] shadow-orange-glow-lg p-1 min-h-[600px] lg:min-h-0 lg:aspect-[4/3] flex flex-col overflow-visible sm:overflow-hidden">
-                    <div className="bg-black/40 p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                 <div className="relative bg-surface-2 border border-white/10 rounded-[3rem] shadow-orange-glow-lg p-1 min-h-[600px] lg:min-h-0 lg:aspect-[4/3] flex flex-col overflow-hidden isolate">
+                    {/* Internal Ambient Glow - Contained within rounded corners */}
+                    <div className="absolute inset-0 bg-brand-orange/5 blur-[80px] rounded-full opacity-50 pointer-events-none" />
+                    
+                    <div className="relative z-10 bg-black/40 p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-t-[inherit]">
                        <div className="flex items-center gap-4 w-full sm:w-auto">
                           <div className="flex gap-1.5 flex-shrink-0">
                             <div className="w-2 h-2 rounded-full bg-red-500/40" />
@@ -213,7 +214,7 @@ export default function ServicesPage() {
                        </div>
                     </div>
                     
-                    <div className="p-8 flex-1 flex flex-col gap-8">
+                    <div className="relative z-10 p-8 flex-1 flex flex-col gap-8">
                        {/* KPI Metrics */}
                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div className="p-4 sm:p-5 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-between group/kpi hover:border-brand-orange/30 transition-all">
