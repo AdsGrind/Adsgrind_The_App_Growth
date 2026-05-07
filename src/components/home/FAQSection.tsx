@@ -36,7 +36,7 @@ const FAQSection = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section className="py-40 bg-[#000000] border-y border-white/10">
+        <section className="bg-[#000000] border-y border-white/10 section-padding">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col lg:flex-row gap-24">
                     <div className="lg:w-1/3">

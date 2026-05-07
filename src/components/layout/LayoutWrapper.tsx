@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect } from 'react';
@@ -12,15 +13,18 @@ import { ModalProvider, useModals } from '@/context/ModalContext';
 import { Loader } from '@/components/ui/Loader';
 import { GlobalParticles } from '@/components/ui/GlobalParticles';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
-  const { 
+  const {
     isAuthOpen, closeAuth, authMode, openAuth,
     isGetStartedOpen, closeGetStarted, openGetStarted,
     isStrategyOpen, closeStrategy,
     isMarketOpen, closeMarket,
     isFraudInsightOpen, closeFraudInsight
   } = useModals();
+
+  const pathname = usePathname();
 
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -36,8 +40,12 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
+  }, [pathname]);
 
   return (
     <>
@@ -46,11 +54,11 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           <motion.div
             key="loader"
             initial={{ opacity: 1 }}
-            exit={{ 
+            exit={{
               opacity: 0,
               filter: "blur(20px)",
               scale: 1.1,
-              transition: { duration: 0.8, ease: "easeInOut" } 
+              transition: { duration: 0.8, ease: "easeInOut" }
             }}
             className="fixed inset-0 z-[10000]"
           >
@@ -72,14 +80,14 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             <Footer />
             <WhatsAppButton />
             <AIChatbot />
-            <AuthModal 
-              isOpen={isAuthOpen} 
-              onClose={closeAuth} 
-              initialMode={authMode} 
+            <AuthModal
+              isOpen={isAuthOpen}
+              onClose={closeAuth}
+              initialMode={authMode}
             />
-            <GetStartedModal 
-              isOpen={isGetStartedOpen} 
-              onClose={closeGetStarted} 
+            <GetStartedModal
+              isOpen={isGetStartedOpen}
+              onClose={closeGetStarted}
             />
             <PerformanceStrategyModal
               isOpen={isStrategyOpen}

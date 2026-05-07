@@ -190,24 +190,32 @@ export default function PortfolioPage() {
                       </div>
 
                       {/* Animated Graph Placeholder */}
-                      <div className="relative h-[200px] w-full bg-surface-3 rounded-2xl border border-white/5 p-6 overflow-hidden">
+                      <div className="relative h-[220px] w-full bg-surface-3 rounded-2xl border border-white/5 p-8 overflow-hidden">
                          <div className="absolute inset-0 bg-grid opacity-10" />
-                         <div className="relative h-full w-full flex items-end justify-between gap-2">
+                         
+                         {/* Floating Growth Index Pill */}
+                         <motion.div 
+                           initial={{ opacity: 0, y: -10 }}
+                           whileInView={{ opacity: 1, y: 0 }}
+                           transition={{ delay: 1, duration: 0.5 }}
+                           className="absolute top-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 px-4 py-2 bg-brand-orange/10 backdrop-blur-md border border-brand-orange/20 rounded-full"
+                         >
+                            <div className="w-1.5 h-1.5 rounded-full bg-brand-orange shadow-[0_0_8px_rgba(255,107,0,0.8)] animate-pulse" />
+                            <span className="text-[9px] font-bold text-brand-orange uppercase tracking-[0.2em]">Growth Index</span>
+                         </motion.div>
+
+                         <div className="relative h-full w-full flex items-end justify-between gap-2 pt-12">
                             {[20, 40, 30, 60, 50, 80, 70, 100, 90].map((h, i) => (
                               <motion.div
                                 key={i}
                                 initial={{ height: 0 }}
-                                whileInView={{ height: `${h}%` }}
-                                transition={{ delay: i * 0.05, duration: 0.8 }}
-                                className="flex-1 bg-brand-orange/20 rounded-t-lg relative group/bar"
+                                whileInView={{ height: `${h * 0.7}%` }}
+                                transition={{ delay: i * 0.05 + 0.5, duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+                                className="flex-1 bg-brand-orange/20 rounded-t-lg relative group/bar will-change-[height]"
                               >
                                  <div className="absolute top-0 left-0 right-0 h-1 bg-brand-orange group-hover:bg-brand-orange-light transition-colors" />
                               </motion.div>
                             ))}
-                         </div>
-                         <div className="absolute top-4 right-4 flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full bg-brand-orange animate-pulse" />
-                            <span className="text-[10px] font-bold text-brand-orange uppercase tracking-widest">Growth Index</span>
                          </div>
                       </div>
                    </div>

@@ -11,7 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
-    const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent-start disabled:pointer-events-none disabled:opacity-50 active:scale-95";
+    const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-500 cubic-bezier(0.23, 1, 0.32, 1) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent-start disabled:pointer-events-none disabled:opacity-50 active:scale-95 will-change-transform";
     
     const variants = {
       primary: "bg-brand-orange text-black hover:bg-brand-orange-light shadow-orange-glow transition-all",
@@ -46,7 +46,7 @@ export const GlassCard = ({ className, hover = true, ...props }: GlassCardProps)
   return (
     <div 
       className={cn(
-        "glass-card p-6 rounded-2xl",
+        "glass-card p-6 rounded-2xl backdrop-blur-xl bg-white/[0.02] border-white/5",
         hover && "glass-card-hover",
         className
       )} 

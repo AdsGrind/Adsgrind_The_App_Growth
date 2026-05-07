@@ -27,7 +27,7 @@ const TrafficSources = () => {
     ];
 
     return (
-        <section className="py-40 bg-[#000000] border-y border-white/10">
+        <section className="bg-[#000000] border-y border-white/10 section-padding">
             <div className="container mx-auto px-6">
                 <div className="mb-24">
                     <motion.span 

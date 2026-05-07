@@ -41,17 +41,27 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
 
   return (
-    <nav 
+    <>
+      <nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-6",
         scrolled ? "bg-black/80 backdrop-blur-xl border-b border-white/5 py-4" : "bg-transparent py-8"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-4 group">
-          <div className="relative w-10 h-10 flex-shrink-0">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-9 h-9 flex-shrink-0">
             <Image 
               src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" 
               alt="ADSGRIND" 
@@ -63,10 +73,10 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             <div className="absolute inset-0 bg-brand-orange/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="flex flex-col items-start leading-none gap-0.5">
-            <span className="font-sans font-black text-2xl tracking-[-0.04em] text-white leading-none">
+            <span className="font-sans font-black text-xl tracking-tighter text-white leading-none">
               ADSGRIND
             </span>
-            <span className="text-[8px] font-bold tracking-[0.5em] text-white uppercase ml-0.5">
+            <span className="text-[7px] font-bold tracking-[0.4em] text-white uppercase ml-0.5">
               THE APP GROWTH
             </span>
           </div>
@@ -126,8 +136,9 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
           </button>
         </div>
       </div>
+    </nav>
 
-      {/* Mobile Menu - Premium Redesign */}
+    {/* Mobile Menu - Premium Redesign */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -135,20 +146,21 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-2xl lg:hidden flex flex-col"
+            className="fixed inset-0 z-[100] bg-black lg:hidden flex flex-col"
           >
-            {/* Background Atmosphere */}
+            {/* Ambient Atmosphere */}
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-brand-orange/[0.03] to-transparent pointer-events-none" />
             <div className="absolute top-1/4 right-0 w-64 h-64 bg-brand-orange/5 blur-[100px] rounded-full pointer-events-none" />
             
             {/* Header / Close */}
-            <div className="flex items-center justify-between p-8 border-b border-white/5">
-               <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
-                  <div className="relative w-8 h-8 rounded-full overflow-hidden grayscale brightness-200">
+            <div className="flex items-center justify-between px-8 py-6 border-b border-white/5">
+               <Link href="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2.5">
+                  <div className="relative w-7 h-7 rounded-full overflow-hidden grayscale brightness-200">
                     <Image src="/logo/2ccbcd53-e176-41fc-b3cb-70c3f0620511.jpg" alt="ADSGRIND" fill className="object-contain" />
                   </div>
                   <div className="flex flex-col items-start leading-none gap-0.5">
-                    <span className="font-sans font-black text-lg tracking-tighter text-white">ADSGRIND</span>
-                    <span className="text-[7px] font-bold tracking-[0.4em] text-white uppercase ml-0.5">THE APP GROWTH</span>
+                    <span className="font-sans font-black text-base tracking-tighter text-white leading-none">ADSGRIND</span>
+                    <span className="text-[6.5px] font-bold tracking-[0.3em] text-white uppercase ml-0.5">THE APP GROWTH</span>
                   </div>
                </Link>
                <button 
@@ -160,7 +172,7 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
             </div>
 
             {/* Navigation Links */}
-            <div className="flex-1 px-8 py-12">
+            <div className="flex-1 px-8 pt-4 pb-10">
                <motion.div 
                  initial="closed"
                  animate="open"
@@ -231,7 +243,7 @@ export const Navbar = ({ onLogin, onSignup }: NavbarProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

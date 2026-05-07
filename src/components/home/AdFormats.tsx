@@ -18,7 +18,7 @@ const AdFormats = () => {
     ];
 
     return (
-        <section className="py-40 bg-[#000000]">
+        <section className="bg-[#000000] section-padding">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
                     <div className="max-w-2xl">
@@ -67,8 +67,9 @@ const AdFormats = () => {
                                 <motion.div 
                                     initial={{ width: 0 }}
                                     whileInView={{ width: '100%' }}
-                                    transition={{ duration: 1.5, delay: idx * 0.1 }}
-                                    className="h-full bg-white"
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 1.5, delay: idx * 0.1, ease: [0.23, 1, 0.32, 1] }}
+                                    className="h-full bg-white will-change-[width]"
                                 />
                             </div>
                         </motion.div>

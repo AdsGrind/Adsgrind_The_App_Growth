@@ -45,7 +45,7 @@ const DataPulseBackground = () => {
               repeat: Infinity,
               ease: "linear"
             }}
-            className="absolute w-1 h-1 bg-brand-orange/40 rounded-full blur-[1px]"
+            className="absolute w-1 h-1 bg-brand-orange/40 rounded-full blur-[1px] will-change-transform"
           />
         ))}
       </div>
@@ -113,7 +113,7 @@ const LinkedinIcon = ({ size = 20, className = "" }: { size?: number; className?
 const HeroSection = () => {
   const { openGetStarted } = useModals();
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-[#000000]">
+    <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden bg-[#000000] section-padding">
       {/* Premium Subtle Background */}
       <DataPulseBackground />
 
@@ -150,8 +150,8 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-5xl mx-auto"
+          transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+          className="max-w-5xl mx-auto will-change-[transform,opacity]"
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -167,12 +167,12 @@ const HeroSection = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-display font-bold text-4xl sm:text-6xl md:text-8xl tracking-[-0.04em] mb-8 leading-[0.95] text-white"
+            transition={{ delay: 0.3, duration: 1, ease: [0.23, 1, 0.32, 1] }}
+            className="font-display font-bold text-4xl sm:text-6xl md:text-8xl tracking-[-0.04em] mb-8 leading-[0.95] text-white will-change-[transform,opacity]"
           >
             Scale Your App to <span className="text-brand-orange">100K+</span><br />
             High-Quality Users<br />
-            <span className="text-white/40 font-light italic">Not Just Installs.</span>
+            <span className="text-white/40 font-light italic block mt-6 md:mt-4">Not Just Installs.</span>
           </motion.h1>
 
           <motion.p
@@ -236,7 +236,7 @@ const HeroSection = () => {
 // --- Live Intelligence Section ---
 const LiveIntelligenceSection = () => {
   return (
-    <section className="py-32 bg-[#000000] relative overflow-hidden">
+    <section className="bg-[#000000] relative overflow-hidden section-padding">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-orange/20 to-transparent" />
       
       <div className="container mx-auto px-6">
@@ -316,8 +316,9 @@ const LiveIntelligenceSection = () => {
                           key={i}
                           initial={{ height: 0 }}
                           whileInView={{ height: `${h}%` }}
-                          transition={{ delay: i * 0.05, duration: 1 }}
-                          className="flex-1 bg-brand-orange/20 rounded-t-sm relative group"
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.05, duration: 1, ease: [0.23, 1, 0.32, 1] }}
+                          className="flex-1 bg-brand-orange/20 rounded-t-sm relative group will-change-[height]"
                         >
                            <div className="absolute inset-0 bg-brand-orange opacity-0 group-hover:opacity-40 transition-opacity" />
                         </motion.div>
@@ -372,7 +373,7 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-surface-1">
+    <section className="bg-surface-1 section-padding">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
           <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">Proven Performance</span>
@@ -447,7 +448,7 @@ const WhyClientsStaySection = () => {
   ];
 
   return (
-    <section className="py-32 bg-surface-1 relative overflow-hidden">
+    <section className="bg-surface-1 relative overflow-hidden section-padding">
        <div className="container mx-auto px-6">
           <div className="text-center mb-24">
              <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.4em] mb-4 block">Our Values</span>
@@ -480,7 +481,7 @@ const WhyClientsStaySection = () => {
 // --- Data Performance / Global Network ---
 const DataPerformanceSection = () => {
   return (
-    <section className="relative py-32 bg-[#000000] overflow-hidden">
+    <section className="relative bg-[#000000] overflow-hidden section-padding">
       {/* Infrastructure Atmosphere */}
       <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-orange/[0.02] blur-[160px] rounded-full pointer-events-none" />

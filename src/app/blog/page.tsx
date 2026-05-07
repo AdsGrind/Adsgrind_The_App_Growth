@@ -120,7 +120,7 @@ export default function BlogPage() {
                          src={featured.image} 
                          alt={featured.title} 
                          fill 
-                         className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                         className="object-cover grayscale-[30%] md:grayscale group-hover:grayscale-0 transition-all duration-700" 
                        />
                      </motion.div>
                      <div className="absolute inset-0 bg-brand-orange/5 mix-blend-color group-hover:opacity-0 transition-opacity" />
@@ -129,7 +129,7 @@ export default function BlogPage() {
                   </div>
                   <div className="p-10 lg:p-20 flex flex-col justify-center relative">
                      {/* Orange Glow on Hover */}
-                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-orange/5 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-orange/5 blur-[100px] opacity-40 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                      
                      <div className="flex items-center gap-4 mb-8 relative z-10">
                         <div className="w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center text-brand-orange border border-brand-orange/20">
@@ -177,14 +177,14 @@ export default function BlogPage() {
                        src={article.image} 
                        alt={article.title} 
                        fill 
-                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                       className="object-cover grayscale-[30%] md:grayscale group-hover:grayscale-0 transition-all duration-700" 
                      />
                    </motion.div>
                    <div className="absolute inset-0 bg-brand-orange/5 mix-blend-color" />
                 </div>
                 <div className="p-8 flex flex-col flex-1 relative">
                    {/* Glow Effect */}
-                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                   <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/10 blur-3xl opacity-50 md:opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                    
                    <div className="flex items-center justify-between mb-6 relative z-10">
                       <div className="flex items-center gap-2">
@@ -210,7 +210,7 @@ export default function BlogPage() {
         </div>
 
         {/* Newsletter / CTA */}
-        <div className="bg-surface-2 border border-white/5 p-16 md:p-32 rounded-[3rem] text-center relative overflow-hidden group">
+        <div className="bg-surface-2 border border-white/5 px-6 py-16 sm:p-20 md:p-32 rounded-[3rem] text-center relative overflow-hidden group">
              <div className="absolute inset-0 bg-brand-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
              <div className="relative z-10 max-w-2xl mx-auto">
                 <AnimatePresence mode="wait">
@@ -221,21 +221,27 @@ export default function BlogPage() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                     >
-                      <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.5em] mb-10 block">Stay Integrated</span>
-                      <h2 className="text-5xl md:text-7xl font-bold mb-8 uppercase text-white tracking-tight leading-[0.9]">Stay ahead of<br /><span className="text-white/40 italic">the performance curve.</span></h2>
-                      <p className="text-white/50 text-lg mb-12">Get exclusive performance engineering insights delivered to your inbox once a month.</p>
-                      <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                      <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.5em] mb-12 block">Stay Integrated</span>
+                      <h2 className="text-[1.85rem] sm:text-5xl md:text-7xl font-black mb-10 uppercase text-white tracking-tight leading-[1.1] md:leading-[0.9] max-w-[15ch] md:max-w-none mx-auto">
+                        Stay <br className="md:hidden" />
+                        ahead of <br className="md:hidden" />
+                        <span className="text-white/20 italic lowercase tracking-normal md:tracking-tighter mr-2">the</span>
+                        performance <br className="md:hidden" />
+                        curve.
+                      </h2>
+                      <p className="text-white/50 text-xs sm:text-base md:text-lg mb-12 max-w-sm sm:max-w-lg mx-auto leading-relaxed">Get exclusive performance engineering insights delivered to your inbox once a month.</p>
+                      <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-5 max-w-md mx-auto mt-8">
                         <input 
                           type="email" 
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Your Email"
-                          className="flex-1 bg-black border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-brand-orange outline-none transition-all"
+                          className="flex-1 bg-black border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-brand-orange outline-none transition-all text-sm"
                         />
                         <button 
                           disabled={isSubmitting}
-                          className="px-10 py-4 bg-brand-orange text-black text-xs font-bold uppercase tracking-widest rounded-2xl hover:bg-brand-orange-light shadow-orange-glow transition-all disabled:opacity-50"
+                          className="px-10 py-4 bg-brand-orange text-black text-[10px] font-bold uppercase tracking-widest rounded-2xl hover:bg-brand-orange-light shadow-orange-glow transition-all disabled:opacity-50"
                         >
                           {isSubmitting ? 'Joining...' : 'Join Insights'}
                         </button>

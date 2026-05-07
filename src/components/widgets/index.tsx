@@ -27,7 +27,7 @@ export const WhatsAppButton = () => (
       rel="noopener noreferrer"
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.94 }}
-      className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(37,211,102,0.4)] cursor-pointer relative pointer-events-auto group"
+      className="w-12 h-12 md:w-14 md:h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(37,211,102,0.4)] cursor-pointer relative pointer-events-auto group"
     >
       {/* Subtle Breathing Glow */}
       <motion.div 
@@ -55,15 +55,15 @@ interface Message {
 }
 
 const QUICK_REPLIES = [
-  "Brand Scale",
-  "Agency Connect",
-  "UA Infrastructure",
-  "CPA Intelligence",
+  "Scale my app installs",
+  "Reduce CAC",
+  "Improve ROAS",
+  "Fraud prevention",
 ];
 
 const WELCOME_MESSAGE: Message = {
   id: "welcome",
-  text: "Protocol online.\n\nSpecify your scaling objective.",
+  text: "Tell me about your app, campaign, or scaling goal.",
   sender: "bot",
   quickReplies: QUICK_REPLIES,
 };
@@ -260,7 +260,7 @@ export const AIChatbot = () => {
         onClick={() => { setIsOpen((o) => !o); setHasPulsed(false); }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.94 }}
-        className="relative w-14 h-14 bg-[#FF3B3B] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(255,59,59,0.35)] pointer-events-auto group"
+        className="relative w-12 h-12 md:w-14 md:h-14 bg-[#FF3B3B] rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(255,59,59,0.35)] pointer-events-auto group"
       >
         <motion.div animate={{ rotate: isOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
           {isOpen ? <X size={24} /> : <Bot size={28} />}
@@ -273,8 +273,8 @@ export const AIChatbot = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[24rem] bg-black border border-white/10 flex flex-col shadow-2xl z-[101]"
-            style={{ maxHeight: "calc(100vh - 8rem)" }}
+            className="absolute bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[26rem] bg-black/90 backdrop-blur-2xl border border-white/10 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[101] pointer-events-auto rounded-[2rem] overflow-hidden"
+            style={{ maxHeight: "calc(100vh - 10rem)" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
@@ -283,8 +283,8 @@ export const AIChatbot = () => {
                   <Bot size={16} />
                 </div>
                 <div>
-                  <h4 className="text-[11px] font-bold tracking-[0.3em] uppercase text-white leading-none">Intelligence_Node</h4>
-                  <p className="text-[9px] font-bold text-white/30 uppercase tracking-widest mt-1.5">Operational · ADSGRIND</p>
+                  <h4 className="text-[12px] font-black tracking-[0.3em] uppercase text-white leading-none">ADSGRIND AI</h4>
+                  <p className="text-[9px] font-bold text-brand-orange/60 uppercase tracking-widest mt-1.5">Performance Intelligence Assistant</p>
                 </div>
               </div>
               <button onClick={handleReset} className="text-white/20 hover:text-white transition-colors">
@@ -299,10 +299,12 @@ export const AIChatbot = () => {
                 return (
                   <div key={msg.id} className={cn("flex flex-col gap-3", msg.sender === "user" ? "items-end" : "items-start")}>
                     <motion.div
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                       className={cn(
-                        "p-4 text-xs tracking-wide leading-relaxed",
-                        msg.sender === "user" ? "bg-white text-black font-bold" : "bg-white/[0.03] border border-white/10 text-white/70"
+                        "p-4 text-[13px] tracking-wide leading-relaxed max-w-[85%]",
+                        msg.sender === "user" 
+                          ? "bg-brand-orange text-black font-bold rounded-2xl rounded-tr-none shadow-[0_4px_15px_rgba(255,102,0,0.2)]" 
+                          : "bg-white/[0.03] border border-white/10 text-white/90 rounded-2xl rounded-tl-none"
                       )}
                     >
                       {(msg as any).type === "quota" ? (
@@ -317,9 +319,15 @@ export const AIChatbot = () => {
                       )}
                     </motion.div>
                     {msg.quickReplies && (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-2 mt-2">
                         {msg.quickReplies.map((qr) => (
-                          <button key={qr} onClick={() => sendMessage(qr)} className="text-[9px] font-bold uppercase tracking-widest text-white/40 border border-white/10 px-3 py-1.5 hover:border-white hover:text-white transition-all">{qr}</button>
+                          <button 
+                            key={qr} 
+                            onClick={() => sendMessage(qr)} 
+                            className="text-[10px] font-bold uppercase tracking-widest text-white/40 border border-white/5 bg-white/[0.02] px-4 py-2 rounded-full hover:border-brand-orange/40 hover:text-brand-orange hover:bg-brand-orange/5 transition-all"
+                          >
+                            {qr}
+                          </button>
                         ))}
                       </div>
                     )}
@@ -334,19 +342,35 @@ export const AIChatbot = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <div className="p-6 border-t border-white/10">
-              <div className="flex items-end gap-4">
+            <div className="p-6 border-t border-white/5 bg-white/[0.01]">
+              <div className="flex items-center gap-3 bg-white/5 rounded-2xl p-2 pl-4 border border-white/5 focus-within:border-brand-orange/30 transition-all">
                 <textarea
                   ref={(el) => { (inputRef as any).current = el; (textareaRef as any).current = el; }}
-                  rows={1} value={input}
-                  onChange={(e) => { setInput(e.target.value); e.target.style.height = "auto"; e.target.style.height = e.target.scrollHeight + "px"; }}
+                  rows={1} 
+                  value={input}
+                  onChange={(e) => { 
+                    setInput(e.target.value); 
+                    e.target.style.height = "auto"; 
+                    e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px"; 
+                  }}
                   onKeyDown={handleKeyDown}
-                  placeholder="Operational query..."
-                  className="flex-1 bg-transparent border-b border-white/10 py-2 text-xs text-white placeholder:text-white/10 focus:outline-none focus:border-white transition-all resize-none uppercase tracking-widest"
+                  placeholder="Ask Adsgrind AI..."
+                  className="flex-1 bg-transparent py-2 text-sm text-white placeholder:text-white/20 focus:outline-none transition-all resize-none font-medium"
                 />
-                <button onClick={() => sendMessage(input)} disabled={!input.trim()} className="text-white/30 hover:text-white disabled:opacity-0 transition-all"><Send size={18} /></button>
+                <button 
+                  onClick={() => sendMessage(input)} 
+                  disabled={!input.trim() || isLoading} 
+                  className={cn(
+                    "w-10 h-10 rounded-xl flex items-center justify-center transition-all",
+                    input.trim() && !isLoading 
+                      ? "bg-brand-orange text-black shadow-orange-glow" 
+                      : "bg-white/5 text-white/20"
+                  )}
+                >
+                  <Send size={18} />
+                </button>
               </div>
+              <p className="text-[8px] text-white/10 uppercase tracking-[0.3em] text-center mt-4">Powered by Performance Engineering</p>
             </div>
           </motion.div>
         )}

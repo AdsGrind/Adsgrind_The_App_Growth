@@ -15,7 +15,7 @@ const MarketOpportunity = () => {
     ];
 
     return (
-        <section className="py-40 bg-[#000000] border-y border-white/10">
+        <section className="bg-[#000000] border-y border-white/10 section-padding">
             <div className="container mx-auto px-6 relative">
                 <div className="flex flex-col lg:flex-row items-center gap-24">
                     <div className="lg:w-1/2">
@@ -45,8 +45,8 @@ const MarketOpportunity = () => {
                                             initial={{ width: 0 }}
                                             whileInView={{ width: `${bar.value}%` }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 1.5, delay: i * 0.2 }}
-                                            className="h-full bg-white"
+                                            transition={{ duration: 1.5, delay: i * 0.2, ease: [0.23, 1, 0.32, 1] }}
+                                            className="h-full bg-white will-change-[width]"
                                         />
                                     </div>
                                 </div>
