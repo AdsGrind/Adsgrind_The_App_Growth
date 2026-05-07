@@ -194,38 +194,41 @@ export default function ServicesPage() {
               <div className="relative group">
                  <div className="absolute inset-0 bg-brand-orange/5 blur-[120px] rounded-full opacity-50" />
                  
-                 <div className="relative bg-surface-2 border border-white/10 rounded-[3rem] overflow-hidden shadow-orange-glow-lg p-1 aspect-[4/3] flex flex-col">
-                    <div className="bg-black/40 p-6 border-b border-white/5 flex items-center justify-between">
-                       <div className="flex items-center gap-4">
-                          <div className="flex gap-1.5">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/40" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/40" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/40" />
+                 <div className="relative bg-surface-2 border border-white/10 rounded-[3rem] shadow-orange-glow-lg p-1 min-h-[600px] lg:min-h-0 lg:aspect-[4/3] flex flex-col overflow-visible sm:overflow-hidden">
+                    <div className="bg-black/40 p-4 sm:p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                       <div className="flex items-center gap-4 w-full sm:w-auto">
+                          <div className="flex gap-1.5 flex-shrink-0">
+                            <div className="w-2 h-2 rounded-full bg-red-500/40" />
+                            <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
+                            <div className="w-2 h-2 rounded-full bg-green-500/40" />
                           </div>
-                          <span className="text-[10px] text-white/30 font-bold uppercase tracking-widest ml-4">ADSGRIND_DEPLOY_v5.0</span>
+                          <span className="text-[9px] sm:text-[10px] text-white/30 font-bold uppercase tracking-widest ml-2 sm:ml-4 truncate">
+                            <span className="sm:hidden">DEPLOY v5.0</span>
+                            <span className="hidden sm:inline">ADSGRIND_DEPLOY_v5.0</span>
+                          </span>
                        </div>
-                       <div className="flex items-center gap-3 bg-brand-orange/10 border border-brand-orange/20 px-3 py-1 rounded-full">
+                       <div className="flex items-center gap-2.5 bg-brand-orange/10 border border-brand-orange/20 px-2.5 py-1 rounded-full flex-shrink-0">
                           <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-                          <span className="text-brand-orange text-[9px] font-bold uppercase tracking-widest">Operational Intelligence</span>
+                          <span className="text-brand-orange text-[8px] sm:text-[9px] font-bold uppercase tracking-widest">Operational Intelligence</span>
                        </div>
                     </div>
                     
                     <div className="p-8 flex-1 flex flex-col gap-8">
                        {/* KPI Metrics */}
-                       <div className="grid grid-cols-2 gap-4">
-                          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-between group/kpi hover:border-brand-orange/30 transition-all">
+                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="p-4 sm:p-5 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-between group/kpi hover:border-brand-orange/30 transition-all">
                              <div>
-                                <div className="text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">Global ROAS</div>
-                                <div className="text-2xl font-bold text-white">4.82x</div>
+                                <div className="text-[8px] sm:text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">Global ROAS</div>
+                                <div className="text-xl sm:text-2xl font-bold text-white">4.82x</div>
                              </div>
-                             <ArrowUpRight size={20} className="text-brand-orange opacity-0 group-hover/kpi:opacity-100 transition-opacity" />
+                             <ArrowUpRight size={18} className="text-brand-orange opacity-40 sm:opacity-0 sm:group-hover/kpi:opacity-100 transition-opacity" />
                           </div>
-                          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-between group/kpi hover:border-brand-orange/30 transition-all">
+                          <div className="p-4 sm:p-5 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center justify-between group/kpi hover:border-brand-orange/30 transition-all">
                              <div>
-                                <div className="text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">Fraud Shield</div>
-                                <div className="text-2xl font-bold text-white">99.8%</div>
+                                <div className="text-[8px] sm:text-[9px] text-white/30 font-bold uppercase tracking-widest mb-1">Fraud Shield</div>
+                                <div className="text-xl sm:text-2xl font-bold text-white">99.8%</div>
                              </div>
-                             <Shield size={20} className="text-brand-orange opacity-0 group-hover/kpi:opacity-100 transition-opacity" />
+                             <Shield size={18} className="text-brand-orange opacity-40 sm:opacity-0 sm:group-hover/kpi:opacity-100 transition-opacity" />
                           </div>
                        </div>
 

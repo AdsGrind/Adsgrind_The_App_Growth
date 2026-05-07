@@ -254,7 +254,10 @@ export default function PortfolioPage() {
              <div className="absolute top-0 left-0 w-full h-full bg-brand-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
              <div className="relative z-10 max-w-2xl mx-auto">
                 <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.5em] mb-10 block">Protocol Initiation</span>
-                <h2 className="text-5xl md:text-7xl font-bold mb-12 uppercase text-white tracking-tight leading-[0.9]">Deploy your<br /><span className="text-white/40 italic">success case.</span></h2>
+                <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-12 uppercase text-white tracking-tight leading-[1.1] sm:leading-[0.9] max-w-[280px] sm:max-w-none mx-auto">
+                  Deploy Your<br />
+                  <span className="text-white/40 italic">Success Case.</span>
+                </h2>
                 <button 
                     className="px-12 py-5 bg-brand-orange text-black text-[12px] font-bold uppercase tracking-[0.4em] transition-all hover:bg-brand-orange-light shadow-orange-glow" 
                     onClick={openGetStarted}

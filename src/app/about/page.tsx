@@ -28,76 +28,86 @@ const PerformanceIntelligenceDashboard = () => {
   return (
     <div className="relative bg-surface-3 border border-white/10 rounded-[2.5rem] overflow-hidden shadow-orange-glow p-1">
       {/* Header */}
-      <div className="bg-black/40 p-5 border-b border-white/5 flex items-center justify-between">
+      <div className="bg-black/40 p-4 sm:p-5 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex gap-1">
+          <div className="flex gap-1.5 flex-shrink-0">
             <div className="w-2 h-2 rounded-full bg-red-500/30" />
             <div className="w-2 h-2 rounded-full bg-yellow-500/30" />
             <div className="w-2 h-2 rounded-full bg-green-500/30" />
           </div>
-          <span className="text-[9px] text-white/30 font-bold uppercase tracking-widest ml-2">CORE_PERF_INTEL_v9.1</span>
+          <span className="text-[9px] text-white/30 font-bold uppercase tracking-widest ml-2 truncate">
+            <span className="sm:hidden">CORE INTEL v9.1</span>
+            <span className="hidden sm:inline">CORE_PERF_INTEL_v9.1</span>
+          </span>
         </div>
-        <div className="px-3 py-1 bg-brand-orange/10 border border-brand-orange/20 rounded-full">
+        <div className="px-3 py-1 bg-brand-orange/10 border border-brand-orange/20 rounded-full flex-shrink-0">
            <span className="text-[8px] text-brand-orange font-bold uppercase tracking-widest animate-pulse">Live Optimization</span>
         </div>
       </div>
 
-      <div className="p-8 space-y-8">
+      <div className="p-6 sm:p-8 space-y-8">
         {/* Metric Cards Grid */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl group hover:border-brand-orange/30 transition-all">
-            <div className="flex items-center justify-between mb-2">
-              <TrendingUp size={14} className="text-brand-orange" />
-              <span className="text-[8px] text-green-500 font-bold">+18.4%</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl group hover:border-brand-orange/30 transition-all flex justify-between items-center sm:block">
+            <div className="flex flex-col sm:block">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp size={14} className="text-brand-orange" />
+                <span className="text-[8px] text-green-500 font-bold">+18.4%</span>
+              </div>
+              <div className="text-xl sm:text-lg font-bold text-white tracking-tight">4.82x</div>
+              <div className="text-[8px] text-white/20 font-bold uppercase tracking-widest mt-1">Target ROAS</div>
             </div>
-            <div className="text-lg font-bold text-white tracking-tight">4.82x</div>
-            <div className="text-[8px] text-white/20 font-bold uppercase tracking-widest">Target ROAS</div>
+            <ArrowUpRight size={18} className="text-brand-orange opacity-40 sm:hidden" />
           </div>
-          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl group hover:border-brand-orange/30 transition-all">
-            <div className="flex items-center justify-between mb-2">
-              <Shield size={14} className="text-brand-orange" />
-              <span className="text-[8px] text-brand-orange font-bold">Active</span>
+          <div className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl group hover:border-brand-orange/30 transition-all flex justify-between items-center sm:block">
+            <div className="flex flex-col sm:block">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield size={14} className="text-brand-orange" />
+                <span className="text-[8px] text-brand-orange font-bold">Active</span>
+              </div>
+              <div className="text-xl sm:text-lg font-bold text-white tracking-tight">99.8%</div>
+              <div className="text-[8px] text-white/20 font-bold uppercase tracking-widest mt-1">Fraud Filter</div>
             </div>
-            <div className="text-lg font-bold text-white tracking-tight">99.8%</div>
-            <div className="text-[8px] text-white/20 font-bold uppercase tracking-widest">Fraud Filter</div>
+            <ShieldCheck size={18} className="text-brand-orange opacity-40 sm:hidden" />
           </div>
         </div>
 
         {/* Dynamic Scale Graph */}
-        <div className="relative h-48 border-l border-b border-white/10 flex items-end gap-1.5 px-3 pb-3 overflow-hidden">
+        <div className="relative h-48 sm:h-52 bg-black/20 rounded-2xl border border-white/5 flex items-end gap-1.5 px-4 pb-4 overflow-hidden group/chart">
           <div className="absolute inset-0 bg-gradient-to-t from-brand-orange/5 to-transparent pointer-events-none" />
+          
+          {/* Chart Label - Positioned for no overlap */}
+          <div className="absolute top-4 left-4 z-10">
+             <div className="flex items-center gap-2 mb-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
+                <span className="text-[9px] font-bold text-white uppercase tracking-widest">Throughput Index</span>
+             </div>
+             <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">4.2M Ops/Sec</div>
+          </div>
+
           {[30, 50, 45, 85, 60, 95, 75, 88, 65, 92].map((h, i) => (
             <motion.div
               key={i}
               initial={{ height: 0 }}
-              whileInView={{ height: `${h}%` }}
-              transition={{ delay: i * 0.05, duration: 1 }}
-              className="flex-1 bg-brand-orange/20 rounded-t-sm relative group"
+              whileInView={{ height: `${h * 0.7}%` }}
+              transition={{ delay: i * 0.05 + 0.3, duration: 1, ease: [0.23, 1, 0.32, 1] }}
+              className="flex-1 bg-brand-orange/20 rounded-t-sm relative group/bar will-change-[height]"
             >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-brand-orange shadow-[0_0_10px_#FF6B00]" />
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-brand-orange shadow-[0_0_10px_#FF6B00] group-hover/bar:bg-white transition-colors" />
             </motion.div>
           ))}
-          
-          {/* Label Overlays */}
-          <div className="absolute top-4 left-4 flex flex-col gap-1">
-             <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-                <span className="text-[9px] font-bold text-white uppercase tracking-widest">Network Throughput</span>
-             </div>
-             <div className="text-xs font-bold text-white/40">4.2M Ops/Sec</div>
-          </div>
         </div>
 
         {/* Status Log */}
-        <div className="space-y-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+        <div className="space-y-3 bg-black/40 p-5 rounded-2xl border border-white/5">
            {[
              { label: "GEO_US_NODE", status: "Scaling", time: "2ms" },
              { label: "FRAUD_SHIELD", status: "Active", time: "Real-time" }
            ].map((log, i) => (
-             <div key={i} className="flex items-center justify-between">
+             <div key={i} className="flex items-center justify-between group/log">
                 <div className="flex items-center gap-2">
-                   <div className="w-1 h-1 rounded-full bg-brand-orange" />
-                   <span className="text-[9px] text-white/30 font-bold uppercase tracking-widest">{log.label}</span>
+                   <div className="w-1.5 h-1.5 rounded-full bg-brand-orange shadow-[0_0_5px_#FF6B00]" />
+                   <span className="text-[9px] text-white/30 font-bold uppercase tracking-widest group-hover/log:text-white transition-colors">{log.label}</span>
                 </div>
                 <div className="flex items-center gap-4">
                    <span className="text-[9px] text-green-500 font-bold uppercase">{log.status}</span>
@@ -331,7 +341,10 @@ export default function AboutPage() {
              <div className="absolute top-0 left-0 w-full h-full bg-brand-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
              <div className="relative z-10 max-w-2xl mx-auto">
                 <span className="text-brand-orange text-[10px] font-bold uppercase tracking-[0.5em] mb-10 block">Protocol Initiation</span>
-                <h2 className="text-5xl md:text-7xl font-bold mb-12 uppercase text-white tracking-tight leading-[0.9]">Ready to engineer<br /><span className="text-white/40 italic">your growth?</span></h2>
+                <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-12 uppercase text-white tracking-tight leading-[1.1] sm:leading-[0.9] max-w-[280px] sm:max-w-none mx-auto">
+                  Ready to engineer<br />
+                  <span className="text-white/40 italic">your growth?</span>
+                </h2>
                 <button 
                     className="px-12 py-5 bg-brand-orange text-black text-[12px] font-bold uppercase tracking-[0.4em] transition-all hover:bg-brand-orange-light shadow-orange-glow" 
                     onClick={openGetStarted}
